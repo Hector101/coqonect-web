@@ -1,0 +1,12 @@
+.c-LoadingPrimary {
+  .circle {
+    fill: $primary-color;
+  }
+}
+
+.c-LoadingWhite {
+  .circle {
+    fill: #ffffff;
+    stroke: #ffffff;
+  }
+}

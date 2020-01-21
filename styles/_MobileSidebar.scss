@@ -1,0 +1,13 @@
+.c-MobileSidebar {
+  max-width: 18.75rem;
+  transform: translateX(-100%);
+  transition: all 0.3s ease-in-out;
+
+  @media(min-width: 48em) {
+    
+  }
+
+  &.c-Show {
+    transform: translateX(0);
+  }
+};

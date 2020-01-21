@@ -1,0 +1,20 @@
+* {
+  font-family: 'Poppins', sans-serif;
+};
+
+.c-IndexContent {
+  height: calc(100vh -  3.75rem);
+}
+
+.c-IndexContent {
+  margin: 3.75rem auto auto auto;
+  max-width: 85.375rem;
+
+  @media (min-width: 85.375rem) {
+    margin: 3.75rem auto auto auto;
+  }
+}
+
+svg {
+  pointer-events: none;
+}

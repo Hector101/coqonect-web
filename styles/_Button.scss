@@ -1,0 +1,13 @@
+.c-Button {
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.c-PrimaryButton {
+    border: solid 2px $primary-color;
+  }
+
+  &.c-withFixedHeight {
+    max-height: 3rem;
+    height: 3rem;
+  }
+}

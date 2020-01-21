@@ -1,0 +1,47 @@
+.c-HomePageDeskTopNavbar {
+  height: 3.75rem;
+
+  .c-LogoIcon {
+    width: 1.875rem;
+    height: 1.875rem;
+    fill: $primary-color;
+    margin-right: 0.625rem;
+  }
+
+  .c-LogoText {
+    font-size: 1rem;
+  }
+
+  .c-NavLinks {
+    margin-right: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .c-LoginLink {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 48em) and (max-width: 50em) {
+    .c-LogoIcon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .c-NavLinks {
+      font-size: 0.575rem;
+    }
+  }
+
+  @media (min-width: 48em) and (max-width: 60em) {
+    .c-LogoText {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (min-width: 50em) and (max-width: 60em) {
+    .c-NavLinks {
+      font-size: 0.7rem;
+    }
+  }
+}

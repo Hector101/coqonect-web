@@ -1,0 +1,28 @@
+.c-Navbar {
+  width: 100%;
+  height: 3.75rem;
+  
+  .c-NavbarContent {
+    max-width: 85.375rem;
+    margin: auto 2rem;
+  }
+
+  @media (min-width: 48em) {
+
+    &.c-IsDashboard {
+      width: 95%;
+      margin-left: 5%;
+    }
+
+    &.c-IsExpanded {
+      width: 80%;
+      margin-left: 20%;
+    }
+  }
+
+  @media (min-width: 85.375rem) {
+    .c-NavbarContent {
+      margin: auto;
+    }
+  }
+}

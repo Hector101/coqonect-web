@@ -1,0 +1,15 @@
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+.transition-all-1 {
+  transition: all 1s ease-in-out;
+}
+
+.transition-all-2 {
+  transition: all 3s ease-in-out;
+}
+
+.transition-all-3 {
+  transition: all 3s ease-in-out;
+}

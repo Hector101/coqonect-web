@@ -1,0 +1,26 @@
+.c-SideMenuLinks {
+  height: calc(100vh - 3.75rem);
+  overflow-y: auto;
+  opacity: 1;
+
+  .c-sidemenu-link {
+    &:hover {
+      color: lighten($primary-blue, 0.6);
+
+      svg {
+        fill: lighten($primary-blue, 0.6);
+      }
+    }
+
+    &.c-selected {
+      border-right: 0.3rem solid lighten($primary-blue, 0.6);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+
+  .c-hide-link-text {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+  }
+}
