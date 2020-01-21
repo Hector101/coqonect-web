@@ -1,4 +1,4 @@
-# CoQonect
+# CoQonect (WIP)
 
 Get mentored by verified professionals
 

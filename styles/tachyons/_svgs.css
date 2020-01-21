@@ -29,3 +29,7 @@
 .fill-black-50 {
   fill: rgba(0, 0, 0, 0.5);
 }
+
+.fill-orange {
+  fill: var(--orange);
+}
