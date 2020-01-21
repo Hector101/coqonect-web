@@ -5,6 +5,7 @@
       text-overflow: ellipsis;
       content: "";
       position: relative;
+      line-height: 1rem;
 
       &::before {
         content: '';
