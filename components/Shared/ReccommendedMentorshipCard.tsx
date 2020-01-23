@@ -7,13 +7,13 @@ import FullStar from '../../static/svgs/FullStar.svg';
 
 const ReccommendedMentorshipCard: FunctionComponent<{}> = () => {
   return (
-    <div className="c-ReccommendedMentorshipCard w-third h-100 pointer mh3 ba b--black-10">
-      <div className="w-100 h2 bb b--black-10 flex items-center justify-between f6">
-        <span className="ml2">JavaScript</span>
-        <span className="mr2">Free</span>
+    <div className="c-ReccommendedMentorshipCard w-third h-100 pointer mr4 ba b--black-10">
+      <div className="w-100 pv3 bg-black-10 flex items-center justify-between f6">
+        <span className="ml2 b">JavaScript</span>
+        <span className="mr2 b">Free</span>
       </div>
-      <div className="pa2">
-        <h4 className="mv1">Intro to JavaScript</h4>
+      <div className="pa3">
+        <h4 className="mv1 blue">Intro to JavaScript</h4>
         <p className="f7 c-mentorship-description mb0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -26,12 +26,13 @@ const ReccommendedMentorshipCard: FunctionComponent<{}> = () => {
           <FullNameAvatar className="w2 h2"/>
           <div className="flex flex-column ml2">
             <span className="f7 black-50">Mentorship by</span>
-            <span className="f7 mv1">John Doe Schevaski Daniel</span>
+            <span className="f7 mv2">John Doe Schevaski Daniel</span>
             <span>
               <Rating
                 emptySymbol={<EmptyStar href="#icon-star-empty" className="w1 h1" />}
-                fullSymbol={<FullStar href="#icon-star-full" className="w1 h1" />}
+                fullSymbol={<FullStar href="#icon-star-full" className="w1 h1 fill-orange" />}
                 initialRating={4}
+                readonly={true}
               />
             </span>
           </div>
