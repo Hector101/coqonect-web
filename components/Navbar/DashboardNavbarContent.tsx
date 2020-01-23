@@ -6,7 +6,7 @@ import Notification from '../../static/svgs/Notification.svg';
 
 const DashboardNavbarContent: FunctionComponent<{}> = () => {
   return (
-    <div className="c-DashboardNavbarContent flex justify-end items-center">
+    <div className="c-DashboardNavbarContent flex justify-end items-center z-3">
       <div className="flex justify-center items-center">
         <Button
           type="button"

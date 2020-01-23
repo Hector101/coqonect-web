@@ -18,7 +18,7 @@ const Navbar: FunctionComponent<Props> = ({ toggleMenu, children, isDashboard, i
     toggleMenu({ type: 'toggle' });
   };
 
-  const rootClassNames = classnames('c-Navbar flex items-center justify-between fixed top-0 left-0 pa0 bg-white bb b--black-10', {
+  const rootClassNames = classnames('c-Navbar flex items-center justify-between fixed top-0 left-0 pa0 bg-white bb b--black-10 z-1', {
     'c-IsDashboard': isDashboard,
     'c-IsExpanded': isExpanded,
   });
