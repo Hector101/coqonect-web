@@ -3,6 +3,7 @@ import Select from 'react-select';
 
 import Input from 'components/Shared/Input';
 import ReccommendedMentorshipCard from 'components/Shared/ReccommendedMentorshipCard';
+import FeaturedMentorCard from 'components/Shared/FeaturedMentorCard';
 import Button from 'components/Shared/Button';
 
 const filterOptions = [
@@ -14,7 +15,7 @@ const filterOptions = [
 const Dashboard: FunctionComponent<{}> = () => {
   return (
     <div className="c-Dashboard">
-      <div className="flex justify-between">
+      <section className="flex justify-between">
         <div>
           <h3 className="mb0">Recommended Mentorships</h3>
           <span className="f7">Most subscribed sessions recently.</span>
@@ -41,12 +42,23 @@ const Dashboard: FunctionComponent<{}> = () => {
             </Button>
           </div>
         </div>
-      </div>
-      <div className="pv4 flex justfy-center">
+      </section>
+      <section className="pv4 flex justfy-center">
         <ReccommendedMentorshipCard />
         <ReccommendedMentorshipCard />
         <ReccommendedMentorshipCard />
-      </div>
+      </section>
+      <section>
+        <div>
+          <h3 className="mb0">Featured Mentors</h3>
+        </div>
+        <div className="pv4 flex justfy-center">
+          <FeaturedMentorCard />
+          <FeaturedMentorCard />
+          <FeaturedMentorCard />
+          <FeaturedMentorCard />
+        </div>
+      </section>
     </div>
   );
 };
