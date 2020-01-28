@@ -25,11 +25,11 @@ const Dashboard: FunctionComponent<{}> = () => {
             options={filterOptions}
             placeholder="Filter By"
             defaultValue={filterOptions[0]}
-            className="w4 mr3"
+            className="w4 mr3 f7"
           />
           <div className="flex items-center">
             <Input
-              className="c-find-by-skills-input f6 bg-white"
+              className="c-find-by-skills-input f7 bg-white"
               defaultType="search"
               placeholder="Find by skills"
               name="search"
