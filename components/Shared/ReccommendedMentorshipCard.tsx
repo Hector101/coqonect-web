@@ -7,7 +7,7 @@ import FullStar from '../../static/svgs/FullStar.svg';
 
 const ReccommendedMentorshipCard: FunctionComponent<{}> = () => {
   return (
-    <div className="w-30-ns h-100 pointer  ba b--black-10 mv4 mv0-ns">
+    <div className="c-ReccommendedMentorshipCard w-30-ns h-100 pointer  ba b--black-10 mv2 mv1-ns">
       <div className="w-100 pv3 bg-black-10 flex items-center justify-between f6">
         <span className="ml2 b">JavaScript</span>
         <span className="mr2 b">Free</span>

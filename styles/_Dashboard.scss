@@ -7,4 +7,25 @@
   .c-find-by-skills-button {
     height: 2.375rem;
   }
+
+  .c-see-more {
+
+    .c-see-more-text {
+      color: rgb(0, 0, 0);
+    }
+
+    .c-see-more-icon {
+      fill: rgb(0, 0, 0);
+    }
+
+    &:hover, :focus {
+      .c-see-more-text {
+        color: rgba(0, 0, 0, .5);
+      }
+
+      .c-see-more-icon {
+        fill: rgba(0, 0, 0, .5);
+      }
+    }
+  }
 }

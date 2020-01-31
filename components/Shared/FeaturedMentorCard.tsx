@@ -1,13 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import Rating from 'react-rating';
+import classnames from 'classnames';
 
 import FullNameAvatar from '../../static/svgs/FullNameAvatar.svg';
 import EmptyStar from '../../static/svgs/EmptyStar.svg';
 import FullStar from '../../static/svgs/FullStar.svg';
 
-const FeaturedMentorCard: FunctionComponent<{}> = () => {
+type Props = {
+  withMarginRight?: boolean;
+};
+
+const FeaturedMentorCard: FunctionComponent<Props> = ({ withMarginRight }) => {
+  const mainClassNames = classnames('w-100 w-25-ns pointer mv2 mv0-ns pv3 ph1 ba b--black-10 flex flex-column items-center', {
+    'mr4-ns': withMarginRight,
+  });
+
   return (
-    <div className="w-25-ns pointer mv2 mv0-ns mr4-ns w-100 pv3 ph1 ba b--black-10 flex flex-column items-center">
+    <div className={mainClassNames}>
       <div>
         <FullNameAvatar className="w3 h3"/>
       </div>
