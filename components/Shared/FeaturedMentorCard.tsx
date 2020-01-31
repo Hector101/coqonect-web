@@ -7,7 +7,7 @@ import FullStar from '../../static/svgs/FullStar.svg';
 
 const FeaturedMentorCard: FunctionComponent<{}> = () => {
   return (
-    <div className="c-FeaturedMentorCard w-third pointer mr4 pv3 ph1 ba b--black-10 flex flex-column items-center">
+    <div className="w-20-ns pointer mv4 pv3 ph1 ba b--black-10 flex flex-column items-center">
       <div>
         <FullNameAvatar className="w3 h3"/>
       </div>
