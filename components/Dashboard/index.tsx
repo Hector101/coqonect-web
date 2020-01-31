@@ -18,8 +18,8 @@ const Dashboard: FunctionComponent<{}> = () => {
     <div className="c-Dashboard">
       <section className="flex-l justify-between-l">
         <div className="mv2 mv0-ns">
-          <h3 className="mb0">Recommended Mentorships</h3>
-          <span className="f7">Most subscribed sessions recently.</span>
+          <h3 className="mb0 f3">Recommended Mentorships</h3>
+          <span className="f6">Most subscribed sessions recently.</span>
         </div>
         <div className="flex items-center-l">
           <Select
@@ -30,14 +30,15 @@ const Dashboard: FunctionComponent<{}> = () => {
           />
           <div className="flex items-center-l">
           <Input
-              className="c-find-by-skills-input w-100 f7 bg-white"
+              className="c-find-by-skills-input w-100 f7 ph3 bg-white"
               defaultType="search"
               placeholder="Find by skills"
               name="search"
             />
             <Button
-              className="pv1 ph3 br1 f7 ml1 c-find-by-skills-button"
+              className="pv1 ph3 br1 f7 ml0 bg-white c-find-by-skills-button"
               type="button"
+              arial-label="search mentors by skills button"
             >
               <Search className="w1"/>
             </Button>
@@ -51,9 +52,9 @@ const Dashboard: FunctionComponent<{}> = () => {
       </section>
       <section>
         <div>
-          <h3 className="mb0">Featured Mentors</h3>
+          <h3 className="mv0 f3">Featured Mentors</h3>
         </div>
-        <div className="pv4 flex-m justify-between-m flex-l justify-between-l">
+        <div className="pv4 flex flex-column flex-row-ns justify-start w-100">
           <FeaturedMentorCard />
           <FeaturedMentorCard />
           <FeaturedMentorCard />

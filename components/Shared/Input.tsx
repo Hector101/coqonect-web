@@ -39,11 +39,12 @@ const Input: FunctionComponent<Props> = ({
 }) => {
   const [toggleStatus, setToggleStatus] = useState(false);
 
-  const inputClassName = classnames(`c-Input outline-transparent ${className}`, {
+  const inputClassName = classnames(`outline-transparent ${className}`, {
     'bn': noBorders,
     'ba b--black-20': !noBorders,
+    'c-Input': leftIconName,
   });
-  const inputContainerClassName = classnames('relative', {
+  const inputContainerClassName = classnames('relative', 'ml3', {
     [`${containerClassName}`]: !!containerClassName,
   });
 
