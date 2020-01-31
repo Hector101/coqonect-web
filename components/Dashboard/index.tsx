@@ -44,7 +44,7 @@ const Dashboard: FunctionComponent<{}> = () => {
           </div>
         </div>
       </section>
-      <section className="c-ReccommendedMentorshipCardWrapper pv4 flex-m justify-between-m flex-l justify-between-l">
+      <section className="pv4 flex-m justify-between-m flex-l justify-between-l">
         <ReccommendedMentorshipCard />
         <ReccommendedMentorshipCard />
         <ReccommendedMentorshipCard />
@@ -53,7 +53,7 @@ const Dashboard: FunctionComponent<{}> = () => {
         <div>
           <h3 className="mb0">Featured Mentors</h3>
         </div>
-        <div className="c-FeaturedMentorCardWrapper pv4 flex-m justify-between-m flex-l justify-between-l">
+        <div className="pv4 flex-m justify-between-m flex-l justify-between-l">
           <FeaturedMentorCard />
           <FeaturedMentorCard />
           <FeaturedMentorCard />
