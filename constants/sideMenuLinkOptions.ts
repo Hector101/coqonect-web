@@ -16,6 +16,12 @@ const sideMenuLinkOptions: MenuList[] = [
         selectable: true,
       },
       {
+        route: '/profile',
+        value: 'Profile',
+        iconName: 'Avatar',
+        selectable: true,
+      },
+      {
         route: '/active-session',
         value: 'Active Sessions',
         iconName: 'ActiveSession',
@@ -39,12 +45,6 @@ const sideMenuLinkOptions: MenuList[] = [
     categoryName: 'SETTINGS',
     iconName: 'Setting',
     links: [
-      {
-        route: '/edit-profile',
-        value: 'Edit Profile',
-        iconName: 'Edit',
-        selectable: true,
-      },
       {
         route: '/help',
         value: 'Help',
