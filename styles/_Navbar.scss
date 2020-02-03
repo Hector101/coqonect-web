@@ -4,7 +4,7 @@
   
   .c-NavbarContent {
     max-width: 85.375rem;
-    margin: auto 2rem;
+    margin: auto 1rem;
   }
 
   @media (min-width: 48em) {
@@ -17,12 +17,6 @@
     &.c-IsExpanded {
       width: 80%;
       margin-left: 20%;
-    }
-  }
-
-  @media (min-width: 85.375rem) {
-    .c-NavbarContent {
-      margin: auto;
     }
   }
 }
