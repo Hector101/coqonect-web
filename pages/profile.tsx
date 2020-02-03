@@ -11,7 +11,7 @@ import checkAuthStatus from 'lib/checkAuthStatus';
 // interface
 import INextFunctionalComponent from 'interfaces/NextFunctionalComponent';
 
-const EditProfile = dynamic(() => import('components/Dashboard/EditProfile'), {
+const Profile = dynamic(() => import('components/Dashboard/Profile'), {
   loading: () =>  <div className="w-100 vh-100 flex justify-center items-center">
     <SVG src="/static/svgs/Loading.svg" className="w3 h3 c-LoadingPrimary" />
   </div>,
@@ -25,9 +25,9 @@ const DashboardContainer = dynamic(() => import('components/Containers/Dashboard
 
 const DashboardPage: INextFunctionalComponent<{}> = () => {
   return (
-    <Plain title="Active Session | CoQonect">
+    <Plain title="Profile | CoQonect">
       <DashboardContainer>
-        <EditProfile />
+        <Profile />
       </DashboardContainer>
     </Plain>
   );
