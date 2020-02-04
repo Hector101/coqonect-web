@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import Button from 'components/Shared/Button';
+import LazyLoadImage from 'components/Shared/LazyLoadImage';
 
 import truncateText from 'lib/truncateText';
 
 import EdirPencil from '../../static/svgs/EditPencil.svg';
-import ProfilePic from '../../static/svgs/ProfilePic.svg';
 import Gear from '../../static/svgs/Gear.svg';
 import Mentorship from '../../static/svgs/Mentorship.svg';
 import Verify from '../../static/svgs/Verify.svg';
@@ -13,36 +15,47 @@ import RightArrow from '../../static/svgs/RightArrow.svg';
 import Plus from '../../static/svgs/Plus.svg';
 import DownArrow from '../../static/svgs/DownArrow.svg';
 
-const bio = `But I must explain to you how all this mistaken idea of denouncing pleasure
-and praising pain was born and I will give you a complete account of the
- system, and expound the actual teachings of the great explorer of the
-  truth, the master-builder of human happiness. No one rejects, dislikes,
-   or avoids pleasure itself, because it is pleasure, but because those who
-    do not know how to pursue pleasure rationally encounter consequences that
-     are extremely painful. Nor again is there anyone who loves or pursues
-      or desires to obtain pain of itself, because it is pain, but because
-      occasionally circumstances occur in which toil and pain can procure
-       him some great pleasure. To take a trivial example, which of us ever
-        undertakes laborious physical exercise, except to obtain some advantage
-         from it? But who has any right to find fault with a man who chooses to
-          enjoy a pleasure that has no annoying consequences, or one who avoids
-           a pain that produces no resultant pleasure?`;
+const AUTHENTICATED_USER = gql`
+  query {
+  client {
+    authenticatedUser {
+      profile {
+        fullName
+        imageUrl
+        city
+        country
+        bio
+      }
+    }
+  }
+}
+`;
 
 
 const Profile: FunctionComponent<{}> = () => {
+  const{ data } = useQuery(AUTHENTICATED_USER);
+
+  const bio = `${data?.client?.authenticatedUser?.profile?.bio}`;
+
   return (
     <div className="ph4">
       <section className="bb b--black-10 pv3 flex flex-column flex-row-ns items-start justify-between">
         <div className="flex items-center w-100 w-50-ns">
           <div className="relative w4 h4">
-            <ProfilePic className="w4 h4 br-100"/>
+            <LazyLoadImage
+                  srcName={data?.client?.authenticatedUser?.profile?.imageUrl}
+                  fallbackIconName="ProfilePic"
+                  className="w4 h4 br-100"
+                />
             <span className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">
               <EdirPencil className="w1 h1 fill-white"/>
             </span>
           </div>
           <div className="ml3 ml4-ns">
-            <h4 className="mv2">Hector Johnson Okoro</h4>
-            <span className="f7">Lagos, Nigeria</span>
+            <h4 className="mv2">{data?.client?.authenticatedUser?.profile?.fullName}</h4>
+            <span className="f7">{data?.client?.authenticatedUser?.profile?.city},  
+              {data?.client?.authenticatedUser?.profile?.country}
+            </span>
           </div>
         </div>
         <div className="w-100 w-50-ns">
