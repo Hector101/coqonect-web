@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -14,6 +15,8 @@ import Verify from '../../static/svgs/Verify.svg';
 import RightArrow from '../../static/svgs/RightArrow.svg';
 import Plus from '../../static/svgs/Plus.svg';
 import DownArrow from '../../static/svgs/DownArrow.svg';
+import EmptyStar from '../../static/svgs/EmptyStar.svg';
+import FullStar from '../../static/svgs/FullStar.svg';
 
 const AUTHENTICATED_USER = gql`
   query {
@@ -53,9 +56,18 @@ const Profile: FunctionComponent<{}> = () => {
           </div>
           <div className="ml3 ml4-ns">
             <h4 className="mv2">{data?.client?.authenticatedUser?.profile?.fullName}</h4>
-            <span className="f7">{data?.client?.authenticatedUser?.profile?.city},  
+            <span className="f7">
+              {data?.client?.authenticatedUser?.profile?.city},  
               {data?.client?.authenticatedUser?.profile?.country}
             </span>
+            <div>
+            <Rating
+                emptySymbol={<EmptyStar href="#icon-star-empty" className="w1 h1" />}
+                fullSymbol={<FullStar href="#icon-star-full" className="w1 h1 fill-orange" />}
+                initialRating={4}
+                readonly={true}
+              />
+              </div>
           </div>
         </div>
         <div className="w-100 w-50-ns">
