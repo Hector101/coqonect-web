@@ -40,8 +40,6 @@ const Profile: FunctionComponent<{}> = () => {
 
   const bio = `${data?.client?.authenticatedUser?.profile?.bio}`;
 
-  // const { client: { authenticatedUser: { profile: { fullName, imageUrl, bio, city, country } } } } = data;
-
   return (
     <div className="ph4">
       <section className="bb b--black-10 pv3 flex flex-column flex-row-ns items-start justify-between">
