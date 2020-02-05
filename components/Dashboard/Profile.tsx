@@ -38,7 +38,9 @@ const AUTHENTICATED_USER = gql`
 const Profile: FunctionComponent<{}> = () => {
   const{ data } = useQuery(AUTHENTICATED_USER);
 
-  const { client: { authenticatedUser: { profile: { fullName, imageUrl, bio, city, country } } } } = data;
+  const bio = `${data?.client?.authenticatedUser?.profile?.bio}`;
+
+  // const { client: { authenticatedUser: { profile: { fullName, imageUrl, bio, city, country } } } } = data;
 
   return (
     <div className="ph4">
@@ -46,7 +48,7 @@ const Profile: FunctionComponent<{}> = () => {
         <div className="flex items-center w-100 w-50-ns">
           <div className="relative w4 h4">
             <LazyLoadImage
-              srcName={imageUrl}
+              srcName={data?.client?.authenticatedUser?.profile?.imageUrl}
               fallbackIconName="ProfilePic"
               className="w4 h4 br-100"
             />
@@ -55,11 +57,11 @@ const Profile: FunctionComponent<{}> = () => {
             </span>
           </div>
           <div className="ml3 ml4-ns">
-            <h4 className="mv2">{fullName}</h4>
+            <h4 className="mv2">{data?.client?.authenticatedUser?.profile?.fullName}</h4>
             <span className="f7">
-              {city}
+              {data?.client?.authenticatedUser?.profile?.city}
               {', '}  
-              {country}
+              {data?.client?.authenticatedUser?.profile?.country}
             </span>
             <div className="pv1"> 
               <Rating
