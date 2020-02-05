@@ -38,7 +38,7 @@ const AUTHENTICATED_USER = gql`
 const Profile: FunctionComponent<{}> = () => {
   const{ data } = useQuery(AUTHENTICATED_USER);
 
-  const bio = `${data?.client?.authenticatedUser?.profile?.bio}`;
+  const { client: { authenticatedUser: { profile: { fullName, imageUrl, bio, city, country } } } } = data;
 
   return (
     <div className="ph4">
@@ -46,28 +46,29 @@ const Profile: FunctionComponent<{}> = () => {
         <div className="flex items-center w-100 w-50-ns">
           <div className="relative w4 h4">
             <LazyLoadImage
-                  srcName={data?.client?.authenticatedUser?.profile?.imageUrl}
-                  fallbackIconName="ProfilePic"
-                  className="w4 h4 br-100"
-                />
+              srcName={imageUrl}
+              fallbackIconName="ProfilePic"
+              className="w4 h4 br-100"
+            />
             <span className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">
               <EdirPencil className="w1 h1 fill-white"/>
             </span>
           </div>
           <div className="ml3 ml4-ns">
-            <h4 className="mv2">{data?.client?.authenticatedUser?.profile?.fullName}</h4>
+            <h4 className="mv2">{fullName}</h4>
             <span className="f7">
-              {data?.client?.authenticatedUser?.profile?.city},  
-              {data?.client?.authenticatedUser?.profile?.country}
+              {city}
+              {', '}  
+              {country}
             </span>
-            <div>
-            <Rating
+            <div className="pv1"> 
+              <Rating
                 emptySymbol={<EmptyStar href="#icon-star-empty" className="w1 h1" />}
-                fullSymbol={<FullStar href="#icon-star-full" className="w1 h1 fill-orange" />}
-                initialRating={4}
+                fullSymbol={<FullStar href="#icon-star-full" className="w1 h1 fill-primary-blue" />}
+                initialRating={3}
                 readonly={true}
-              />
-              </div>
+              /> 
+            </div>
           </div>
         </div>
         <div className="w-100 w-50-ns">
