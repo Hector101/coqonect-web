@@ -38,7 +38,7 @@ const AUTHENTICATED_USER = gql`
 const Profile: FunctionComponent<{}> = () => {
   const{ data } = useQuery(AUTHENTICATED_USER);
 
-  const bio = `${data?.client?.authenticatedUser?.profile?.bio}`;
+  const aboutMe = `${data?.client?.authenticatedUser?.profile?.bio}`;
 
   return (
     <div className="ph4">
@@ -74,7 +74,7 @@ const Profile: FunctionComponent<{}> = () => {
         <div className="w-100 w-50-ns">
           <h4>About Me</h4>
           <p className="f7 lh-copy pointer">
-            {truncateText(bio, 300)}
+            {truncateText(aboutMe, 300)}
           </p>
         </div>
       </section>
