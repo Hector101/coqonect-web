@@ -38,7 +38,7 @@ const AUTHENTICATED_USER = gql`
 const Profile: FunctionComponent<{}> = () => {
   const{ data } = useQuery(AUTHENTICATED_USER);
 
-  const aboutMe = `${data?.client?.authenticatedUser?.profile?.bio}`;
+  const aboutMe = data?.client?.authenticatedUser?.profile?.bio;
 
   return (
     <div className="ph4">
