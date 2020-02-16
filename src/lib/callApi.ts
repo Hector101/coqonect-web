@@ -21,18 +21,28 @@ const callApi = async ({
   method = 'post',
   headers,
 }: IAPICallParameters): Promise<IResponseData> => {
-  const response = await fetch(`${process.env.API_URL}${url}`, {
-    method,
-    mode: 'cors',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    const response = await fetch(`${process.env.API_URL}${url}`, {
+      method,
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers,
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  } catch (err) {
+    return Promise.resolve({
+      success: false,
+      message: 'Server Error',
+      status: 500 ,
+      payload: {},
+    });
+  }
 
-  return await response.json();
+
 };
 
 export default callApi;
