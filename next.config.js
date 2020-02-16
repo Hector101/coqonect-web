@@ -31,6 +31,24 @@ const nextConfig = {
 
     return config;
   },
+  exportPathMap: async function(
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+      '/login': { page: '/login' },
+      '/signup': { page: '/signup' },
+      '/dashboard': { page: '/dashboard' },
+      '/dashboard/active-session': { page: '/dashboard/active-session' },
+      '/dashboard/help': { page: '/dashboard/help' },
+      '/dashboard/mentors': { page: '/dashboard/mentors' },
+      '/dashboard/profile': { page: '/dashboard/profile' },
+      '/dashboard/notifications': { page: '/dashboard/notifications' },
+      '/reset-password': { page: '/reset-password' },
+      '/unauthorized': { page: '/unauthorized' },
+    }
+  },
 };
 
 module.exports = withPlugins(
