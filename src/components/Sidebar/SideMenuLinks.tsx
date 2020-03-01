@@ -88,7 +88,8 @@ const MenuLink: FunctionComponent<MenuLinkProps> = ({ link, selected, isMobile }
     'c-selected': selected && link.selectable,
   });
   const linkTextClassName = classnames('ml3', {
-    'dn c-hide-link-text': !isExpanded && !isMobile,
+    'dn c-fade-out': !isExpanded && !isMobile,
+    'dib c-ease-in': isExpanded,
   });
 
   const _handleClick = async () => {
@@ -100,7 +101,9 @@ const MenuLink: FunctionComponent<MenuLinkProps> = ({ link, selected, isMobile }
   return (
     <Link href={link.route}>
       <a className={mainClassName} id={link.route} onClick={_handleClick}>
-        <RenderSVG name={link.iconName} className="w1 h1" />
+        <span className="w1 h1">
+          <RenderSVG name={link.iconName} className="w1 h1" />
+        </span>
         <span id={link.route} className={linkTextClassName}>{link.value}</span>
       </a>
     </Link>

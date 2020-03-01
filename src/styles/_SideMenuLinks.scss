@@ -1,7 +1,6 @@
 .c-SideMenuLinks {
   height: calc(100vh - 3.75rem);
   overflow-y: auto;
-  opacity: 1;
 
   .c-sidemenu-link {
     &:hover {
@@ -18,9 +17,30 @@
       border-bottom-right-radius: 4px;
     }
   }
+  
+  .c-fade-in {
+    animation: fadeIn ease 10s;
+  }
 
-  .c-hide-link-text {
+  .c-fade-out {
+    animation: fadeOut ease 8s;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
     opacity: 0;
-    transition: opacity 0.5s linear;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
