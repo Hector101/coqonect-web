@@ -20,25 +20,48 @@ import FullStar from '../../../public/svgs/FullStar.svg';
 
 const AUTHENTICATED_USER = gql`
   query {
-  client {
-    authenticatedUser {
-      profile {
-        fullName
-        imageUrl
-        city
-        country
-        bio
+    client {
+      authenticatedUser {
+        profile {
+          fullName
+          imageUrl
+          city
+          country
+          bio
+        }
       }
     }
   }
-}
 `;
 
+type Profile = {
+  fullName: string;
+  imageUrl: string | null;
+  city: string;
+  country: string;
+  bio: string | null;
+};
+
+type AuthenticatedUser = {
+  profile: Profile;
+};
+
+type Client = {
+  authenticatedUser: AuthenticatedUser;
+};
+
+type ProfileUseQueryProps = {
+  client: Client;
+};
 
 const Profile: FunctionComponent<{}> = () => {
-  const{ data } = useQuery(AUTHENTICATED_USER);
+  const{ data, loading } = useQuery<ProfileUseQueryProps>(AUTHENTICATED_USER);
 
-  const aboutMe = data?.client?.authenticatedUser?.profile?.bio;
+  if (loading || !data) {
+    return <div className="ph4">Loading...</div>;
+  }
+
+  const aboutMe = data.client.authenticatedUser.profile.bio;
 
   return (
     <div className="ph4">
@@ -57,9 +80,9 @@ const Profile: FunctionComponent<{}> = () => {
           <div className="ml3 ml4-ns">
             <h4 className="mv2">{data?.client?.authenticatedUser?.profile?.fullName}</h4>
             <span className="f7">
-              {data?.client?.authenticatedUser?.profile?.city}
+              {data.client.authenticatedUser.profile.city}
               {', '}
-              {data?.client?.authenticatedUser?.profile?.country}
+              {data.client.authenticatedUser.profile.country}
             </span>
             <div className="pv1">
               <Rating
@@ -74,7 +97,7 @@ const Profile: FunctionComponent<{}> = () => {
         <div className="w-100 w-50-ns">
           <h4>About Me</h4>
           <p className="f7 lh-copy pointer">
-            {truncateText(aboutMe, 300)}
+            {aboutMe ? truncateText(aboutMe, 300) : <span>About Me description not added yet.</span>}
           </p>
         </div>
       </section>

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 type Props = {
   className: string;
-  srcName: string;
+  srcName: string | null;
   fallbackIconName: string;
   alt?: string;
 };
