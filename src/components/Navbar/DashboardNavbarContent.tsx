@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 
+import { ProfileUseQueryProps, Profile } from 'src/types';
+
 import Notification from '../../../public/svgs/Notification.svg';
 
 const AUTHENTICATED_USER = gql`
@@ -25,40 +27,52 @@ const AUTHENTICATED_USER = gql`
 `;
 
 const DashboardNavbarContent: FunctionComponent<{}> = () => {
-  const{ data } = useQuery(AUTHENTICATED_USER);
+  const{ data, loading } = useQuery<ProfileUseQueryProps>(AUTHENTICATED_USER);
 
-  return (
+  const renderStaticNavContents = (optionalProps?: Profile) => (
     <div className="c-DashboardNavbarContent flex justify-end items-center z-3">
-      <div className="flex justify-center items-center">
-        <Button
-          type="button"
-          className="pv2 ph3 f6 br1 bn white bg-primary-blue dn db-ns"
-        >
-          Request Mentorship
-        </Button>
-        <ul className="flex justify-between items-center list">
-          <li>
-            <a className="mr4 pointer relative">
-              <span className="absolute bg-orange w05 h05 br-100 right-0"/>
-              <Notification className="w1 h1" />
-            </a>
-          </li>
-          <li className="c-user-menu-link">
-            <Link href="/dashboard/profile">
-              <a className="inline-flex justify-center items-center pointer link">
-                <LazyLoadImage
-                  srcName={data?.client?.authenticatedUser?.profile?.imageUrl}
-                  fallbackIconName="ProfilePic"
-                  className="w15 h15 br-100"
-                />
-                <span className="f7 f6-ns ml2">{data?.client?.authenticatedUser?.profile?.fullName}</span>
+      <ul className="flex justify-between items-center list">
+        <li className="mr3 dib">
+          <Button
+            type="button"
+            className="pv2 ph3 mr2 f6 br1 bn white bg-primary-blue dn db-ns"
+          >
+            Request Mentorship
+          </Button>
+        </li>
+        <li className="mr3 dib">
+          <Link href="/dashboard/notifications">
+              <a className="pointer relative">
+                <span className="absolute bg-orange w05 h05 br-100 right-0"/>
+                <Notification className="w1 h1" />
               </a>
             </Link>
-          </li>
-        </ul>
-      </div>
+        </li>
+        <li className="mr3 dib ttc">
+          {
+            optionalProps ? (
+              <Link href="/dashboard/profile">
+                <a className="inline-flex justify-center items-center pointer link">
+                  <LazyLoadImage
+                    srcName={optionalProps.imageUrl}
+                    fallbackIconName="ProfilePic"
+                    className="w15 h15 br-100"
+                  />
+                  <span className="f7 f6-ns ml2">{optionalProps.fullName}</span>
+                </a>
+              </Link>
+            ) : 'Loading...'
+          }
+        </li>
+      </ul>
     </div>
   );
+
+  if (!data || loading) {
+    return  renderStaticNavContents();
+  }
+
+  return renderStaticNavContents(data.client.authenticatedUser.profile);
 };
 
 export default DashboardNavbarContent;

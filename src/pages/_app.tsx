@@ -2,7 +2,8 @@ import App from 'next/app';
 import NProgress from 'nprogress';
 import Router, { withRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import SVG from 'react-inlinesvg';
+
+import LoadingPage from 'src/components/Shared/LoadingPage';
 
 // lib
 import { withApollo } from 'src/lib/withApollo';
@@ -15,9 +16,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const DashboardContainer = dynamic(() => import('src/components/Containers/DashboardContainer'), {
-  loading: () => <div className="w-100 vh-100 flex justify-center items-center">
-   <SVG src="/svgs/Loading.svg" className="w3 h3 c-LoadingPrimary" />
-  </div>,
+  loading: () => <LoadingPage />,
 });
 
 class MyApp extends App {
