@@ -1,4 +1,4 @@
-const truncateText = (str = '', length?: number, ending?: string) => {
+const truncateText = (str: string, length?: number, ending?: string) => {
   if (!length) {
     length = 100;
   }
