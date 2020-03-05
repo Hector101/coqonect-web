@@ -3,6 +3,8 @@ import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import Input from 'src/components/Shared/Input';
+import Textarea from 'src/components/Shared/Textarea';
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import LoadingPage from 'src/components/Shared/LoadingPage';
@@ -49,8 +51,8 @@ const Profile: FunctionComponent<{}> = () => {
   return (
     <div className="ph4">
       <section className="bb b--black-10 pv3 flex flex-column flex-row-ns items-center justify-between">
-        <div className="flex items-center w-100 w-50-ns">
-          <div className="relative w4 h4">
+        <div className="flex flex-column flex-row-ns justify-between items-center w-100">
+          <div className="relative w4 h4 mb5">
             <LazyLoadImage
               srcName={imageUrl}
               fallbackIconName="ProfilePic"
@@ -58,14 +60,6 @@ const Profile: FunctionComponent<{}> = () => {
             />
             <span className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">
               <EdirPencil className="w1 h1 fill-white"/>
-            </span>
-          </div>
-          <div className="ml3 ml4-ns">
-            <h4 className="mv2 ttc">{fullName}</h4>
-            <span className="f7">
-              {city}
-              {', '}
-              {country}
             </span>
             <div className="pv1">
               <Rating
@@ -76,20 +70,58 @@ const Profile: FunctionComponent<{}> = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="w-100 w-50-ns">
-          <article className="mw5 mw6-ns br1 hidden ba b--black-10 mv4">
-            <h2 className="f5 bg-near-white br1 br--top black-80 mv0 pv2 ph3 ttu">More About Me</h2>
-            <div className="pv2 ph3 bt b--black-10">
-              <p className="f7 f6-ns lh-copy measure">
-                {
-                  bio
-                    ? truncateText(bio, 300)
-                    : 'About Me description not added yet.'
-                }
-              </p>
-            </div>
-          </article>
+          <div className="ml3 ml4-ns w-100 w-50-ns">
+            <form>
+              <span className="f5">Email Address</span>
+              <Input 
+                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                defaultType="text"
+                placeholder="Enter E-mail"
+                name="text"
+                value="Test Email" 
+              />
+              <span className="f5">Fullname</span>
+              <Input 
+                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                defaultType="text"
+                placeholder="Enter Fullname"
+                name="text"
+                value={fullName}
+              />
+              <span className="f5">City</span>
+              <Input 
+                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                defaultType="text"
+                placeholder="Enter City"
+                name="text"
+                value={city}
+              />
+              <span className="f5">Country</span>
+              <Input 
+                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                defaultType="text"
+                placeholder="Enter Country"
+                name="text"
+                value={country}
+              />
+              <span className="f5">Bio</span>
+              <Textarea 
+                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3 c-textarea"
+                defaultType="textarea"
+                placeholder="Enter bio"
+                name="text"
+              >
+                <span>
+                  {
+                    bio
+                      ? truncateText(bio, 300)
+                      : 'About Me description not added yet.'
+                  }
+                </span>
+              </Textarea>  
+              <Button className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3 w-100 w-auto-ns" type="button">Save</Button>
+            </form>
+          </div>
         </div>
       </section>
       <section className="w-100 pv4">
