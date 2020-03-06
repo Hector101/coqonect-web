@@ -52,7 +52,7 @@ const Textarea: FunctionComponent<Props> = ({
         readOnly={readOnly}
       >
         {children}
-      </textarea>  
+      </textarea>
       {error && <label className="light-red f6 mt1">{error}</label>}
     </div>
   );

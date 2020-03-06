@@ -73,15 +73,15 @@ const Profile: FunctionComponent<{}> = () => {
           <div className="ml3 ml4-ns w-100 w-50-ns">
             <form>
               <span className="f5">Email Address</span>
-              <Input 
+              <Input
                 className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
                 defaultType="text"
                 placeholder="Enter E-mail"
                 name="text"
-                value="Test Email" 
+                value="Test Email"
               />
               <span className="f5">Fullname</span>
-              <Input 
+              <Input
                 className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
                 defaultType="text"
                 placeholder="Enter Fullname"
@@ -89,7 +89,7 @@ const Profile: FunctionComponent<{}> = () => {
                 value={fullName}
               />
               <span className="f5">City</span>
-              <Input 
+              <Input
                 className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
                 defaultType="text"
                 placeholder="Enter City"
@@ -97,7 +97,7 @@ const Profile: FunctionComponent<{}> = () => {
                 value={city}
               />
               <span className="f5">Country</span>
-              <Input 
+              <Input
                 className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
                 defaultType="text"
                 placeholder="Enter Country"
@@ -105,7 +105,7 @@ const Profile: FunctionComponent<{}> = () => {
                 value={country}
               />
               <span className="f5">Bio</span>
-              <Textarea 
+              <Textarea
                 className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3 c-textarea"
                 defaultType="textarea"
                 placeholder="Enter bio"
@@ -118,8 +118,13 @@ const Profile: FunctionComponent<{}> = () => {
                       : 'About Me description not added yet.'
                   }
                 </span>
-              </Textarea>  
-              <Button className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3 w-100 w-auto-ns" type="button">Save</Button>
+              </Textarea>
+              <Button
+                className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3 w-100 w-auto-ns"
+                type="button"
+              >
+                Save
+              </Button>
             </form>
           </div>
         </div>
