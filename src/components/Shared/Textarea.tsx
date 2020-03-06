@@ -2,21 +2,18 @@ import { FunctionComponent, ChangeEvent } from 'react';
 import classnames from 'classnames';
 
 type Props = {
-  value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   className: string;
   containerClassName?: string;
-  defaultType: 'textarea';
-  customType?: 'textarea';
   name: string;
   placeholder: string;
   disabled?: boolean;
   error?: string;
   noBorders?: boolean;
-  children: React.ReactElement;
+  value: string | null;
 };
 
-const Textarea: FunctionComponent<Props> = ({
+const TextArea: FunctionComponent<Props> = ({
   onChange,
   className,
   containerClassName,
@@ -26,9 +23,7 @@ const Textarea: FunctionComponent<Props> = ({
   error,
   placeholder,
   noBorders,
-  children,
 }) => {
-  // const [toggleStatus, setToggleStatus] = useState(false);
 
   const inputClassName = classnames(`outline-transparent ${className}`, {
     'bn': noBorders,
@@ -45,18 +40,17 @@ const Textarea: FunctionComponent<Props> = ({
     <div className={inputContainerClassName}>
       <textarea
         className={inputClassName}
+        onChange={onChange}
         name={name}
-        value={value}
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
-      >
-        {children}
-      </textarea>
+        value={value || undefined}
+      />
       {error && <label className="light-red f6 mt1">{error}</label>}
     </div>
   );
 };
 
 
-export default Textarea;
+export default TextArea;

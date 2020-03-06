@@ -8,6 +8,7 @@ export type Profile = {
 
 export type AuthenticatedUser = {
   profile: Profile;
+  email: string;
 };
 
 export type Client = {

@@ -1,15 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
+import { Formik } from 'formik';
 import gql from 'graphql-tag';
+import * as yup from 'yup';
 
 import Input from 'src/components/Shared/Input';
-import Textarea from 'src/components/Shared/Textarea';
+import TextArea from 'src/components/Shared/TextArea';
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import LoadingPage from 'src/components/Shared/LoadingPage';
 
-import truncateText from 'src/lib/truncateText';
+// import truncateText from 'src/lib/truncateText';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
 import Gear from '../../../public/svgs/Gear.svg';
@@ -21,12 +23,19 @@ import DownArrow from '../../../public/svgs/DownArrow.svg';
 import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
 
-import { ProfileUseQueryProps } from 'src/types';
+import { ProfileUseQueryProps, Profile as ProfileType } from 'src/types';
+
+type FormMethod = {
+  setSubmitting: (isSubmitting: boolean) => void;
+};
+
+type EditProfileValues = Omit<ProfileType, 'imageUrl'>;
 
 const AUTHENTICATED_USER = gql`
   query {
     client {
       authenticatedUser {
+        email
         profile {
           fullName
           imageUrl
@@ -39,14 +48,33 @@ const AUTHENTICATED_USER = gql`
   }
 `;
 
+const editProfileValidationSchema = yup.object().shape({
+  fullName: yup.string()
+    .required('Required'),
+  city: yup.string()
+    .required('Required'),
+  country: yup.string()
+    .required('Required'),
+  bio: yup.string()
+  .required('Required'),
+});
+
 const Profile: FunctionComponent<{}> = () => {
+  const _handleProfileEdit = async (_values: EditProfileValues, { setSubmitting }: FormMethod) => {
+    setSubmitting(true);
+
+    console.log('Submitting...');
+
+    setSubmitting(false);
+  };
+
   const{ data, loading } = useQuery<ProfileUseQueryProps>(AUTHENTICATED_USER);
 
   if (loading || !data) {
     return <LoadingPage />;
   }
 
-  const { fullName, imageUrl,  bio, city, country } = data.client.authenticatedUser.profile;
+  const { profile: { imageUrl }, profile, email } = data.client.authenticatedUser;
 
   return (
     <div className="ph4">
@@ -71,61 +99,78 @@ const Profile: FunctionComponent<{}> = () => {
             </div>
           </div>
           <div className="ml3 ml4-ns w-100 w-50-ns">
-            <form>
-              <span className="f5">Email Address</span>
-              <Input
-                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
-                defaultType="text"
-                placeholder="Enter E-mail"
-                name="text"
-                value="Test Email"
-              />
-              <span className="f5">Fullname</span>
-              <Input
-                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
-                defaultType="text"
-                placeholder="Enter Fullname"
-                name="text"
-                value={fullName}
-              />
-              <span className="f5">City</span>
-              <Input
-                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
-                defaultType="text"
-                placeholder="Enter City"
-                name="text"
-                value={city}
-              />
-              <span className="f5">Country</span>
-              <Input
-                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
-                defaultType="text"
-                placeholder="Enter Country"
-                name="text"
-                value={country}
-              />
-              <span className="f5">Bio</span>
-              <Textarea
-                className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3 c-textarea"
-                defaultType="textarea"
-                placeholder="Enter bio"
-                name="text"
-              >
-                <span>
-                  {
-                    bio
-                      ? truncateText(bio, 300)
-                      : 'About Me description not added yet.'
-                  }
-                </span>
-              </Textarea>
-              <Button
-                className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3 w-100 w-auto-ns"
-                type="button"
-              >
-                Save
-              </Button>
-            </form>
+            <Formik
+              initialValues={{
+                fullName: '',
+                city: '',
+                country: '',
+                bio: '',
+                ...profile,
+              }}
+              onSubmit={_handleProfileEdit}
+              validationSchema={editProfileValidationSchema}
+            >
+              {({
+                values: editProfileValues,
+                // errors: editProfileErrors,
+                // isSubmitting: editProfileSubmitting,
+                handleSubmit: handleEditProfileSubmit,
+                handleChange: handleEditProfileInputChange,
+              }) => (
+                <form onSubmit={handleEditProfileSubmit}>
+                  <label className="f5">Email Address</label>
+                  <Input
+                    className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                    defaultType="text"
+                    placeholder="Enter E-mail"
+                    name="text"
+                    value={email}
+                    onChange={handleEditProfileInputChange}
+                  />
+                  <label className="f5">Fullname</label>
+                  <Input
+                    className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                    defaultType="text"
+                    placeholder="Enter Fullname"
+                    name="fullName"
+                    value={editProfileValues.fullName}
+                    onChange={handleEditProfileInputChange}
+                  />
+                  <label className="f5">City</label>
+                  <Input
+                    className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                    defaultType="text"
+                    placeholder="Enter City"
+                    name="city"
+                    value={editProfileValues.city}
+                    onChange={handleEditProfileInputChange}
+                  />
+                  <label className="f5">Country</label>
+                  <Input
+                    className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3"
+                    defaultType="text"
+                    placeholder="Enter Country"
+                    name="country"
+                    value={editProfileValues.country}
+                    onChange={handleEditProfileInputChange}
+                  />
+                  <label className="f5">Bio</label>
+                  <TextArea
+                    className="pv3 pl2 pr2 f6 input-reset bg-transparent w-100 mt2 mb3 c-textarea"
+                    placeholder="Enter bio"
+                    name="bio"
+                    onChange={handleEditProfileInputChange}
+                    value={editProfileValues.bio}
+                  />
+                  <Button
+                    className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3 w-100 w-auto-ns"
+                    type="button"
+                  >
+                    Save
+                  </Button>
+                </form>
+              )}
+            </Formik>
           </div>
         </div>
       </section>
