@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
 
 import Plain from 'src/components/Containers/Plain';
 import Navbar from 'src/components/Navbar';
@@ -9,17 +10,21 @@ import HomePageMobileNavbar from 'src/components/Navbar/HomePageMobileNavbar';
 
 import INextFunctionalComponent from 'src/interfaces/NextFunctionalComponent';
 
-import { sideMenuReducer } from 'src/store/reducer';
+import { useStore } from 'src/store';
 
 const Index: INextFunctionalComponent<{}> = () => {
-  const [isExpanded, sideMenuDispatcher] = useReducer(sideMenuReducer, false);
+  const { uiStore } = useStore();
+
+  const _toggleSideMenu = () => {
+    uiStore.toggleSideMenu();
+  };
 
   return (
     <Plain title="Home | CoQonect">
-      <Navbar isExpanded={isExpanded} toggleMenu={sideMenuDispatcher}>
+      <Navbar isExpanded={uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <HomePageDeskTopNavbar />
       </Navbar>
-      <MobileSidebar isExpanded={isExpanded} toggleMenu={sideMenuDispatcher}>
+      <MobileSidebar isExpanded={uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <HomePageMobileNavbar />
       </MobileSidebar>
       <div className="c-IndexContent">
@@ -29,4 +34,4 @@ const Index: INextFunctionalComponent<{}> = () => {
   );
 };
 
-export default Index;
+export default observer(Index);

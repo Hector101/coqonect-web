@@ -1,5 +1,6 @@
-import { FunctionComponent, ReactNode, useReducer } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import classnames from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import Navbar from 'src/components/Navbar';
 import MobileSidebar from 'src/components/Sidebar/MobileSidebar';
@@ -8,38 +9,39 @@ import DashboardNavbarContent from 'src/components/Navbar/DashboardNavbarContent
 import SidebarContent from 'src/components/Sidebar/SidebarContent';
 
 // store
-import { sideMenuReducer } from 'src/store/reducer';
-
-// context
-import { SideMenuContext } from 'src/store/contexts';
+import { useStore } from 'src/store';
 
 type Props = {
   children: ReactNode;
 };
 
 const DashboardContainer: FunctionComponent<Props> = ({ children }) => {
-  const [isExpanded, sideMenuDispatcher] = useReducer(sideMenuReducer, true);
+  const { uiStore } = useStore();
 
   const dashboardContentClassName = classnames('c-DashboardContainer', {
-    'c-IsExpanded': !isExpanded,
+    'c-IsExpanded': !uiStore.sideMenuOpened,
   });
 
+  const _toggleSideMenu = () => {
+    uiStore.toggleSideMenu();
+  };
+
   return (
-    <SideMenuContext.Provider value={isExpanded}>
-      <Navbar toggleMenu={sideMenuDispatcher} isDashboard={true} isExpanded={isExpanded}>
+    <>
+      <Navbar toggleMenu={_toggleSideMenu} isDashboard={true} isExpanded={uiStore.sideMenuOpened}>
         <DashboardNavbarContent />
       </Navbar>
-      <DeskTopSidebar isExpanded={isExpanded}>
+      <DeskTopSidebar isExpanded={uiStore.sideMenuOpened}>
         <SidebarContent />
       </DeskTopSidebar>
-      <MobileSidebar isDashboard={true}  isExpanded={!isExpanded} toggleMenu={sideMenuDispatcher}>
+      <MobileSidebar isDashboard={true}  isExpanded={!uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <SidebarContent isMobile={true} />
       </MobileSidebar>
       <div className={dashboardContentClassName}>
         {children}
       </div>
-    </SideMenuContext.Provider>
+    </>
   );
 };
 
-export default DashboardContainer;
+export default observer(DashboardContainer);

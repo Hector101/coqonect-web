@@ -112,6 +112,9 @@
 .bg-transparent {   background-color: var(--transparent); }
 .bg-primary-blue { background-color: var(--primary-blue); }
 .bg-cyan { background-color: var(--cyan); }
+.bg-cyan-10 { background-color: lighten(var(--cyan, 1)); }
+.bg-cyan-30 { background-color: lighten(var(--cyan, 3)); }
+.bg-cyan-50 { background-color: lighten(var(--cyan, 5)); }
 .bg-soft-red { background-color: var(--soft-red) }
 
 .bg-dark-red { background-color: var(--dark-red); }

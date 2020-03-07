@@ -23,9 +23,10 @@ const Button: FunctionComponent<Props> = ({
   type,
 }) => {
   const mainClassNames = classnames('c-Button pointer outline-transparent', {
-    'bg-cyan': filled,
+    'bg-cyan': filled && !disabled,
     'c-PrimaryButton': primaryColor,
     'c-withFixedHeight': withFixedHeight,
+    'bg-black-50': disabled,
   });
 
   return (

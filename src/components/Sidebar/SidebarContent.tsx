@@ -1,22 +1,23 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent } from 'react';
 import classnames from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import SideMenuLinks from 'src/components/Sidebar/SideMenuLinks';
 
 import Logo from '../../../public/svgs/Logo.svg';
 
 // context
-import { SideMenuContext } from 'src/store/contexts';
+import { useStore } from 'src/store';
 
 type Props = {
   isMobile?: boolean;
 };
 
 const SidebarContent: FunctionComponent<Props> = ({ isMobile }) => {
-  const isExpanded = useContext(SideMenuContext);
+  const { uiStore } = useStore();
 
   const hideMenuTextClassName = classnames('f5 b ml2 black-90', {
-    dn: !isExpanded && !isMobile,
+    dn: !uiStore.sideMenuOpened && !isMobile,
   });
 
   return (
@@ -32,4 +33,4 @@ const SidebarContent: FunctionComponent<Props> = ({ isMobile }) => {
   );
 };
 
-export default SidebarContent;
+export default observer(SidebarContent);

@@ -9,22 +9,13 @@
   }
 
   .c-see-more {
-
-    .c-see-more-text {
-      color: rgb(0, 0, 0);
-    }
-
-    .c-see-more-icon {
-      fill: rgb(0, 0, 0);
-    }
-
     &:hover, :focus {
       .c-see-more-text {
-        color: rgba(0, 0, 0, .5);
+        color: lighten($primary-blue, 9);
       }
 
       .c-see-more-icon {
-        fill: rgba(0, 0, 0, .5);
+        fill: lighten($primary-blue, 9);
       }
     }
   }

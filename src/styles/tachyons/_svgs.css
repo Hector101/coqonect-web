@@ -22,6 +22,10 @@
   fill: rgb(0, 0, 0)
 }
 
+.fill-black-10 {
+  fill: rgba(0, 0, 0, 0.1);
+}
+
 .fill-black-30 {
   fill: rgba(0, 0, 0, 0.3);
 }
@@ -30,6 +34,14 @@
   fill: rgba(0, 0, 0, 0.5);
 }
 
+.fill-black-80 {
+  fill: rgba(0, 0, 0, 0.8);
+}
+
 .fill-orange {
   fill: var(--orange);
+}
+
+.fill-gray {
+  fill: #808080;
 }

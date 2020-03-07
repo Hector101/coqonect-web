@@ -96,27 +96,30 @@ const Profile: FunctionComponent<{}> = () => {
         <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
           <div>
             <div className="relative">
-              <Gear className="w3 h3 fill-primary-blue"/>
-              <Plus className="w1 h1 absolute bottom-0 right--1 fill-primary-blue" />
+              <Gear className="w3 h3"/>
+              <Plus className="w1 h1 absolute bottom-0 right--1" />
             </div>
-            <p className="f7 f6-ns">ADD SKILLS</p>
+            <p className="f7">ADD SKILLS</p>
           </div>
           <RightArrow className="w1 h1 dn db-ns" />
           <DownArrow className="w1 h1 dn-ns mb3" />
           <div>
-            <Verify className="w3 h3 fill-primary-blue"/>
-            <p className="f7 f6-ns">WE VERIFY THOSE SKILLS</p>
+            <Verify className="w3 h3"/>
+            <p className="f7">WE VERIFY THOSE SKILLS</p>
           </div>
           <RightArrow className="w1 h1 dn db-ns" />
           <DownArrow className="w1 h1 dn-ns mb3" />
           <div>
-            <Mentorship className="w3 h3 fill-primary-blue"/>
-            <p className="f7 f6-ns">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
+            <Mentorship className="w3 h3"/>
+            <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
           </div>
         </div>
         <div className="pv5 flex justify-center">
-          <Button className="bn br1 bg-primary-blue  white pointer f5 pv2 ph3" type="button">ADD SKILLS</Button>
+          <Button className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3" type="button">ADD SKILLS</Button>
         </div>
+      </section>
+      <section className="bb b--black-10">
+        <h1>Edit Profile</h1>
       </section>
     </div>
   );

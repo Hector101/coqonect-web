@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent } from 'react';
 import classnames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 
 import { RenderSVG } from 'src/components/Shared/SVGS';
 
@@ -12,7 +13,7 @@ import sideMenuLinkOptions from 'src/constants/sideMenuLinkOptions';
 import { MenuList, LinkType } from 'src/interfaces/SideMenuLink';
 
 // context
-import { SideMenuContext } from 'src/store/contexts';
+import { useStore } from 'src/store';
 
 type Props = {
   isMobile?: boolean;
@@ -35,12 +36,12 @@ type MenuLinkProps = {
   isMobile?: boolean;
 };
 
-const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = ({ menuLinks, isMobile }) => {
-  const isExpanded = useContext(SideMenuContext);
+const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(({ menuLinks, isMobile }) => {
+  const { uiStore } = useStore();
   const router = useRouter();
 
   const linkTitleClassName = classnames('mv0 pv1 black-30 transition-all ml3', {
-    'dn c-hide-link-text': !isExpanded && !isMobile,
+    'dn c-hide-link-text': !uiStore.sideMenuOpened && !isMobile,
   });
 
   return (
@@ -60,7 +61,7 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = ({ menuLi
       }
     </>
   );
-};
+});
 
 const MenuLinks: FunctionComponent<MenuLinksProps> = ({ menuLink, selectedRoute, isMobile }) => {
   return (
@@ -81,15 +82,15 @@ const MenuLinks: FunctionComponent<MenuLinksProps> = ({ menuLink, selectedRoute,
   );
 };
 
-const MenuLink: FunctionComponent<MenuLinkProps> = ({ link, selected, isMobile }) => {
-  const isExpanded = useContext(SideMenuContext);
+const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, isMobile }) => {
+  const { uiStore } = useStore();
 
   const mainClassName = classnames('h3 ph3 f6 pointer black-80 c-sidemenu-link link flex items-center', {
     'c-selected': selected && link.selectable,
   });
   const linkTextClassName = classnames('ml3', {
-    'dn c-fade-out': !isExpanded && !isMobile,
-    'dib c-ease-in': isExpanded,
+    'dn c-fade-out': !uiStore.sideMenuOpened && !isMobile,
+    'dib c-ease-in': uiStore.sideMenuOpened,
   });
 
   const _handleClick = async () => {
@@ -108,7 +109,7 @@ const MenuLink: FunctionComponent<MenuLinkProps> = ({ link, selected, isMobile }
       </a>
     </Link>
   );
-};
+});
 
 const SideMenuLinks: FunctionComponent<Props> = ({ isMobile }) => {
   return (
