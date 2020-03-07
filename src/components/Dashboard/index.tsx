@@ -53,10 +53,12 @@ const Dashboard: FunctionComponent<{}> = () => {
           <ReccommendedMentorshipCard />
           <ReccommendedMentorshipCard />
         </div>
-        <a className="c-see-more flex flex-column items-center pointer pv2 pv4-ns">
-          <span className="c-see-more-text">See More</span>
-          <SeeMore className="c-see-more-icon w1 h1"/>
-        </a>
+        <div className="flex justify-center">
+          <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
+            <span className="c-see-more-text primary-blue">See More</span>
+            <SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
+          </a>
+        </div>
       </section>
       <section>
         <div>
@@ -69,10 +71,12 @@ const Dashboard: FunctionComponent<{}> = () => {
             <FeaturedMentorCard withMarginRight={true} />
             <FeaturedMentorCard />
           </div>
-          <a className="c-see-more flex flex-column items-center pointer pv2 pv4-ns">
-            <span className="c-see-more-text">See More</span>
-            <SeeMore className="c-see-more-icon w1 h1"/>
-        </a>
+          <div className="flex justify-center">
+            <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
+              <span className="c-see-more-text primary-blue">See More</span>
+              <SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
+            </a>
+          </div>
         </div>
       </section>
     </div>

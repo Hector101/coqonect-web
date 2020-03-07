@@ -1,21 +1,8 @@
 import fetch from 'isomorphic-unfetch';
 
-interface IAPICallParameters {
-  url: string;
-  data?: ({}) | any;
-  method?: 'post' | 'get';
-  headers?: ({}) | any;
-  responseType?: string;
-}
+import { IAPICallParameters, IResponseData, CallApiType } from 'src/interfaces/CallApi';
 
-interface IResponseData {
-  payload: ({}) | any;
-  success: boolean;
-  message: string;
-  status: number;
-}
-
-const callApi = async ({
+const callApi: CallApiType = async ({
   url,
   data,
   method = 'post',

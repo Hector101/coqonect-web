@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 
-const Dashboard: FunctionComponent<{}> = () => {
+const ActiveSession: FunctionComponent<{}> = () => {
   return (
     <h1>Active Session Page</h1>
   );
 };
 
-export default Dashboard;
+export default ActiveSession;

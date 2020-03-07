@@ -2,12 +2,15 @@ import App from 'next/app';
 import NProgress from 'nprogress';
 import Router, { withRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { observer } from 'mobx-react-lite';
 
 import LoadingPage from 'src/components/Shared/LoadingPage';
 
 // lib
 import { withApollo } from 'src/lib/withApollo';
 import callApi from 'src/lib/callApi';
+
+import { UserStore } from 'src/store/UserStore';
 
 import '../styles/pages.scss';
 
@@ -20,25 +23,24 @@ const DashboardContainer = dynamic(() => import('src/components/Containers/Dashb
 });
 
 class MyApp extends App {
+  store: UserStore;
+
+  constructor(props: any) {
+    super(props);
+    this.store = new UserStore(callApi);
+  }
 
   async componentDidMount() {
     const { router } = this.props;
 
     if (router.route.startsWith('/dashboard')) {
-
-      const res = await callApi({
-        url: '/api/v1/auth-status',
-        method: 'get',
-      });
-
-      if (res.status !== 200) {
-        router.push('/login');
-      }
+      this.store.handleCheckAuthStatus();
     }
   }
 
   render() {
     const { Component, pageProps, router } = this.props;
+
     if (router.route.startsWith('/dashboard')) {
       return (
         <DashboardContainer>
@@ -53,4 +55,4 @@ class MyApp extends App {
 }
 
 // @ts-ignore
-export default withRouter(withApollo(MyApp));
+export default observer(withRouter(withApollo(MyApp)));

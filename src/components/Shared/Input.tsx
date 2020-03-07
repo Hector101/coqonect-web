@@ -19,6 +19,7 @@ type Props = {
   customRightIconName?: string;
   error?: string;
   noBorders?: boolean;
+  autoComplete?: string;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -36,6 +37,7 @@ const Input: FunctionComponent<Props> = ({
   error,
   placeholder,
   noBorders,
+  ...rest
 }) => {
   const [toggleStatus, setToggleStatus] = useState(false);
 
@@ -69,10 +71,11 @@ const Input: FunctionComponent<Props> = ({
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
+        {...rest}
       />
 
-      <div onClick={_changeInputType}>
-        {rightIcon && <RenderSVG name={rightIcon} className="w1 h1 absolute right-1 top-1 pointer" />}
+      <div onClick={_changeInputType} className="w1 h1 pointer absolute right-1 top-1">
+        {rightIcon && <RenderSVG name={rightIcon} className="w1 h1" />}
       </div>
       {error && <label className="light-red f6 mt1">{error}</label>}
     </div>
