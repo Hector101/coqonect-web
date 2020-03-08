@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import Modal from 'src/components/Shared/Modal';
-import ResetPasswordForm from 'src/components/Login/ResetPasswordForm';
+import ResetPasswordForm from 'src/components/Login/ForgotPasswordForm';
 
 import { useStore } from 'src/store';
 
@@ -10,7 +10,7 @@ import { useStore } from 'src/store';
 import CheckMark from '../../../public/svgs/CheckMark.svg';
 import Error from '../../../public/svgs/Error.svg';
 
-const PasswordResetFailureMessage: FunctionComponent<{}> = () => {
+const EmailNotSentMessage: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
   return (
@@ -27,7 +27,7 @@ const PasswordResetFailureMessage: FunctionComponent<{}> = () => {
   );
 };
 
-const PasswordResetSuccessMessage: FunctionComponent<{}> = () => {
+const EmailSentMessage: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
   return (
@@ -47,7 +47,7 @@ const PasswordResetSuccessMessage: FunctionComponent<{}> = () => {
   );
 };
 
-const ResetPasswordModal: FunctionComponent<{}> = () => {
+const ForgotPasswordModal: FunctionComponent<{}> = () => {
   const { uiStore, userStore } = useStore();
 
   const _closeModal = () => {
@@ -56,11 +56,11 @@ const ResetPasswordModal: FunctionComponent<{}> = () => {
 
   return (
     <Modal visible={uiStore.modalOpened} onClose={_closeModal}>
-      {userStore.emailSentStatus === 'sent' && <PasswordResetSuccessMessage />}
-      {userStore.emailSentStatus === 'failed' && <PasswordResetFailureMessage />}
+      {userStore.emailSentStatus === 'sent' && <EmailSentMessage />}
+      {userStore.emailSentStatus === 'failed' && <EmailNotSentMessage />}
       {!userStore.emailSentStatus && <ResetPasswordForm />}
     </Modal>
   );
 };
 
-export default observer(ResetPasswordModal);
+export default observer(ForgotPasswordModal);

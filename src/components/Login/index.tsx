@@ -5,7 +5,7 @@ import Link from 'next/link';
 import ErrorMessage from 'src/components/Shared/ErrorMessage';
 import SuccessMessage from 'src/components/Shared/SuccessMessage';
 import Button from 'src/components/Shared/Button';
-import ResetPasswordModal from 'src/components/Login/ResetPasswordModal';
+import ForgotPasswordModal from 'src/components/Login/ForgotPasswordModal';
 import LoginForm from 'src/components/Login/LoginForm';
 import { observer } from 'mobx-react-lite';
 
@@ -25,7 +25,7 @@ const Login: FunctionComponent<{}> = () => {
 
   return (
     <div className="c-Login w-100 vh-100 flex flex-column justify-center-ns justify-start items-center">
-      <ResetPasswordModal />
+      <ForgotPasswordModal />
       {userStore.loginError &&  <ErrorMessage message={userStore.loginMesssage} />}
       {userStore.loginSuccess &&  <SuccessMessage message={userStore.loginMesssage} />}
       <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1">

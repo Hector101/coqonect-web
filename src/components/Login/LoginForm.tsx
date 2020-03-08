@@ -66,6 +66,7 @@ const LoginForm: FunctionComponent<{}> = () => {
     isSubmitting,
     handleSubmit,
     handleChange,
+    handleBlur,
   } = formik;
 
   return (
@@ -82,6 +83,7 @@ const LoginForm: FunctionComponent<{}> = () => {
           value={values.email}
           leftIconName="Email"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.email}
         />
         <Input
@@ -96,6 +98,7 @@ const LoginForm: FunctionComponent<{}> = () => {
           defaultRightIconName="Hide"
           customRightIconName="Show"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.password}
           autoComplete="on"
         />

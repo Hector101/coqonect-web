@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 
-import { ProfileUseQueryProps, Profile } from 'src/types';
+import { TProfileUseQueryProps, TProfile } from 'src/apolloTypes';
 
 import Notification from '../../../public/svgs/Notification.svg';
 
@@ -27,9 +27,9 @@ const AUTHENTICATED_USER = gql`
 `;
 
 const DashboardNavbarContent: FunctionComponent<{}> = () => {
-  const{ data, loading } = useQuery<ProfileUseQueryProps>(AUTHENTICATED_USER);
+  const{ data, loading } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
 
-  const renderStaticNavContents = (optionalProps?: Profile) => (
+  const renderStaticNavContents = (optionalProps?: TProfile) => (
     <div className="c-DashboardNavbarContent flex justify-end items-center z-3">
       <ul className="flex justify-between items-center list">
         <li className="mr3 dib">

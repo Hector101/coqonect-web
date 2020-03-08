@@ -20,7 +20,7 @@ export class UserStore {
   }
 
   @action
-  async handlePasswordReset(email: string) {
+  async handleForgotPassword(email: string) {
     const response = await this.api({
       url: '/api/v1/forgot-password',
       data: { email },

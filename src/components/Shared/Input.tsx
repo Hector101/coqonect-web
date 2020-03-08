@@ -7,6 +7,7 @@ type InputTypes = 'text' | 'email' | 'password' | 'search';
 type Props = {
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   className: string;
   containerClassName?: string;
   defaultType: InputTypes;
@@ -20,6 +21,7 @@ type Props = {
   error?: string;
   noBorders?: boolean;
   autoComplete?: string;
+  size?: 'small' | 'medium' | 'large';
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -37,6 +39,7 @@ const Input: FunctionComponent<Props> = ({
   error,
   placeholder,
   noBorders,
+  size = 'large',
   ...rest
 }) => {
   const [toggleStatus, setToggleStatus] = useState(false);
@@ -44,10 +47,13 @@ const Input: FunctionComponent<Props> = ({
   const inputClassName = classnames(`outline-transparent ${className}`, {
     'bn': noBorders,
     'ba b--black-20': !noBorders,
-    'c-Input': leftIconName,
+    'c-with-left-icon': leftIconName,
   });
-  const inputContainerClassName = classnames('relative', {
+  const inputContainerClassName = classnames('relative c-Input', {
     [`${containerClassName}`]: !!containerClassName,
+    small: size === 'small',
+    medium: size === 'medium',
+    large: size === 'large',
   });
 
   const _changeInputType = () => {

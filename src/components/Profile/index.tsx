@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import LoadingPage from 'src/components/Shared/LoadingPage';
+import EditProfileForm from 'src/components/Profile/EditProfileForm';
 
 import truncateText from 'src/lib/truncateText';
 
@@ -19,12 +20,13 @@ import DownArrow from '../../../public/svgs/DownArrow.svg';
 import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
 
-import { ProfileUseQueryProps } from 'src/types';
+import { TProfileUseQueryProps } from 'src/apolloTypes';
 
 const AUTHENTICATED_USER = gql`
   query {
     client {
       authenticatedUser {
+        email
         profile {
           fullName
           imageUrl
@@ -38,13 +40,13 @@ const AUTHENTICATED_USER = gql`
 `;
 
 const Profile: FunctionComponent<{}> = () => {
-  const{ data, loading } = useQuery<ProfileUseQueryProps>(AUTHENTICATED_USER);
+  const{ data, loading } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
 
   if (loading || !data) {
     return <LoadingPage />;
   }
 
-  const { fullName, imageUrl,  bio, city, country } = data.client.authenticatedUser.profile;
+  const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = data.client.authenticatedUser;
 
   return (
     <div className="ph4">
@@ -92,7 +94,7 @@ const Profile: FunctionComponent<{}> = () => {
           </article>
         </div>
       </section>
-      <section className="w-100 pv4">
+      <section className="w-100 pv2">
         <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
           <div>
             <div className="relative">
@@ -114,12 +116,13 @@ const Profile: FunctionComponent<{}> = () => {
             <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
           </div>
         </div>
-        <div className="pv5 flex justify-center">
+        <div className="pv4 flex justify-center">
           <Button className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3" type="button">ADD SKILLS</Button>
         </div>
       </section>
-      <section className="bb b--black-10">
-        <h1>Edit Profile</h1>
+      <section className="bb b--black-10 pt2 pb4">
+        <h3 className="mt0">Edit Profile</h3>
+        <EditProfileForm profile={{email, ...profile}} />
       </section>
     </div>
   );
