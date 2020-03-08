@@ -72,7 +72,7 @@ const SignupForm: FunctionComponent<{}> = () => {
           value={values.fullName}
           leftIconName="FullNameAvatar"
           onChange={handleChange}
-          handleBlur={handleBlur}
+          onBlur={handleBlur}
           error={errors.fullName}
         />
         <Input
@@ -84,7 +84,7 @@ const SignupForm: FunctionComponent<{}> = () => {
           value={values.email}
           leftIconName="Email"
           onChange={handleChange}
-          handleBlur={handleBlur}
+          onBlur={handleBlur}
           error={errors.email}
         />
         <Input
@@ -99,8 +99,9 @@ const SignupForm: FunctionComponent<{}> = () => {
           defaultRightIconName="Hide"
           customRightIconName="Show"
           onChange={handleChange}
-          handleBlur={handleBlur}
+          onBlur={handleBlur}
           error={errors.password}
+          autoComplete="on"
         />
       </div>
       <Button

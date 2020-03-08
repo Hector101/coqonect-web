@@ -7,7 +7,7 @@ type InputTypes = 'text' | 'email' | 'password' | 'search';
 type Props = {
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   className: string;
   containerClassName?: string;
   defaultType: InputTypes;
@@ -20,7 +20,7 @@ type Props = {
   customRightIconName?: string;
   error?: string;
   noBorders?: boolean;
-  autoComplete?: string;
+  autoComplete?: 'on' | 'off';
   size?: 'small' | 'medium' | 'large';
 };
 

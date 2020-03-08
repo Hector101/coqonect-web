@@ -27,7 +27,8 @@ import Setting from '../../../public/svgs/Setting.svg';
 import Show from '../../../public/svgs/Show.svg';
 import Recommended from '../../../public/svgs/Recommended.svg';
 import Activity from '../../../public/svgs/Activity.svg';
-
+import CityIcon from '../../../public/svgs/CityIcon.svg';
+import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 
 interface ISvgs {
   [key: string]: ReactType<{}>;
@@ -61,6 +62,8 @@ export const SVGS: ISvgs = {
   Show,
   Activity,
   Recommended,
+  CityIcon,
+  LocationIcon,
 };
 
 type Props = {

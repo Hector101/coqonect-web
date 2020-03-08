@@ -8,7 +8,7 @@ import React,
   Dispatch,
   SetStateAction,
 } from 'react';
-import { Editor, RichUtils, EditorState, ContentBlock } from 'draft-js';
+import { Editor, RichUtils, EditorState, ContentBlock, getDefaultKeyBinding, KeyBindingUtil } from 'draft-js';
 
 type Props = {
   onChange: Dispatch<SetStateAction<EditorState>>;
@@ -30,6 +30,8 @@ type TStyleButton = {
 type StyleButtonProps = TInlineStyleControls & TStyleButton;
 
 type BlockStyleControlsProps = Pick<Props, 'editorState'> & TInlineStyleControls;
+
+const { hasCommandModifier } = KeyBindingUtil;
 
 export const RichEditor: FunctionComponent<Props> = (props) => {
   const { editorState } = props;
@@ -60,10 +62,14 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
       return 'not-handled';
   };
 
-  const _onTab = (e: KeyboardEvent) => {
-    const maxDepth = 2;
-    _onChange(RichUtils.onTab(e, editorState, maxDepth));
-  };
+  function _onTabKeyBindingFn(e: KeyboardEvent): string {
+    if (e.keyCode === 9 /* `Tab` key */ && hasCommandModifier(e)) {
+      const maxDepth = 2;
+      _onChange(RichUtils.onTab(e, editorState, maxDepth));
+      return 'tabed';
+    }
+    return getDefaultKeyBinding(e);
+  }
 
   const _toggleBlockType = (blockType: string) => {
     _onChange(RichUtils.toggleBlockType(editorState, blockType));
@@ -98,7 +104,7 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
           editorState={editorState}
           handleKeyCommand={_handleKeyCommand}
           onChange={_onChange}
-          onTab={_onTab}
+          keyBindingFn={_onTabKeyBindingFn}
           placeholder="Tell your audience about yourself..."
           ref={editor}
           spellCheck={true}

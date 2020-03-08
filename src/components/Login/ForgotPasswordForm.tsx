@@ -74,7 +74,7 @@ const ForgotPasswordForm: FunctionComponent<{}> = () => {
           value={values.email}
           leftIconName="Email"
           onChange={handleChange}
-          handleBlur={handleBlur}
+          onBlur={handleBlur}
           error={errors.email}
         />
       </div>

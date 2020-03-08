@@ -62,55 +62,63 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-column flex-row-ns justfy-between items-center">
-        <div className="w-100 mv2 mr0 mr5-ns">
+        <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="email" className="f5 b black-50">
             Email Address
             <span className="f6 orange"> (Not Editable)</span>
           </label>
           <Input
-            className="pv3 ph3 f6 input-reset bg-transparent w-100 mt2"
+            className="pv3 pr2 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
             defaultType="text"
             placeholder="Enter E-mail"
             name="text"
             value={email}
+            leftIconName="Email"
           />
         </div>
         <div className="w-100 mv2">
           <label htmlFor="fullName" className="f5 b black-50">Full Name</label>
           <Input
-            className="pv3 ph3 f6 input-reset bg-transparent w-100 mt2"
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
             defaultType="text"
             placeholder="Enter Fullname"
             name="fullName"
             value={fullName}
             error={errors.fullName}
             onChange={handleChange}
+            leftIconName="FullNameAvatar"
           />
         </div>
       </div>
       <div className="flex flex-column flex-row-ns justfy-center items-center">
-        <div className="w-100 mv2 mr0 mr5-ns">
+        <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="city" className="f5 b black-50">City</label>
           <Input
-            className="pv3 ph3 f6 input-reset bg-transparent w-100 mt2"
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
             defaultType="text"
             placeholder="Enter City"
             name="city"
             value={city}
             error={errors.city}
             onChange={handleChange}
+            leftIconName="CityIcon"
           />
         </div>
         <div className="w-100 mv2">
           <label htmlFor="country" className="f5 b black-50">Country</label>
           <Input
-            className="pv3 ph3 f6 input-reset bg-transparent w-100 mt2"
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
             defaultType="text"
             placeholder="Enter Country"
             name="country"
             value={country}
             error={errors.country}
             onChange={handleChange}
+            leftIconName="LocationIcon"
           />
         </div>
       </div>
