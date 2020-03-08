@@ -1,4 +1,18 @@
 .c-Input {
-  padding-left: 3rem;
-  padding-right: 3rem;
+  .c-with-left-icon {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  &.small {
+    width: 50%;
+  }
+
+  &.medium {
+    width: 70%;
+  }
+
+  &.large {
+    width: 100%;
+  }
 }

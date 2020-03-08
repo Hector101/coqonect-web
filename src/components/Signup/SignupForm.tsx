@@ -54,6 +54,7 @@ const SignupForm: FunctionComponent<{}> = () => {
     isSubmitting,
     handleSubmit,
     handleChange,
+    handleBlur,
   } = formik;
 
   return (
@@ -71,6 +72,7 @@ const SignupForm: FunctionComponent<{}> = () => {
           value={values.fullName}
           leftIconName="FullNameAvatar"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.fullName}
         />
         <Input
@@ -82,6 +84,7 @@ const SignupForm: FunctionComponent<{}> = () => {
           value={values.email}
           leftIconName="Email"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.email}
         />
         <Input
@@ -96,6 +99,7 @@ const SignupForm: FunctionComponent<{}> = () => {
           defaultRightIconName="Hide"
           customRightIconName="Show"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.password}
         />
       </div>

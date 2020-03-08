@@ -25,13 +25,13 @@ const validationSchema = yup.object().shape({
     .required('Required'),
 });
 
-const ResetPasswordForm: FunctionComponent<{}> = () => {
+const ForgotPasswordForm: FunctionComponent<{}> = () => {
   const { uiStore, userStore } = useStore();
 
-  const _handlePasswordReset = ({ email }: ResetPasswordFormValues, { setSubmitting, resetForm }: FormMethod) => {
+  const _handleForgotPassword = ({ email }: ResetPasswordFormValues, { setSubmitting, resetForm }: FormMethod) => {
     setSubmitting(true);
 
-    userStore.handlePasswordReset(email);
+    userStore.handleForgotPassword(email);
 
     resetForm();
     setSubmitting(false);
@@ -45,7 +45,7 @@ const ResetPasswordForm: FunctionComponent<{}> = () => {
     initialValues: {
       email: '',
     },
-    onSubmit: _handlePasswordReset,
+    onSubmit: _handleForgotPassword,
     validationSchema,
   });
 
@@ -55,6 +55,7 @@ const ResetPasswordForm: FunctionComponent<{}> = () => {
     isSubmitting,
     handleSubmit,
     handleChange,
+    handleBlur,
   } = formik;
 
   return (
@@ -73,6 +74,7 @@ const ResetPasswordForm: FunctionComponent<{}> = () => {
           value={values.email}
           leftIconName="Email"
           onChange={handleChange}
+          handleBlur={handleBlur}
           error={errors.email}
         />
       </div>
@@ -93,4 +95,4 @@ const ResetPasswordForm: FunctionComponent<{}> = () => {
   );
 };
 
-export default observer(ResetPasswordForm);
+export default observer(ForgotPasswordForm);
