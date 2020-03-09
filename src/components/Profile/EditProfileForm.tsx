@@ -1,14 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { EditorState, ContentState } from 'draft-js';
+import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import Input from 'src/components/Shared/Input';
 import Button from 'src/components/Shared/Button';
 import { RichEditor } from 'src/components/Shared/RichEditor';
 
-import { TProfile } from 'src/apolloTypes';
-import { TFormMethod } from 'src/interfaces/Forms';
+import { TProfile, TEditProfile } from 'src/apolloTypes';
+
+const EDIT_PROFILE = gql`
+  mutation EditProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
+    client {
+      editProfile(city: $city, country: $country, bio: $bio, fullName: $fullName) {
+        message
+      }
+    }
+  }
+`;
 
 type EditProfileValues = Omit<TProfile, 'imageUrl'>;
 
@@ -26,16 +37,17 @@ const validationSchema = yup.object().shape({
 });
 
 const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
+  const editorStateFromRaw = profile.bio ? convertFromRaw(JSON.parse(profile.bio)) : ContentState.createFromText('');
 
   const [editorState, setEditorState] = React.useState(
-    EditorState.createWithContent(ContentState.createFromText(profile.bio)),
+    EditorState.createWithContent(editorStateFromRaw),
   );
+  const [editProfile, { loading }] = useMutation<TEditProfile>(EDIT_PROFILE);
 
-  const _handleProfileEdit = async (_values: EditProfileValues, { setSubmitting }: TFormMethod) => {
-    setSubmitting(true);
-    // tslint:disable-next-line: no-console
-    console.log('Submitting...');
-    setSubmitting(false);
+  const _handleProfileEdit = async (values: EditProfileValues) => {
+    const rawEditorState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+
+    editProfile({ variables: { ...values, bio: rawEditorState } });
   };
 
   const formik = useFormik({
@@ -53,10 +65,8 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
   const {
     values: { email, fullName, city, country },
     errors,
-    isSubmitting,
     handleSubmit,
     handleChange,
-    setFieldValue,
   } = formik;
 
   return (
@@ -94,30 +104,36 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
       </div>
       <div className="flex flex-column flex-row-ns justfy-center items-center">
         <div className="w-100 pv2 pr0 pr5-ns">
-          <label htmlFor="city" className="f5 b black-50">City</label>
+          <label htmlFor="email" className="f5 b black-50">
+            City
+            {city && <span className="f6 orange"> (Not Editable)</span>}
+          </label>
           <Input
             className="pv3 ph3 f6 input-reset bg-transparent w-100"
             containerClassName="mt2"
             defaultType="text"
-            placeholder="Enter City"
+            placeholder="Enter Your City"
             name="city"
             value={city}
             error={errors.city}
-            onChange={handleChange}
+            onChange={city ? null : handleChange}
             leftIconName="CityIcon"
           />
         </div>
         <div className="w-100 mv2">
-          <label htmlFor="country" className="f5 b black-50">Country</label>
+          <label htmlFor="email" className="f5 b black-50">
+            City
+            {country && <span className="f6 orange"> (Not Editable)</span>}
+          </label>
           <Input
             className="pv3 ph3 f6 input-reset bg-transparent w-100"
             containerClassName="mt2"
             defaultType="text"
-            placeholder="Enter Country"
+            placeholder="Enter Your Country"
             name="country"
             value={country}
             error={errors.country}
-            onChange={handleChange}
+            onChange={country ? null : handleChange}
             leftIconName="LocationIcon"
           />
         </div>
@@ -128,12 +144,11 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
           editorState={editorState}
           onChange={setEditorState}
           containerClassName="mt2"
-          setFieldValue={setFieldValue}
         />
       </div>
       <Button
         className="bn br1 bg-primary-blue  white pointer f6 pv2 ph4 ph3 w-100 w-auto-ns mt2"
-        type="button"
+        type="submit"
         disabled={
           !!(errors.fullName) ||
           !!(errors.country) ||
@@ -141,10 +156,10 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
           !(fullName) ||
           !(country) ||
           !(city) ||
-          isSubmitting
+          loading
         }
       >
-        Save
+        {loading ? 'Saving...' : 'Save'}
       </Button>
     </form>
   );

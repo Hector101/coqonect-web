@@ -11,10 +11,22 @@ export type TAuthenticatedUser = {
   email: string;
 };
 
-export type Client = {
+export type TClientQuery = {
   authenticatedUser: TAuthenticatedUser;
 };
 
 export type TProfileUseQueryProps = {
-  client: Client;
+  client: TClientQuery;
+};
+
+export type TEditProfile = {
+  client: TClientMutation;
+};
+
+export type TClientMutation = {
+  client: TMessage;
+};
+
+export type TMessage = {
+  message: string;
 };
