@@ -1,0 +1,6 @@
+# dynamic routes
+/dashboard/*       /dashboard.html       404
+/login/*           /login.html           404
+/reset-password/*  /reset-password.html  404
+/signup/*          /signup.html          404
+/unauthorized/*    /unauthorized.html    404
