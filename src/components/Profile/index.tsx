@@ -1,14 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import LoadingPage from 'src/components/Shared/LoadingPage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
 
-import truncateText from 'src/lib/truncateText';
+// import truncateText from 'src/lib/truncateText';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
 import Gear from '../../../public/svgs/Gear.svg';
@@ -41,12 +42,16 @@ const AUTHENTICATED_USER = gql`
 
 const Profile: FunctionComponent<{}> = () => {
   const{ data, loading } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   if (loading || !data) {
     return <LoadingPage />;
   }
 
   const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = data.client.authenticatedUser;
+  const editorStateFromRaw = bio
+    ? EditorState.createWithContent(convertFromRaw(JSON.parse(bio)))
+    : editorState;
 
   return (
     <div className="ph4">
@@ -83,13 +88,13 @@ const Profile: FunctionComponent<{}> = () => {
           <article className="mw5 mw6-ns br1 hidden ba b--black-10 mv4">
             <h2 className="f5 bg-near-white br1 br--top black-80 mv0 pv2 ph3 ttu">More About Me</h2>
             <div className="pv2 ph3 bt b--black-10">
-              <p className="f7 f6-ns lh-copy measure">
+              <div className="f7 f6-ns lh-copy measure">
                 {
                   bio
-                    ? truncateText(bio, 300)
+                    ? <Editor onChange={setEditorState} editorState={editorStateFromRaw} readOnly={true} />
                     : 'About Me description not added yet.'
                 }
-              </p>
+              </div>
             </div>
           </article>
         </div>

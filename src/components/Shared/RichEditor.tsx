@@ -1,6 +1,5 @@
 import React,
 {
-  KeyboardEvent,
   MouseEvent,
   useRef,
   useEffect,
@@ -8,13 +7,13 @@ import React,
   Dispatch,
   SetStateAction,
 } from 'react';
-import { Editor, RichUtils, EditorState, ContentBlock, getDefaultKeyBinding, KeyBindingUtil } from 'draft-js';
+import { Editor, RichUtils, EditorState, ContentBlock } from 'draft-js';
 
 type Props = {
   onChange: Dispatch<SetStateAction<EditorState>>;
   editorState: EditorState;
   containerClassName?: string;
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  readOnly?: boolean;
 };
 
 type TInlineStyleControls = { onToggle: (inlineStyle: string) => void };
@@ -30,8 +29,6 @@ type TStyleButton = {
 type StyleButtonProps = TInlineStyleControls & TStyleButton;
 
 type BlockStyleControlsProps = Pick<Props, 'editorState'> & TInlineStyleControls;
-
-const { hasCommandModifier } = KeyBindingUtil;
 
 export const RichEditor: FunctionComponent<Props> = (props) => {
   const { editorState } = props;
@@ -50,7 +47,6 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
 
   const _onChange = (editorStateValue: EditorState) => {
     props.onChange(editorStateValue);
-    props.setFieldValue('bio', editorStateValue);
   };
 
   const _handleKeyCommand = (command: string) => {
@@ -61,15 +57,6 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
       }
       return 'not-handled';
   };
-
-  function _onTabKeyBindingFn(e: KeyboardEvent): string {
-    if (e.keyCode === 9 /* `Tab` key */ && hasCommandModifier(e)) {
-      const maxDepth = 2;
-      _onChange(RichUtils.onTab(e, editorState, maxDepth));
-      return 'tabed';
-    }
-    return getDefaultKeyBinding(e);
-  }
 
   const _toggleBlockType = (blockType: string) => {
     _onChange(RichUtils.toggleBlockType(editorState, blockType));
@@ -104,10 +91,10 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
           editorState={editorState}
           handleKeyCommand={_handleKeyCommand}
           onChange={_onChange}
-          keyBindingFn={_onTabKeyBindingFn}
           placeholder="Tell your audience about yourself..."
           ref={editor}
           spellCheck={true}
+          readOnly={props.readOnly}
         />
       </div>
     </div>
