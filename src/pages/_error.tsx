@@ -26,12 +26,22 @@ function Error({ statusCode }: Props) {
   };
 
   return (
-    <Plain title="Page not Found">
+    <Plain title={statusCode ? 'Page not Found' : 'Temporary Server Error'}>
       <div className="w-100 vh-100 flex flex-column justify-center items-center">
         {
           statusCode
-            ? <PageNotFountIcon className="w4 h4" />
-            : <Cloud className="w4 h4" />
+            ? (
+              <>
+                <PageNotFountIcon className="w4 h4" />
+                <h3>Page Not Found</h3>
+              </>
+            )
+            : (
+              <>
+                <Cloud className="w4 h4" />
+                <h3>Temporary Server Error</h3>
+              </>
+            )
         }
         <div className="mt5 w-100 flex justify-center">
           <Button
