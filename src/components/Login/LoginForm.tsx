@@ -43,6 +43,7 @@ const LoginForm: FunctionComponent<{}> = () => {
     userStore.resetLoginInfo();
     await userStore.handleLogin({ email, password });
 
+    userStore.resetLoginInfo();
     resetForm();
     return setSubmitting(false);
   };

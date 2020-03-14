@@ -44,13 +44,17 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(
     'dn c-hide-link-text': !uiStore.sideMenuOpened && !isMobile,
   });
 
+  const linkCategoryClassName = classnames('bb bt b--black-10 flex items-center ph3 h3', {
+    'justify-center': !uiStore.sideMenuOpened,
+  });
+
   return (
     <>
       {
         menuLinks.map((menuLink) => {
           return (
             <div key={menuLink.categoryName}>
-              <div className="bb bt b--black-10 flex items-center ph3 h3">
+              <div className={linkCategoryClassName}>
                 <img src={`/svgs/${menuLink.iconName}.svg`} className="w1 h1 fill-black-30" />
                 <h4 className={linkTitleClassName}>{menuLink.categoryName}</h4>
               </div>
@@ -87,6 +91,7 @@ const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, i
 
   const mainClassName = classnames('h3 ph3 f6 pointer black-80 c-sidemenu-link link flex items-center', {
     'c-selected': selected && link.selectable,
+    'justify-center': !uiStore.sideMenuOpened,
   });
   const linkTextClassName = classnames('ml3', {
     'dn c-fade-out': !uiStore.sideMenuOpened && !isMobile,

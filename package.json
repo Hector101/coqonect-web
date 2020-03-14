@@ -31,6 +31,7 @@
     "cookie": "^0.4.0",
     "dotenv-webpack": "^1.7.0",
     "draft-js": "^0.11.4",
+    "draft-js-export-html": "^1.4.1",
     "formik": "^2.0.4",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",

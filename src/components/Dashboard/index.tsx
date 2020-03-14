@@ -17,7 +17,7 @@ const filterOptions = [
 
 const Dashboard: FunctionComponent<{}> = () => {
   return (
-    <div className="c-Dashboard">
+    <div className="c-Dashboard mw8 center">
       <section className="flex flex-column flex-row-ns justify-between">
         <div className="mv2 mv0-ns">
           <h3 className="mb0 f3">Recommended Mentorships</h3>
