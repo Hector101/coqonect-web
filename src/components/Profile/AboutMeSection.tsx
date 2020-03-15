@@ -16,7 +16,11 @@ const AboutMeSection: FunctionComponent<Props> = ({ bio }) => {
   return (
       <div className="c-AboutMeSection pv2 ph3 bt b--black-10">
         <div className="f7 f6-ns lh-copy">
-          <HtmlFromString htmlString={htmlString} />
+          {
+            htmlString
+              ? <HtmlFromString htmlString={htmlString} />
+              : 'About Me description not added yet.'
+          }
         </div>
       </div>
   );
