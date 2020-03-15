@@ -29,6 +29,7 @@ import Recommended from '../../../public/svgs/Recommended.svg';
 import Activity from '../../../public/svgs/Activity.svg';
 import CityIcon from '../../../public/svgs/CityIcon.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
+import SeeMore from '../../../public/svgs/SeeMore.svg';
 
 interface ISvgs {
   [key: string]: ReactType<{}>;
@@ -64,6 +65,7 @@ export const SVGS: ISvgs = {
   Recommended,
   CityIcon,
   LocationIcon,
+  SeeMore,
 };
 
 type Props = {

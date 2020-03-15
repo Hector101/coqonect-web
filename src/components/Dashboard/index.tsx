@@ -6,8 +6,7 @@ import ReccommendedMentorshipCard from 'src/components/Shared/ReccommendedMentor
 import FeaturedMentorCard from 'src/components/Shared/FeaturedMentorCard';
 import Button from 'src/components/Shared/Button';
 
-import Search from '../../../public/svgs/Search.svg';
-import SeeMore from '../../../public/svgs/SeeMore.svg';
+import { SVGS } from 'src/components/Shared/SVGS';
 
 const filterOptions = [
   { value: 'all', label: 'All' },
@@ -42,7 +41,7 @@ const Dashboard: FunctionComponent<{}> = () => {
               type="button"
               arial-label="search mentors by skills button"
             >
-              <Search className="w1"/>
+              <SVGS.Search className="w1"/>
             </Button>
           </div>
         </div>
@@ -56,7 +55,7 @@ const Dashboard: FunctionComponent<{}> = () => {
         <div className="flex justify-center">
           <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
             <span className="c-see-more-text primary-blue">See More</span>
-            <SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
+            <SVGS.SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
           </a>
         </div>
       </section>
@@ -74,7 +73,7 @@ const Dashboard: FunctionComponent<{}> = () => {
           <div className="flex justify-center">
             <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
               <span className="c-see-more-text primary-blue">See More</span>
-              <SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
+              <SVGS.SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
             </a>
           </div>
         </div>

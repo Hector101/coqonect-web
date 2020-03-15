@@ -8,6 +8,7 @@ import React,
   SetStateAction,
 } from 'react';
 import { Editor, RichUtils, EditorState, ContentBlock } from 'draft-js';
+import { observer } from 'mobx-react-lite';
 
 type Props = {
   onChange: Dispatch<SetStateAction<EditorState>>;
@@ -30,7 +31,7 @@ type StyleButtonProps = TInlineStyleControls & TStyleButton;
 
 type BlockStyleControlsProps = Pick<Props, 'editorState'> & TInlineStyleControls;
 
-export const RichEditor: FunctionComponent<Props> = (props) => {
+export const RichEditor: FunctionComponent<Props> = observer((props) => {
   const { editorState } = props;
   let className = 'RichEditor-editor';
   const contentState = editorState.getCurrentContent();
@@ -47,15 +48,6 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
 
   const _onChange = (editorStateValue: EditorState) => {
     props.onChange(editorStateValue);
-  };
-
-  const _handleKeyCommand = (command: string) => {
-      const newState = RichUtils.handleKeyCommand(editorState, command);
-      if (newState) {
-        _onChange(newState);
-        return 'handled';
-      }
-      return 'not-handled';
   };
 
   const _toggleBlockType = (blockType: string) => {
@@ -89,9 +81,8 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
           blockStyleFn={getBlockStyle}
           customStyleMap={styleMap}
           editorState={editorState}
-          handleKeyCommand={_handleKeyCommand}
           onChange={_onChange}
-          placeholder="Tell your audience about yourself..."
+          placeholder="Write about yourself here..."
           ref={editor}
           spellCheck={true}
           readOnly={props.readOnly}
@@ -99,7 +90,7 @@ export const RichEditor: FunctionComponent<Props> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const styleMap = {
   CODE: {
@@ -147,7 +138,6 @@ const BLOCK_TYPES = [
   { label: 'Blockquote', style: 'blockquote' },
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
-  { label: 'Code Block', style: 'code-block' },
 ];
 
 const BlockStyleControls = (props: BlockStyleControlsProps) => {

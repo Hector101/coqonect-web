@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import sweetalert from '@sweetalert/with-react';
@@ -25,7 +26,7 @@ const validationSchema = yup.object().shape({
 });
 
 const LoginForm: FunctionComponent<{}> = () => {
-
+  const router = useRouter();
   const { uiStore, userStore } = useStore();
 
   useEffect(() => {
@@ -40,10 +41,17 @@ const LoginForm: FunctionComponent<{}> = () => {
   });
 
   const _handleLogin = async ({ email, password }: TLoginFormValues, { setSubmitting, resetForm }: TFormMethod) => {
-    userStore.resetLoginInfo();
-    await userStore.handleLogin({ email, password });
+    userStore.resetLoginResponse();
+    await userStore.handleLogin({ email, password },
+      () => {
+        uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
+        router.push('/dashboard');
+      },
+      () => {
+        uiStore.setSnackBarErrorMessage(userStore.loginResponse.message);
+      },
+    );
 
-    userStore.resetLoginInfo();
     resetForm();
     return setSubmitting(false);
   };

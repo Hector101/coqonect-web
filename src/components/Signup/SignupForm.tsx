@@ -25,14 +25,18 @@ const validationSchema = yup.object().shape({
 });
 
 const SignupForm: FunctionComponent<{}> = () => {
-
-  const { userStore } = useStore();
+  const { userStore, uiStore } = useStore();
 
   const _handleSignup = async (
     { fullName, email, password }: TSignupFormValues,
     { setSubmitting, resetForm }: TFormMethod) => {
-    userStore.resetSignupInfo();
-    await userStore.handleSignup({ email, password, fullName });
+    await userStore.handleSignup({ email, password, fullName },
+      () => {
+        uiStore.setSnackBarSuccessMessage(userStore.signupResponse.message);
+      },
+      () => {
+        uiStore.setSnackBarErrorMessage(userStore.signupResponse.message);
+      });
 
     resetForm();
     return setSubmitting(false);
