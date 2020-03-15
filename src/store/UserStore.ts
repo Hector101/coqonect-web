@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-import { TLoginFormValues, TSignupFormValues } from 'src/interfaces/Forms';
+import { TLoginFormValues, TSignupFormValues, TPasswordResetFormValues } from 'src/interfaces/Forms';
 import { CallApiType } from 'src/interfaces/CallApi';
 
 export class UserStore {
@@ -8,6 +8,7 @@ export class UserStore {
   @observable emailUnverified = false;
   @observable loginResponse = { message: '' };
   @observable signupResponse = { message: '' };
+  @observable passwordResetResponse = { message: '' };
   @observable loggedIn = false;
 
   constructor(public api: CallApiType) {
@@ -90,6 +91,31 @@ export class UserStore {
       url: '/api/v1/logout',
       method: 'get',
     });
+
+    if (response.success) {
+      if (onSuccess) {
+        onSuccess();
+      }
+    } else {
+      if (onError) {
+        onError();
+      }
+    }
+  }
+
+  @action
+  async handlePasswordReset(
+    { password, token }: TPasswordResetFormValues,
+    onSuccess?: () => void,
+    onError?: () => void,
+  ) {
+    const response = await this.api({
+      url: '/api/v1/reset-password',
+      data: { password, token },
+      method: 'post',
+    });
+
+    this. passwordResetResponse.message = response.message;
 
     if (response.success) {
       if (onSuccess) {

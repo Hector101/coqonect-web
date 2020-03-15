@@ -1,16 +1,15 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
+import { observer } from 'mobx-react-lite';
 import * as yup from 'yup';
 import Link from 'next/link';
-
-// components
-import ErrorMessage from 'src/components/Shared/ErrorMessage';
-import SuccessMessage from 'src/components/Shared/SuccessMessage';
 
 // lib
 import callApi from 'src/lib/callApi';
 import redirect from 'src/lib/redirect';
+
+import { useStore } from 'src/store';
 
 // SVG
 import Lock from '../../../public/svgs/Lock.svg';
@@ -38,11 +37,10 @@ const validationSchema = yup.object().shape({
 
 
 const ResetPassword: FunctionComponent<{}> = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const { userStore, uiStore } = useStore();
 
   const router = useRouter();
-  const { t: token } = router.query;
+  const token = router.query.t as string;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,23 +62,16 @@ const ResetPassword: FunctionComponent<{}> = () => {
     { password }: FormValues,
     { setSubmitting, resetForm }: FormMethod,
   ) => {
-    setErrorMessage('');
-    setSuccessMessage('');
+    userStore.handlePasswordReset({ password, token },
+        () => {
+          uiStore.setSnackBarSuccessMessage(userStore.passwordResetResponse.message);
+        },
+        () => {
+          uiStore.setSnackBarErrorMessage(userStore.passwordResetResponse.message);
+        },
+      );
 
-    const response = await callApi({
-      url: '/api/v1/reset-password',
-      data: { password, token },
-      method: 'post',
-    });
-
-    if (response.success) {
-      resetForm();
-      setSuccessMessage(response.message);
-      redirect({}, '/login');
-    } else {
-      setErrorMessage(response.message);
-    }
-
+    resetForm();
     return setSubmitting(false);
   };
 
@@ -99,8 +90,6 @@ const ResetPassword: FunctionComponent<{}> = () => {
 
   return (
     <div className="c-ResetPassword w-100 vh-100 flex flex-column justify-center-ns justify-start items-center">
-      <ErrorMessage message={errorMessage} />
-      <SuccessMessage message={successMessage} />
       <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1">
         <div className="tc pv2">
           <Link href="/">
@@ -157,4 +146,4 @@ const ResetPassword: FunctionComponent<{}> = () => {
   );
 };
 
-export default ResetPassword;
+export default observer(ResetPassword);

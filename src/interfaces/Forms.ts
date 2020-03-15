@@ -13,3 +13,8 @@ export type TSignupFormValues = {
   email: string;
   password: string;
 };
+
+export type TPasswordResetFormValues = {
+  token: string;
+  password: string;
+};

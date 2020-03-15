@@ -44,7 +44,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
       },
       onError() {
         uiStore.setSnackBarSuccessMessage('Error occurred, try again!');
-      }
+      },
   });
 
   const plainTextLength = editorState.getCurrentContent().getPlainText().length;

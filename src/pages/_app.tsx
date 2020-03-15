@@ -33,11 +33,11 @@ const DashboardContainer = dynamic(() => import('src/components/Containers/Dashb
 
 const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({ isDashboard, Component, pageProps }) => (
   <>
-      {isDashboard
-        ? (<DashboardContainer><Component {...pageProps} /></DashboardContainer>)
-        : <Component {...pageProps} />
-      }
-      <CustomSnackbar />
+    {isDashboard
+      ? (<DashboardContainer><Component {...pageProps} /></DashboardContainer>)
+      : <Component {...pageProps} />
+    }
+    <CustomSnackbar />
   </>
 );
 
