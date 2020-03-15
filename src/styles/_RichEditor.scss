@@ -3,8 +3,11 @@
   border: 1px solid #ddd;
   font-family: 'Georgia', serif;
   font-size: 14px;
-
   padding: 15px;
+
+  &.error {
+    border: 1px solid rgb(202, 83, 83);
+  }
 }
 
 .RichEditor-editor {

@@ -10,6 +10,8 @@ import React,
 import { Editor, RichUtils, EditorState, ContentBlock } from 'draft-js';
 import { observer } from 'mobx-react-lite';
 
+import { useStore } from 'src/store';
+
 type Props = {
   onChange: Dispatch<SetStateAction<EditorState>>;
   editorState: EditorState;
@@ -32,6 +34,8 @@ type StyleButtonProps = TInlineStyleControls & TStyleButton;
 type BlockStyleControlsProps = Pick<Props, 'editorState'> & TInlineStyleControls;
 
 export const RichEditor: FunctionComponent<Props> = observer((props) => {
+  const { uiStore } = useStore();
+
   const { editorState } = props;
   let className = 'RichEditor-editor';
   const contentState = editorState.getCurrentContent();
@@ -47,6 +51,7 @@ export const RichEditor: FunctionComponent<Props> = observer((props) => {
   }, []);
 
   const _onChange = (editorStateValue: EditorState) => {
+    uiStore.validateEditorState(editorStateValue);
     props.onChange(editorStateValue);
   };
 
@@ -82,7 +87,7 @@ export const RichEditor: FunctionComponent<Props> = observer((props) => {
           customStyleMap={styleMap}
           editorState={editorState}
           onChange={_onChange}
-          placeholder="Write about yourself here..."
+          placeholder="Write Here..."
           ref={editor}
           spellCheck={true}
           readOnly={props.readOnly}

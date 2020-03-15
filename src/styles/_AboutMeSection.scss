@@ -1,5 +1,5 @@
 .c-AboutMeSection {
-  min-height: 6rem;
+  min-height: 8rem;
   max-height: 12rem;
 
   .c-about-me-continer {
@@ -8,6 +8,7 @@
     content: "";
     position: relative;
     line-height: 1rem;
+    max-height: 9rem;
   
     &::before {
       content: '';
