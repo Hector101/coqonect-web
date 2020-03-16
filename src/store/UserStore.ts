@@ -9,7 +9,9 @@ export class UserStore {
   @observable loginResponse = { message: '' };
   @observable signupResponse = { message: '' };
   @observable passwordResetResponse = { message: '' };
+  @observable imageUploadResponse = { message: '' };
   @observable loggedIn = false;
+  @observable uploadingImage = false;
 
   constructor(public api: CallApiType) {
     this.api = api;
@@ -130,12 +132,12 @@ export class UserStore {
 
   @action
   async handleCheckAuthStatus(onSuccess?: () => void, onError?: () => void) {
-    const res = await this.api({
+    const response = await this.api({
       url: '/api/v1/auth-status',
       method: 'get',
     });
 
-    if (res.status === 200) {
+    if (response.status === 200) {
       this.loggedIn = true;
       if (onSuccess) {
         onSuccess();
@@ -145,6 +147,40 @@ export class UserStore {
         onError();
       }
     }
+  }
+
+  @action
+  async handleImageUpload(file: File, onSuccess?: () => void, onError?: () => void) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const response = await this.api({
+      url: '/api/v1/upload-image',
+      data: formData,
+      upload: true,
+    });
+
+    this.imageUploadResponse.message = response.message;
+
+    if (response.status === 200) {
+      if (onSuccess) {
+        onSuccess();
+      }
+    } else {
+      if (onError) {
+        onError();
+      }
+    }
+  }
+
+  @action
+  startImageUpload() {
+    this.uploadingImage = true;
+  }
+
+  @action
+  completeImageUpload() {
+    this.uploadingImage = false;
   }
 
   @action

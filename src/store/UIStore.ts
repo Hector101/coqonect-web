@@ -10,6 +10,7 @@ export class UIStore {
   @observable snackBarVariant: 'error' | 'success' | 'warning' | 'info' | 'default' = 'default';
   @observable snackBarMessage = '';
   @observable validEditorState = false;
+  @observable dialog = { open: false, id: '' };
 
   constructor(public api: CallApiType) {
     this.api = api;
@@ -58,5 +59,17 @@ export class UIStore {
     } else {
       this.validEditorState = false;
     }
+  }
+
+  @action
+  openDialog(id: string) {
+    this.dialog.open = true;
+    this.dialog.id = id;
+  }
+
+  @action
+  closeDialog() {
+    this.dialog.open = false;
+    this.dialog.id = '';
   }
 }

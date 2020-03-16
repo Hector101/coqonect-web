@@ -7,17 +7,17 @@ const callApi: CallApiType = async ({
   data,
   method = 'post',
   headers,
+  upload = false,
 }: IAPICallParameters): Promise<IResponseData> => {
   try {
+    const body = upload ? data : JSON.stringify(data);
+
     const response = await fetch(`${process.env.API_URL}${url}`, {
       method,
       mode: 'cors',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify(data),
+      body,
+      ...(!upload && { headers: { 'Content-Type': 'application/json', ...headers } }),
     });
     return await response.json();
   } catch (err) {
