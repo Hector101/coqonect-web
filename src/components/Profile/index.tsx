@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, SyntheticEvent, useState, ChangeEvent } from 'react';
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
+import { observer } from 'mobx-react-lite';
 import gql from 'graphql-tag';
 import Paper from '@material-ui/core/Paper';
 
@@ -21,8 +22,12 @@ import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 
+import CustomDialog from 'src/components/Shared/CustomDialog';
+
 
 import { TProfileUseQueryProps } from 'src/apolloTypes';
+
+import { useStore } from 'src/store';
 
 const AUTHENTICATED_USER = gql`
   query {
@@ -42,7 +47,9 @@ const AUTHENTICATED_USER = gql`
 `;
 
 const Profile: FunctionComponent<{}> = () => {
-  const{ data, loading } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
+  const{ data, loading, refetch } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
+  const { uiStore, userStore } = useStore();
+  const [file, setFile] = useState(null);
 
   if (loading || !data) {
     return <LoadingPage />;
@@ -50,8 +57,49 @@ const Profile: FunctionComponent<{}> = () => {
 
   const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = data.client.authenticatedUser;
 
+  const _openDialog = (e: SyntheticEvent<HTMLSpanElement>) => {
+    uiStore.openDialog(e.currentTarget.id);
+  };
+
+  const _handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileName = e.target.files[0];
+    setFile(fileName);
+  };
+
+  const _handleImageUpload = () => {
+    userStore.startImageUpload();
+    userStore.handleImageUpload(
+      file,
+      () => {
+        setFile(null);
+        userStore.completeImageUpload();
+        refetch();
+        uiStore.setSnackBarSuccessMessage(userStore.imageUploadResponse.message);
+        uiStore.closeDialog();
+      },
+      () => {
+        userStore.completeImageUpload();
+        uiStore.setSnackBarErrorMessage(userStore.imageUploadResponse.message);
+      },
+    );
+  };
+
   return (
     <Paper elevation={0}>
+      <CustomDialog
+        dialogId="uploadPic"
+        title="Image Upload"
+        actionText="Upload"
+        handleAction={_handleImageUpload}
+        disableActionButton={!(file)}
+        actionProcessText="Uploading..."
+        actionProgressStatus={userStore.uploadingImage}
+      >
+        <div>
+          <input type="file" name="myImage" onChange={_handleImageChange} />
+          <h5>Select image file not more than 3MB.</h5>
+        </div>
+      </CustomDialog>
       <div className="ph4 mw8 center bg-white">
         <section className="bb b--black-10 pv4 mb4 flex flex-column flex-row-ns items-start justify-between">
           <div className="flex items-center w-100 w-50-ns justify-center justify-start-ns">
@@ -59,9 +107,9 @@ const Profile: FunctionComponent<{}> = () => {
               <LazyLoadImage
                 srcName={imageUrl}
                 fallbackIconName="ProfilePic"
-                className="w4 h4 br-100"
+                className="w4 h4 br-100 ba b--black-20"
               />
-              <span className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">
+              <span id="uploadPic" onClick={_openDialog} className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">
                 <EdirPencil className="w1 h1 fill-white"/>
               </span>
             </div>
@@ -123,4 +171,4 @@ const Profile: FunctionComponent<{}> = () => {
   );
 };
 
-export default Profile;
+export default observer(Profile);

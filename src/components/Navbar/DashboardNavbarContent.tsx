@@ -41,7 +41,7 @@ const DashboardNavbarContent: FunctionComponent<{}> = () => {
                   <LazyLoadImage
                     srcName={optionalProps.imageUrl}
                     fallbackIconName="ProfilePic"
-                    className="w15 h15 br-100"
+                    className="w15 h15 br-100 ba b--black-20"
                   />
                   <span className="f7 f6-ns ml2">{optionalProps.fullName}</span>
                 </a>
