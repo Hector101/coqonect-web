@@ -84,7 +84,7 @@ const CustomModal: FunctionComponent<Props> = ({
   handleAction,
   disableActionButton,
   actionProgressStatus,
-  actionProcessText
+  actionProcessText,
 }) => {
   const { uiStore } = useStore();
 
