@@ -1,14 +1,14 @@
 .c-AboutMeSection {
   min-height: 8rem;
-  max-height: 12rem;
+  max-height: 14rem;
 
   .c-about-me-continer {
     overflow: hidden;
     text-overflow: ellipsis;
     content: "";
     position: relative;
-    line-height: 1rem;
-    max-height: 9rem;
+    line-height: 1.5;
+    max-height: 12rem;
   
     &::before {
       content: '';

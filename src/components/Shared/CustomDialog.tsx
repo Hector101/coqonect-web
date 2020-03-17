@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react-lite';
+import classnames from 'classnames';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,20 +14,24 @@ import Typography from '@material-ui/core/Typography';
 
 import { useStore } from 'src/store';
 
+import { isFunction } from 'src/lib';
+
 type Props = {
   children: ReactNode;
   dialogId: string;
   title: string;
-  actionText: string;
+  actionText?: string;
   handleAction?: () => void;
   disableActionButton?: boolean;
-  actionProcessText: string;
-  actionProgressStatus: boolean;
+  actionProcessText?: string;
+  actionProgressStatus?: boolean;
+  darkenHeaderBackground?: boolean;
 };
 
 type DialogTitleProps = {
   onClose: () => void;
   id: string;
+  darkenHeaderBackground: boolean;
 };
 
 const useDialogTitleStyle = makeStyles((theme) => ({
@@ -34,11 +39,20 @@ const useDialogTitleStyle = makeStyles((theme) => ({
     margin: 0,
     padding: theme.spacing(2),
   },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: theme.palette.grey[600],
+  },
+  darkenBackground: {
+    backgroundColor: theme.palette.grey[300],
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    color: theme.palette.grey[600],
   },
 }));
 
@@ -47,10 +61,14 @@ const DialogTitle: FunctionComponent<DialogTitleProps> = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
-    <MuiDialogTitle disableTypography={true} className={classes.root} {...other}>
+    <MuiDialogTitle
+      disableTypography={true}
+      className={classnames(classes.root, { [classes.darkenBackground]: props.darkenHeaderBackground })}
+      {...other}
+    >
       <Typography
         variant="h6"
-        style={{ fontSize: 14, fontWeight: 'bold', textTransform: 'uppercase' }}
+        className={classes.title}
       >
         {children}
       </Typography>
@@ -65,7 +83,8 @@ const DialogTitle: FunctionComponent<DialogTitleProps> = (props) => {
 
 const DialogContent = withStyles((theme) => ({
   root: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
+    lineHeight: 1.5,
   },
 }))(MuiDialogContent);
 
@@ -85,6 +104,7 @@ const CustomModal: FunctionComponent<Props> = ({
   disableActionButton,
   actionProgressStatus,
   actionProcessText,
+  darkenHeaderBackground,
 }) => {
   const { uiStore } = useStore();
 
@@ -93,9 +113,7 @@ const CustomModal: FunctionComponent<Props> = ({
   };
 
   const handleClick = () => {
-    if (handleAction) {
-      handleAction();
-    }
+    handleAction();
   };
 
   return (
@@ -105,27 +123,32 @@ const CustomModal: FunctionComponent<Props> = ({
         aria-labelledby="customized-dialog-title"
         open={uiStore.dialog.open && dialogId === uiStore.dialog.id}
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose} darkenHeaderBackground={darkenHeaderBackground}>
           {title}
         </DialogTitle>
         <DialogContent dividers={true}>
             {children}
         </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClick}
-            color="primary"
-            variant="contained"
-            size="small"
-            disabled={disableActionButton}
-          >
-            {
-              actionProgressStatus
-                ? actionProcessText
-                : actionText
-            }
-          </Button>
-        </DialogActions>
+        {
+          isFunction(handleAction)
+            ? (
+              <DialogActions>
+                <Button
+                  onClick={handleClick}
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                  disabled={disableActionButton}
+                >
+                  {
+                    actionProgressStatus
+                      ? actionProcessText
+                      : actionText
+                  }
+                </Button>
+              </DialogActions>
+            ) : null
+        }
       </Dialog>
     </div>
   );

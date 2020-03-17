@@ -13,7 +13,7 @@ import { EDIT_PROFILE, AUTHENTICATED_USER } from 'src/queries';
 
 import { useStore } from 'src/store';
 
-import { TProfile, TEditProfile } from 'src/apolloTypes';
+import { TProfile, TMutation } from 'src/apolloTypes';
 
 type EditProfileValues = Omit<TProfile, 'imageUrl'>;
 
@@ -37,7 +37,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(editorStateFromRaw),
   );
-  const [editProfile, { loading }] = useMutation<TEditProfile>(EDIT_PROFILE,
+  const [editProfile, { loading }] = useMutation<TMutation>(EDIT_PROFILE,
     {
       onCompleted() {
         uiStore.setSnackBarSuccessMessage('Profile Update Successfully');
@@ -83,7 +83,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
   });
 
   return (
-    <form onSubmit={handleSubmit} className="c-EditProfileForm">
+    <form onSubmit={handleSubmit} className="c-EditProfileForm pa2 ba b--black-10">
       <div className="flex flex-column flex-row-ns justfy-between items-center">
         <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="email" className="f5 b black-50">
@@ -162,7 +162,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
         />
       </div>
       <Button
-        className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2"
+        className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2 ttu"
         type="submit"
         disabled={
           !!(errors.fullName) ||
