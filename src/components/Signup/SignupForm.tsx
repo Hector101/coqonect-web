@@ -20,8 +20,7 @@ const validationSchema = yup.object().shape({
     .required('Required'),
   password: yup.string()
     .required('Required')
-    .min(6, 'Must be more than 6 length')
-    .max(30, 'Must be less than 30 length'),
+    .min(6, 'Must be more than 6 length'),
 });
 
 const SignupForm: FunctionComponent<{}> = () => {

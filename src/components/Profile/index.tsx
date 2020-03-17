@@ -9,6 +9,7 @@ import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import LoadingPage from 'src/components/Shared/LoadingPage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
+import ChangePasswordForm from 'src/components/Profile/ChangePasswordForm';
 import AboutMeSection from 'src/components/Profile/AboutMeSection';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
@@ -130,8 +131,8 @@ const Profile: FunctionComponent<{}> = () => {
             </div>
           </div>
           <div className="w-100 w-50-ns mt4 mt0-ns">
-            <section className="br1 hidden ba b--black-10 ">
-              <h2 className="f5 bg-near-white br1 br--top black-80 mv0 pv2 ph3 ttu">More About Me</h2>
+            <section className="br1 ba b--black-10 ">
+              <h2 className="f6 bg-light-gray b br1 br--top black-80 mv0 pv2 ph3 ttu">More About Me</h2>
               <AboutMeSection bio={bio} />
             </section>
           </div>
@@ -162,9 +163,13 @@ const Profile: FunctionComponent<{}> = () => {
             <Button className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3" type="button">ADD SKILLS</Button>
           </div>
         </section>
-        <section className="bb b--black-10 pt2 pb4">
-          <h3 className="mt0">Edit Profile</h3>
+        <section className="pv4">
+          <h3 className="">Edit Profile</h3>
           <EditProfileForm profile={{email, ...profile}} />
+        </section>
+        <section className="pv4">
+          <h3 className="">Change Password</h3>
+          <ChangePasswordForm />
         </section>
       </div>
     </Paper>

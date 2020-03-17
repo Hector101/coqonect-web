@@ -18,9 +18,19 @@ export const AUTHENTICATED_USER = gql`
 `;
 
 export const EDIT_PROFILE = gql`
-  mutation EditProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
+  mutation editProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
     client {
       editProfile(city: $city, country: $country, bio: $bio, fullName: $fullName) {
+        message
+      }
+    }
+  }
+`;
+
+export const CHANGE_PROFILE = gql`
+  mutation changePassword($oldPassword: String!, $newPassword: String!) {
+    client {
+      changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
         message
       }
     }
