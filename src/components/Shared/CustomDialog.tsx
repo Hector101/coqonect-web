@@ -58,13 +58,16 @@ const useDialogTitleStyle = makeStyles((theme) => ({
 
 const DialogTitle: FunctionComponent<DialogTitleProps> = (props) => {
   const classes = useDialogTitleStyle();
-  const { children, onClose, ...other } = props;
+  const { children, onClose } = props;
+
+  const customClassName = classnames(classes.root, {
+    [classes.darkenBackground]: !!(props.darkenHeaderBackground),
+  });
 
   return (
     <MuiDialogTitle
       disableTypography={true}
-      className={classnames(classes.root, { [classes.darkenBackground]: props.darkenHeaderBackground })}
-      {...other}
+      className={customClassName}
     >
       <Typography
         variant="h6"

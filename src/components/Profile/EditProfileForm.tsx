@@ -88,7 +88,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
         <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="email" className="f5 b black-50">
             Email Address
-            <span className="f6 orange"> (Not Editable)</span>
+            <span className="orange f7 f6-ns"> (Not Editable)</span>
           </label>
           <Input
             className="pv3 pr2 f6 input-reset bg-transparent w-100"
@@ -119,7 +119,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
         <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="email" className="f5 b black-50">
             City
-            {city && <span className="f6 orange"> (Not Editable)</span>}
+            {city && <span className="orange f7 f6-ns"> (Not Editable)</span>}
           </label>
           <Input
             className="pv3 ph3 f6 input-reset bg-transparent w-100"
@@ -135,8 +135,8 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
         </div>
         <div className="w-100 mv2">
           <label htmlFor="email" className="f5 b black-50">
-            City
-            {country && <span className="f6 orange"> (Not Editable)</span>}
+            Country
+            {country && <span className="f7 f6-ns orange"> (Not Editable)</span>}
           </label>
           <Input
             className="pv3 ph3 f6 input-reset bg-transparent w-100"

@@ -2,7 +2,7 @@ import React, { FunctionComponent, SyntheticEvent, useState, ChangeEvent } from 
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
-import gql from 'graphql-tag';
+import Select from 'react-select';
 import Paper from '@material-ui/core/Paper';
 
 import Button from 'src/components/Shared/Button';
@@ -24,41 +24,38 @@ import FullStar from '../../../public/svgs/FullStar.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 
 import CustomDialog from 'src/components/Shared/CustomDialog';
+import CustomTab from 'src/components/Shared/CustomTab';
+import TabContainer from 'src/components/Shared/TabContainer';
 
-
-import { TProfileUseQueryProps } from 'src/apolloTypes';
+import { TQuery } from 'src/apolloTypes';
 
 import { useStore } from 'src/store';
 
-const AUTHENTICATED_USER = gql`
-  query {
-    client {
-      authenticatedUser {
-        email
-        profile {
-          fullName
-          imageUrl
-          city
-          country
-          bio
-        }
-      }
-    }
-  }
-`;
+import { AUTHENTICATED_USER, SKILL_CATEGORIES } from 'src/queries';
+
+import { groupedSelectionOptions } from 'src/lib';
+
+const formatGroupLabel = (data: any) => (
+  <div className="flex items-center justify-between">
+    <span>{data.label}</span>
+    <span className="c-groupBadgeStyles ml2">{data.options.length}</span>
+  </div>
+);
 
 const Profile: FunctionComponent<{}> = () => {
-  const{ data, loading, refetch } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
+  const{ data: userData, loading: userLoading, refetch } = useQuery<TQuery>(AUTHENTICATED_USER);
+  const{ data: skillsData, loading: skillsLoading } = useQuery<TQuery>(SKILL_CATEGORIES);
+
   const { uiStore, userStore } = useStore();
   const [file, setFile] = useState(null);
 
-  if (loading || !data) {
+  if (userLoading || !userData) {
     return <LoadingPage />;
   }
 
-  const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = data.client.authenticatedUser;
+  const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = userData.client.authenticatedUser;
 
-  const _openDialog = (e: SyntheticEvent<HTMLSpanElement>) => {
+  const _openDialog = (e: SyntheticEvent<HTMLSpanElement> | SyntheticEvent<HTMLButtonElement>) => {
     uiStore.openDialog(e.currentTarget.id);
   };
 
@@ -99,6 +96,24 @@ const Profile: FunctionComponent<{}> = () => {
         <div>
           <input type="file" name="myImage" onChange={_handleImageChange} />
           <h5>Select image file not more than 3MB.</h5>
+        </div>
+      </CustomDialog>
+      <CustomDialog
+        dialogId="add-skill"
+        title="Add Skills"
+        actionText="Add"
+        handleAction={_handleImageUpload}
+        disableActionButton={true}
+        actionProcessText="Adding..."
+      >
+        <div className="ma4 w-100 vh-50">
+          <Select
+            placeholder="Select Skill"
+            className="w5 f5"
+            sLoading={skillsLoading}
+            options={groupedSelectionOptions(skillsData?.client?.skillCategories)}
+            formatGroupLabel={formatGroupLabel}
+          />
         </div>
       </CustomDialog>
       <div className="ph4 mw8 center bg-white">
@@ -160,16 +175,26 @@ const Profile: FunctionComponent<{}> = () => {
             </div>
           </div>
           <div className="pv4 flex justify-center">
-            <Button className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3" type="button">ADD SKILLS</Button>
+            <Button
+              id="add-skill"
+              className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
+              type="button"
+              onClick={_openDialog}
+            >
+              ADD SKILLS
+            </Button>
           </div>
         </section>
         <section className="pv4">
-          <h3 className="">Edit Profile</h3>
-          <EditProfileForm profile={{email, ...profile}} />
-        </section>
-        <section className="pv4">
-          <h3 className="">Change Password</h3>
-          <ChangePasswordForm />
+          <h3>Update Profile</h3>
+          <CustomTab>
+            <TabContainer title={'Edit Profile'}>
+              <EditProfileForm profile={{email, ...profile}} />
+            </TabContainer>
+            <TabContainer title={'Change Password'}>
+              <ChangePasswordForm />
+            </TabContainer>
+          </CustomTab>
         </section>
       </div>
     </Paper>

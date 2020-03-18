@@ -5,6 +5,7 @@ export const AUTHENTICATED_USER = gql`
   query {
     client {
       authenticatedUser {
+        email
         profile {
           fullName
           imageUrl
@@ -32,6 +33,21 @@ export const CHANGE_PROFILE = gql`
     client {
       changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
         message
+      }
+    }
+  }
+`;
+
+export const SKILL_CATEGORIES = gql`
+  query {
+    client {
+      skillCategories {
+        id
+        name
+        skills {
+          id
+          name
+        }
       }
     }
   }
