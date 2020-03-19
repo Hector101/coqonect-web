@@ -2,7 +2,6 @@ import React, { FunctionComponent, SyntheticEvent, useState, ChangeEvent } from 
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
-import Select from 'react-select';
 import Paper from '@material-ui/core/Paper';
 
 import Button from 'src/components/Shared/Button';
@@ -23,28 +22,19 @@ import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 
-import CustomDialog from 'src/components/Shared/CustomDialog';
 import CustomTab from 'src/components/Shared/CustomTab';
 import TabContainer from 'src/components/Shared/TabContainer';
+import ImageUploadModal from 'src/components/Profile/ImageUploadModal';
+import AddSkillModal from 'src/components/Profile/AddSkillModal';
 
 import { TQuery } from 'src/apolloTypes';
 
 import { useStore } from 'src/store';
 
-import { AUTHENTICATED_USER, SKILL_CATEGORIES } from 'src/queries';
-
-import { groupedSelectionOptions } from 'src/lib';
-
-const formatGroupLabel = (data: any) => (
-  <div className="flex items-center justify-between">
-    <span>{data.label}</span>
-    <span className="c-groupBadgeStyles ml2">{data.options.length}</span>
-  </div>
-);
+import { AUTHENTICATED_USER } from 'src/queries';
 
 const Profile: FunctionComponent<{}> = () => {
   const{ data: userData, loading: userLoading, refetch } = useQuery<TQuery>(AUTHENTICATED_USER);
-  const{ data: skillsData, loading: skillsLoading } = useQuery<TQuery>(SKILL_CATEGORIES);
 
   const { uiStore, userStore } = useStore();
   const [file, setFile] = useState(null);
@@ -84,38 +74,13 @@ const Profile: FunctionComponent<{}> = () => {
 
   return (
     <Paper elevation={0}>
-      <CustomDialog
-        dialogId="uploadPic"
-        title="Image Upload"
-        actionText="Upload"
+      <ImageUploadModal
         handleAction={_handleImageUpload}
+        onChange={_handleImageChange}
         disableActionButton={!(file)}
-        actionProcessText="Uploading..."
         actionProgressStatus={userStore.uploadingImage}
-      >
-        <div>
-          <input type="file" name="myImage" onChange={_handleImageChange} />
-          <h5>Select image file not more than 3MB.</h5>
-        </div>
-      </CustomDialog>
-      <CustomDialog
-        dialogId="add-skill"
-        title="Add Skills"
-        actionText="Add"
-        handleAction={_handleImageUpload}
-        disableActionButton={true}
-        actionProcessText="Adding..."
-      >
-        <div className="ma4 w-100 vh-50">
-          <Select
-            placeholder="Select Skill"
-            className="w5 f5"
-            sLoading={skillsLoading}
-            options={groupedSelectionOptions(skillsData?.client?.skillCategories)}
-            formatGroupLabel={formatGroupLabel}
-          />
-        </div>
-      </CustomDialog>
+      />
+      <AddSkillModal />
       <div className="ph4 mw8 center bg-white">
         <section className="bb b--black-10 pv4 mb4 flex flex-column flex-row-ns items-start justify-between">
           <div className="flex items-center w-100 w-50-ns justify-center justify-start-ns">

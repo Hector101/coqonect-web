@@ -28,7 +28,7 @@ export const EDIT_PROFILE = gql`
   }
 `;
 
-export const CHANGE_PROFILE = gql`
+export const CHANGE_PASSWORD = gql`
   mutation changePassword($oldPassword: String!, $newPassword: String!) {
     client {
       changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
@@ -48,6 +48,16 @@ export const SKILL_CATEGORIES = gql`
           id
           name
         }
+      }
+    }
+  }
+`;
+
+export const ADD_USER_SKILL = gql`
+  mutation addUserSkill($skillId: String!, $description: String!) {
+    client {
+      addUserSkill(skillId: $skillId, description: $description) {
+        message
       }
     }
   }

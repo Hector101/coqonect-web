@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Input from 'src/components/Shared/Input';
 import Button from 'src/components/Shared/Button';
 
-import { CHANGE_PROFILE } from 'src/queries';
+import { CHANGE_PASSWORD } from 'src/queries';
 
 import { TMutation } from 'src/apolloTypes';
 
@@ -38,7 +38,7 @@ const ChangePasswordForm: FunctionComponent<{}> = () => {
   const { uiStore, userStore } = useStore();
   const router = useRouter();
 
-  const [changePassword, { loading }] = useMutation<TMutation>(CHANGE_PROFILE,
+  const [changePassword, { loading }] = useMutation<TMutation>(CHANGE_PASSWORD,
     {
       onCompleted(data) {
         uiStore.setSnackBarSuccessMessage(data.client.changePassword.message);

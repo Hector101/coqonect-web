@@ -6,6 +6,7 @@ export type TMutation = {
 export type TClientMutation = {
   editProfile: TMessage;
   changePassword: TMessage;
+  addUserSkill: TMessage;
 };
 
 export type TMessage = {
