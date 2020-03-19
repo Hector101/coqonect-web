@@ -1,0 +1,16 @@
+.c-FooterSection {
+  background-color: #eff2f2;
+  .c-FooterContainer {
+    width: 90%;
+    margin: 0 auto;
+    .c-LogoIcon {
+      width: 1.875rem;
+      height: 1.875rem;
+      fill: $primary-color;
+      margin-right: 0.625rem;
+    }
+    .c-LogoText {
+      font-size: 0.75rem;;
+    }
+  }
+}
