@@ -6,7 +6,7 @@ import Button from 'src/components/Shared/Button';
 const HeroSection: FunctionComponent<{}> = () => {
   return (
     <div className="c-HeroSection flex items-start white">
-      <section className="c-HeroTextSection mh2 mh5-ns">
+      <section className="c-HeroTextSection mh2 mh5-ns mv6-ns">
         <h2 className="c-HeroTitle ma0">Connect with experts to become an expert</h2>
         <div className="c-HeroSubtitle">
           CoQonect connects you to verified
@@ -16,9 +16,7 @@ const HeroSection: FunctionComponent<{}> = () => {
           <a>
             <Button
               type="button"
-              filled={true}
-              primaryColor={true}
-              className="c-GetStartedButton f5 b white"
+              className="c-GetStartedButton bn bg-primary-blue f5 b white"
             >
               GET STARTED
             </Button>
