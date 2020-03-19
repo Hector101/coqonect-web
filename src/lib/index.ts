@@ -5,7 +5,7 @@ export function isFunction(value: () => void) {
 }
 
 export function getGraphQLMessage(message: string) {
-  return message.split('GraphQL error: Error: ')[1];
+  return message.split('GraphQL error: ')[1];
 }
 
 export function groupedSelectionOptions(options: TSkillCategories[]) {

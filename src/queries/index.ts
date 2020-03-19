@@ -19,7 +19,7 @@ export const AUTHENTICATED_USER = gql`
 `;
 
 export const EDIT_PROFILE = gql`
-  mutation editProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
+  mutation EditProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
     client {
       editProfile(city: $city, country: $country, bio: $bio, fullName: $fullName) {
         message
@@ -29,7 +29,7 @@ export const EDIT_PROFILE = gql`
 `;
 
 export const CHANGE_PASSWORD = gql`
-  mutation changePassword($oldPassword: String!, $newPassword: String!) {
+  mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
     client {
       changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
         message
@@ -54,7 +54,7 @@ export const SKILL_CATEGORIES = gql`
 `;
 
 export const ADD_USER_SKILL = gql`
-  mutation addUserSkill($skillId: String!, $description: String!) {
+  mutation AddUserSkill($skillId: ID!, $description: String!) {
     client {
       addUserSkill(skillId: $skillId, description: $description) {
         message

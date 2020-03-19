@@ -12,7 +12,9 @@ import { SKILL_CATEGORIES, ADD_USER_SKILL } from 'src/queries';
 
 import { TQuery, TMutation } from 'src/apolloTypes';
 
-import { groupedSelectionOptions } from 'src/lib';
+import { groupedSelectionOptions, getGraphQLMessage } from 'src/lib';
+
+import { useStore } from 'src/store';
 
 const validationSchema = yup.object().shape({
   description: yup.string()
@@ -27,18 +29,21 @@ const formatGroupLabel = (data: any) => (
 );
 
 const AddSkillModal: FunctionComponent<{}> = () => {
+  const { uiStore } = useStore();
+  const [selectedSkill, setSelectedSkill] = useState(null);
+
   const { data: skillsData, loading: skillsLoading } = useQuery<TQuery>(SKILL_CATEGORIES);
   const [addUserSkill] = useMutation<TMutation>(ADD_USER_SKILL,
     {
       onCompleted(data) {
-        console.log(data, '<<<<<<<SUCCESSFUL')
+        uiStore.setSnackBarSuccessMessage(data.client.addUserSkill.message);
+        uiStore.closeDialog();
+        _resetForm();
       },
       onError(error) {
-        console.log(error, 'Errors>>>>>>>>>')
+        uiStore.setSnackBarErrorMessage(getGraphQLMessage(error.message));
       },
     });
-
-  const [selectedSkill, setSelectedSkill] = useState(null);
 
   const _handleChangeSelection = (selected: any) => {
     setSelectedSkill(selected);
@@ -46,11 +51,7 @@ const AddSkillModal: FunctionComponent<{}> = () => {
 
   const _addUserSkill = (values: { description: string; }) => {
 
-    console.log(selectedSkill.id, '<<<<<<', values.description, '>>>>>>>>>>>')
-
-    addUserSkill({
-      variables: { skillId: selectedSkill.id, description: values.description },
-    });
+    addUserSkill({ variables: { skillId: selectedSkill.id, description: values.description }});
   };
 
   const formik = useFormik({
@@ -67,7 +68,12 @@ const AddSkillModal: FunctionComponent<{}> = () => {
     handleSubmit,
     handleChange,
     dirty,
+    resetForm,
   } = formik;
+
+  function _resetForm() {
+    resetForm();
+  }
 
   return (
     <CustomDialog
