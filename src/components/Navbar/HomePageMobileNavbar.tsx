@@ -14,9 +14,8 @@ const HomePageMobileNavbar: FunctionComponent<{}> = () => {
       </div>
       <div className="w-100">
         <ul className="list w-100 flex flex-column justify-center items-start pl0">
-          <li className="c-NavLinks w-100 pointer pa3 bb b--black-10"><a>Meet Our Experts</a></li>
-          <li className="c-NavLinks w-100 pointer pa3 bb b--black-10"><a>How It Works</a></li>
           <li className="c-NavLinks w-100 pointer pa3 bb b--black-10"><a>Explore Skill Categories</a></li>
+          <li className="c-NavLinks w-100 pointer pa3 bb b--black-10"><a>Meet Our Experts</a></li>
           <li className="c-NavLinks w-100 pointer pa3 bb b--black-10"><a>Testimonials</a></li>
         </ul>
       </div>
