@@ -1,9 +1,5 @@
 import { MenuList } from 'src/interfaces/SideMenuLink';
 
-import redirect from 'src/lib/redirect';
-
-import callApi from 'src/lib/callApi';
-
 const sideMenuLinkOptions: MenuList[] = [
   {
     categoryName: 'MAIN MENU',
@@ -56,16 +52,6 @@ const sideMenuLinkOptions: MenuList[] = [
         value: 'Logout',
         iconName: 'Logout',
         selectable: false,
-        onClick: async () => {
-          const response = await callApi({
-            url: '/api/v1/logout',
-            method: 'get',
-          });
-
-          if (response.success) {
-            redirect({}, '/login');
-          }
-        },
       },
     ],
   },

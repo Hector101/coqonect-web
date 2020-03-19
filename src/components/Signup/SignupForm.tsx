@@ -20,19 +20,22 @@ const validationSchema = yup.object().shape({
     .required('Required'),
   password: yup.string()
     .required('Required')
-    .min(6, 'Must be more than 6 length')
-    .max(30, 'Must be less than 30 length'),
+    .min(6, 'Must be more than 6 length'),
 });
 
 const SignupForm: FunctionComponent<{}> = () => {
-
-  const { userStore } = useStore();
+  const { userStore, uiStore } = useStore();
 
   const _handleSignup = async (
     { fullName, email, password }: TSignupFormValues,
     { setSubmitting, resetForm }: TFormMethod) => {
-    userStore.resetSignupInfo();
-    await userStore.handleSignup({ email, password, fullName });
+    await userStore.handleSignup({ email, password, fullName },
+      () => {
+        uiStore.setSnackBarSuccessMessage(userStore.signupResponse.message);
+      },
+      () => {
+        uiStore.setSnackBarErrorMessage(userStore.signupResponse.message);
+      });
 
     resetForm();
     return setSubmitting(false);

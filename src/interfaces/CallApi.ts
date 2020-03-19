@@ -4,6 +4,7 @@ export type IAPICallParameters = {
   method?: 'post' | 'get';
   headers?: ({}) | any;
   responseType?: string;
+  upload?: boolean;
 };
 
 export type IResponseData = {

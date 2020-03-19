@@ -18,3 +18,12 @@
 svg {
   pointer-events: none;
 }
+
+.c-save-button {
+  cursor: pointer;
+
+  &:disabled {
+    background-color: rgb(167, 167, 167);
+    cursor: auto;
+  }
+}

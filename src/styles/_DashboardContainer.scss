@@ -1,11 +1,12 @@
 .c-DashboardContainer {
-  height: calc(100vh -  3.75rem);
+  height: 100%;
   margin: 3.75rem auto auto auto;
   padding: 1rem;
   transition: all 0.3s ease-in-out;
+  background-color: rgb(240, 240, 240);
 
   @media (min-width: 48em) {
-    margin: 3.75rem auto auto 20%;
+    margin: 3.75rem auto auto 15%;
     
     &.c-IsExpanded {
       margin: 3.75rem auto auto 5%;

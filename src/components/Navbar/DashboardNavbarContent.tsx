@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
@@ -10,21 +9,7 @@ import { TProfileUseQueryProps, TProfile } from 'src/apolloTypes';
 
 import Notification from '../../../public/svgs/Notification.svg';
 
-const AUTHENTICATED_USER = gql`
-  query {
-  client {
-    authenticatedUser {
-      profile {
-        fullName
-        imageUrl
-        city
-        country
-        bio
-      }
-    }
-  }
-}
-`;
+import { AUTHENTICATED_USER } from 'src/queries';
 
 const DashboardNavbarContent: FunctionComponent<{}> = () => {
   const{ data, loading } = useQuery<TProfileUseQueryProps>(AUTHENTICATED_USER);
@@ -56,7 +41,7 @@ const DashboardNavbarContent: FunctionComponent<{}> = () => {
                   <LazyLoadImage
                     srcName={optionalProps.imageUrl}
                     fallbackIconName="ProfilePic"
-                    className="w15 h15 br-100"
+                    className="w15 h15 br-100 ba b--black-20"
                   />
                   <span className="f7 f6-ns ml2">{optionalProps.fullName}</span>
                 </a>

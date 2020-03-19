@@ -19,12 +19,13 @@ export type TProfileUseQueryProps = {
   client: TClientQuery;
 };
 
-export type TEditProfile = {
+export type TMutation = {
   client: TClientMutation;
 };
 
 export type TClientMutation = {
-  client: TMessage;
+  editProfile: TMessage;
+  changePassword: TMessage;
 };
 
 export type TMessage = {

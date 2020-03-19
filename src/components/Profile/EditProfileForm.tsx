@@ -3,23 +3,17 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
 import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import classnames from 'classnames';
 
 import Input from 'src/components/Shared/Input';
 import Button from 'src/components/Shared/Button';
 import { RichEditor } from 'src/components/Shared/RichEditor';
 
-import { TProfile, TEditProfile } from 'src/apolloTypes';
+import { EDIT_PROFILE, AUTHENTICATED_USER } from 'src/queries';
 
-const EDIT_PROFILE = gql`
-  mutation EditProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
-    client {
-      editProfile(city: $city, country: $country, bio: $bio, fullName: $fullName) {
-        message
-      }
-    }
-  }
-`;
+import { useStore } from 'src/store';
+
+import { TProfile, TMutation } from 'src/apolloTypes';
 
 type EditProfileValues = Omit<TProfile, 'imageUrl'>;
 
@@ -37,17 +31,32 @@ const validationSchema = yup.object().shape({
 });
 
 const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
+  const { uiStore } = useStore();
   const editorStateFromRaw = profile.bio ? convertFromRaw(JSON.parse(profile.bio)) : ContentState.createFromText('');
 
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(editorStateFromRaw),
   );
-  const [editProfile, { loading }] = useMutation<TEditProfile>(EDIT_PROFILE);
+  const [editProfile, { loading }] = useMutation<TMutation>(EDIT_PROFILE,
+    {
+      onCompleted() {
+        uiStore.setSnackBarSuccessMessage('Profile Update Successfully');
+      },
+      onError() {
+        uiStore.setSnackBarSuccessMessage('Error occurred, try again!');
+      },
+  });
+
+  const plainTextLength = editorState.getCurrentContent().getPlainText().length;
 
   const _handleProfileEdit = async (values: EditProfileValues) => {
     const rawEditorState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
 
-    editProfile({ variables: { ...values, bio: rawEditorState } });
+    editProfile({
+        variables: { ...values, bio: plainTextLength ? rawEditorState  : '' },
+        refetchQueries: [{ query: AUTHENTICATED_USER }],
+      },
+    );
   };
 
   const formik = useFormik({
@@ -69,8 +78,12 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
     handleChange,
   } = formik;
 
+  const containerClassName = classnames('mt2', {
+    error: !uiStore.validEditorState && !!(plainTextLength),
+  });
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="c-EditProfileForm pa2 ba b--black-10">
       <div className="flex flex-column flex-row-ns justfy-between items-center">
         <div className="w-100 pv2 pr0 pr5-ns">
           <label htmlFor="email" className="f5 b black-50">
@@ -138,16 +151,18 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
           />
         </div>
       </div>
-      <div className="mt2">
-        <label htmlFor="bio" className="f5 b black-50">About Me</label>
+      <div className="mt3">
+        <label htmlFor="bio" className="f5 b black-60">
+          <span className="f5">Tell your audience about yourself</span>
+        </label>
         <RichEditor
           editorState={editorState}
           onChange={setEditorState}
-          containerClassName="mt2"
+          containerClassName={containerClassName}
         />
       </div>
       <Button
-        className="bn br1 bg-primary-blue  white pointer f6 pv2 ph4 ph3 w-100 w-auto-ns mt2"
+        className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2 ttu"
         type="submit"
         disabled={
           !!(errors.fullName) ||
@@ -156,6 +171,7 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
           !(fullName) ||
           !(country) ||
           !(city) ||
+          !(uiStore.validEditorState) ||
           loading
         }
       >

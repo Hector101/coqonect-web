@@ -3,12 +3,8 @@ import Link from 'next/link';
 import { observer } from 'mobx-react-lite';
 
 // components
-import ErrorMessage from 'src/components/Shared/ErrorMessage';
-import SuccessMessage from 'src/components/Shared/SuccessMessage';
 import Button from 'src/components/Shared/Button';
 import SignupForm from 'src/components/Signup/SignupForm';
-
-import { useStore } from 'src/store';
 
 // SVG
 import Google from '../../../public/svgs/Google.svg';
@@ -16,16 +12,12 @@ import Logo from '../../../public/svgs/Logo.svg';
 
 
 const Signup: FunctionComponent<{}> = () => {
-  const { userStore } = useStore();
-
   const _socialSignup = () => {
     window.location.href = `${process.env.API_URL}/api/v1/google`;
   };
 
   return (
     <div className="c-Signup w-100 vh-100 flex flex-column justify-center-ns justify-start items-center">
-      {userStore.signupError &&  <ErrorMessage message={userStore.signupMessage} />}
-      {userStore.signupSuccess &&  <SuccessMessage message={userStore.signupMessage} />}
       <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1">
         <div className="tc pv2">
           <Link href="/">
