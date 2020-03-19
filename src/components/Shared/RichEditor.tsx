@@ -2,7 +2,6 @@ import React,
 {
   MouseEvent,
   useRef,
-  useEffect,
   FunctionComponent,
   Dispatch,
   SetStateAction,
@@ -45,10 +44,6 @@ export const RichEditor: FunctionComponent<Props> = observer((props) => {
   const _focusEditor = () => {
     editor.current.focus();
   };
-
-  useEffect(() => {
-    _focusEditor();
-  }, []);
 
   const _onChange = (editorStateValue: EditorState) => {
     uiStore.validateEditorState(editorStateValue);

@@ -2,13 +2,14 @@ import { FunctionComponent, useState, ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { RenderSVG } from 'src/components/Shared/SVGS';
 
-type InputTypes = 'text' | 'email' | 'password' | 'search';
+type InputTypes = 'text' | 'email' | 'password' | 'search' | 'textarea';
 
 type Props = {
   value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   className: string;
+  mainClassName?: string;
   containerClassName?: string;
   defaultType: InputTypes;
   customType?: InputTypes;
@@ -19,6 +20,7 @@ type Props = {
   defaultRightIconName?: string;
   customRightIconName?: string;
   error?: string;
+  errorWithBorder?: boolean;
   noBorders?: boolean;
   autoComplete?: 'on' | 'off';
   size?: 'small' | 'medium' | 'large';
@@ -37,8 +39,10 @@ const Input: FunctionComponent<Props> = ({
   customRightIconName,
   value,
   error,
+  errorWithBorder,
   placeholder,
   noBorders,
+  mainClassName,
   size = 'large',
   ...rest
 }) => {
@@ -56,6 +60,10 @@ const Input: FunctionComponent<Props> = ({
     large: size === 'large',
   });
 
+  const textAreaClassName = classnames(mainClassName, {
+    'ba b--red': errorWithBorder && error,
+  });
+
   const _changeInputType = () => {
     setToggleStatus(!toggleStatus);
   };
@@ -63,6 +71,23 @@ const Input: FunctionComponent<Props> = ({
   const rightIcon = toggleStatus ? customRightIconName : defaultRightIconName;
   const currentType = toggleStatus ? customType : defaultType;
   const readOnly = onChange ? false : true;
+
+  if (defaultType === 'textarea') {
+    return (
+      <div className={className}>
+        <textarea
+          className={textAreaClassName}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          disabled={disabled}
+          readOnly={readOnly}
+        />
+        {error && !errorWithBorder && <label className="light-red f6 mt1">{error}</label>}
+      </div>
+    );
+  }
 
   return (
 

@@ -1,3 +1,33 @@
+// Mutation Types
+export type TMutation = {
+  client: TClientMutation;
+};
+
+export type TClientMutation = {
+  editProfile: TMessage;
+  changePassword: TMessage;
+  addUserSkill: TMessage;
+};
+
+export type TMessage = {
+  message: string;
+};
+
+// Query Types
+export type TQuery = {
+  client: TClientQuery;
+};
+
+export type TClientQuery = {
+  authenticatedUser: TAuthenticatedUser;
+  skillCategories: TSkillCategories[],
+};
+
+export type TAuthenticatedUser = {
+  profile: TProfile;
+  email: string;
+};
+
 export type TProfile = {
   fullName: string;
   imageUrl: string | null;
@@ -6,28 +36,13 @@ export type TProfile = {
   bio: string | null;
 };
 
-export type TAuthenticatedUser = {
-  profile: TProfile;
-  email: string;
+export type TSkillCategories = {
+  id: string;
+  name: string;
+  skills: TSkills[];
 };
 
-export type TClientQuery = {
-  authenticatedUser: TAuthenticatedUser;
-};
-
-export type TProfileUseQueryProps = {
-  client: TClientQuery;
-};
-
-export type TMutation = {
-  client: TClientMutation;
-};
-
-export type TClientMutation = {
-  editProfile: TMessage;
-  changePassword: TMessage;
-};
-
-export type TMessage = {
-  message: string;
+export type TSkills = {
+  id: string;
+  name: string;
 };

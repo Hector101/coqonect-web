@@ -1,15 +1,16 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode, SyntheticEvent } from 'react';
 import classnames from 'classnames';
 
 type Props = {
   filled?: boolean;
   primaryColor?: boolean;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
   className: string;
   type: 'button' | 'submit';
   disabled?: boolean;
   withFixedHeight?: boolean;
+  id?: string;
 };
 
 const Button: FunctionComponent<Props> = ({
@@ -21,6 +22,7 @@ const Button: FunctionComponent<Props> = ({
   disabled,
   withFixedHeight,
   type,
+  ...others
 }) => {
   const mainClassNames = classnames('c-Button pointer outline-transparent', {
     'bg-cyan': filled && !disabled,
@@ -35,6 +37,7 @@ const Button: FunctionComponent<Props> = ({
     type={type}
     className={`${mainClassNames} ${className}`}
     disabled={disabled}
+    {...others}
   >
     {children}
   </button>
