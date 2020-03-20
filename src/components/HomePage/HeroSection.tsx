@@ -16,7 +16,7 @@ const HeroSection: FunctionComponent<{}> = () => {
           <a>
             <Button
               type="button"
-              className="c-GetStartedButton bn bg-primary-blue f5 b white"
+              className="c-GetStartedButton bn bg-primary-blue f5 b white mb4 mb0-ns"
             >
               GET STARTED
             </Button>
