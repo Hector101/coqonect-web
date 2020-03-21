@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import SwipeableTextMobileStepper from 'src/components/Carousel';
+import SwipeableTextMobileStepper from 'src/components/Shared/Carousel';
 import Button from 'src/components/Shared/Button';
 
 

@@ -1,22 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
+import Typography from '@material-ui/core/Typography';
 
 import Button from 'src/components/Shared/Button';
 
 const HeroSection: FunctionComponent<{}> = () => {
   return (
     <div className="c-HeroSection flex items-start white">
-      <section className="c-HeroTextSection mh2 mh5-ns mv6-ns">
-        <h2 className="c-HeroTitle ma0">Connect with experts to become an expert</h2>
-        <div className="c-HeroSubtitle">
+      <section className="c-HeroTextSection mh3 mh5-ns mv6-ns">
+        <Typography
+          variant="h3"
+          gutterBottom={true}
+          className="c-HeroTitle"
+        >
+          Connect with experts to become an expert
+        </Typography>
+        <Typography variant="subtitle1" className="c-SubHeroTitle">
           CoQonect connects you to verified
            experts to help you become an expert on various skills.
-        </div>
+        </Typography>
         <Link href="/signup">
           <a>
             <Button
               type="button"
-              className="c-GetStartedButton bn bg-primary-blue f5 b white mb4 mb0-ns"
+              className="c-GetStartedButton bn bg-cyan f5 b white mb4 mb0-ns"
             >
               GET STARTED
             </Button>

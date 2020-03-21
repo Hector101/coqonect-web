@@ -18,7 +18,7 @@ const Signup: FunctionComponent<{}> = () => {
 
   return (
     <div className="c-Signup w-100 vh-100 flex flex-column justify-center-ns justify-start items-center">
-      <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1">
+      <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1 mw6">
         <div className="tc pv2">
           <Link href="/">
             <a className="pointer">

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import OutlinedCard from 'src/components/Card';
+import Card from '@material-ui/core/Card'
 
 const VerifiedExpert: FunctionComponent<{}> = () => {
   return (
@@ -9,9 +9,9 @@ const VerifiedExpert: FunctionComponent<{}> = () => {
         <h3 className="tc">Meet Our Verified Experts</h3>
       </div>
       <div className="flex-ns w-100 justify-between">
-        <OutlinedCard />
-        <OutlinedCard />
-        <OutlinedCard />
+        <Card />
+        <Card />
+        <Card />
       </div>
     </section>
   );

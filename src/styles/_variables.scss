@@ -1,2 +1,36 @@
 $primary-color: #16B8C2;
 $primary-blue: #1677D6;
+
+$screen-sm-min: 20em;
+$screen-md-min: 48em;
+$screen-lg-min: 60em;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+ }
+ 
+ // Medium devices
+ @mixin md {
+    @media (min-width: #{$screen-md-min}) {
+      @content;
+    }
+ }
+ 
+ // Large devices
+ @mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+ }
+ 
+
+// Custom devices
+@mixin cw($screen) {
+  @media (min-width: $screen+'em') {
+    @content;
+  }
+ }
+ 

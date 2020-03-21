@@ -10,8 +10,8 @@
     "type:check": "tsc",
     "run:githook": "git config core.hooksPath .githooks",
     "tslint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "build:tachyons": "tachyons src/styles/tachyons/tachyons.css > src/styles/tachyons.css",
-    "minify:tachyons": "tachyons src/styles/tachyons/tachyons.css --minify > src/styles/tachyons.min.css"
+    "build:tachyons": "tachyons src/styles/tachyons/tachyons.css > src/styles/tachyons.scss",
+    "minify:tachyons": "tachyons src/styles/tachyons/tachyons.css --minify > src/styles/tachyons.min.scss"
   },
   "license": "ISC",
   "repository": "https://gitlab.com/hector101/coqonect-client.git",
@@ -83,6 +83,7 @@
     "@types/yup": "^0.26.24",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "fork-ts-checker-webpack-plugin": "^3.1.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-css-variables": "^0.13.0",
     "tachyons-cli": "^1.3.3",
     "ts-node": "^8.5.0",

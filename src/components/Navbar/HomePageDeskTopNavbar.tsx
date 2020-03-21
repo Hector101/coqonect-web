@@ -21,12 +21,17 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
         </ul>
         <Link href="/login">
           <a className="link c-Link mr4">
-            <Button type="button" className="f6 bg-white b-primary-blue pv1 ph3">Login</Button>
+            <Button
+              type="button"
+              className="f6 bg-white pv2 ph3 ba b--black-30"
+            >
+              Login
+            </Button>
           </a>
         </Link>
         <Link href="/signup">
           <a className="link c-Link">
-            <Button type="button" className="f6 pv1 ph3 bn bg-primary-blue white">Sign up</Button>
+            <Button type="button" className="f6 pv2 ph3 bn br1 bg-cyan white">Sign up</Button>
           </a>
         </Link>
       </div>

@@ -15,6 +15,7 @@ import callApi from 'src/lib/callApi';
 
 import { UserStore } from 'src/store/UserStore';
 
+import '../styles/tachyons.scss';
 import '../styles/pages.scss';
 
 type WithCustomSnackbarProps = {

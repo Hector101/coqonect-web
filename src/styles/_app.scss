@@ -8,9 +8,8 @@
 
 .c-IndexContent {
   margin: 3.75rem auto auto auto;
-  max-width: 85.375rem;
 
-  @media (min-width: 85.375rem) {
+  @include cw(85.375) {
     margin: 3.75rem auto auto auto;
   }
 }
