@@ -14,7 +14,7 @@ import FullStar from '../../../public/svgs/FullStar.svg';
 
 const ExpertCard: FunctionComponent<{}> = () => {
   return (
-    <div className="c-ExpertCard ba b--black-10">
+    <div className="c-ExpertCard br1 bg-white">
       <div className="tc flex justify-center items-center">
         <LazyLoadImage
           srcName={null}
