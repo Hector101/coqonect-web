@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import HeroSection from 'src/components/HomePage/HeroSection';
 import ExploreSkillCategory from 'src/components/HomePage/ExploreSkillCategory';
-import VerifiedExpert from 'src/components/VerfiedExpert';
+import MeetOurExperts from 'src/components/HomePage/MeetOurExperts';
 import Testimonials from 'src/components/HomePage/Testimonials';
 import JoinUs from 'src/components/HomePage/JoinUs';
 import Footer from 'src/components/Footer';
@@ -12,7 +12,7 @@ const HomePage: FunctionComponent<{}> = () => {
     <div>
       <HeroSection />
       <ExploreSkillCategory />
-      <VerifiedExpert />
+      <MeetOurExperts />
       <Testimonials />
       <JoinUs />
       <Footer />

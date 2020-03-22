@@ -15,6 +15,8 @@ import callApi from 'src/lib/callApi';
 
 import { UserStore } from 'src/store/UserStore';
 
+import '../styles/slick/slick.css';
+import '../styles/slick/slick-theme.css';
 import '../styles/tachyons.scss';
 import '../styles/pages.scss';
 
