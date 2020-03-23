@@ -1,0 +1,13 @@
+.c-MeetOurExperts {
+  background-color: #eef0f0;
+
+  .title {
+    @include sm {
+      font-size: 1.5rem;
+    }
+
+    @include md {
+      font-size: 1.7rem;
+    }
+  }
+}

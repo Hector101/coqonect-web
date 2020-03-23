@@ -1,0 +1,7 @@
+.c-SkillCategoryCard {
+  padding: 1rem 2rem;
+  
+  @include lg {
+    width: calc(100%/4);
+  }
+}

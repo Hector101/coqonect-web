@@ -105,9 +105,13 @@ const Input: FunctionComponent<Props> = ({
         {...rest}
       />
 
-      <div onClick={_changeInputType} className="w1 h1 pointer absolute right-1 top-1">
-        {rightIcon && <RenderSVG name={rightIcon} className="w1 h1" />}
-      </div>
+      {
+        rightIcon ? (
+          <div onClick={_changeInputType} className="w1 h1 pointer absolute right-1 top-1">
+            <RenderSVG name={rightIcon} className="w1 h1" />
+          </div>
+        ) : null
+      }
       {error && <label className="light-red f6 mt1">{error}</label>}
     </div>
   );

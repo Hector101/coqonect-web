@@ -1,0 +1,14 @@
+.c-Testimonials {
+    background-color: #ffffff;
+  
+    .title {
+      @include sm {
+        font-size: 1.5rem;
+      }
+  
+      @include md {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  

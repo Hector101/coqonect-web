@@ -32,7 +32,7 @@ const Navbar: FunctionComponent<Props> = ({ toggleMenu, children, isDashboard, i
       <div onClick={_handleToggleMenu} className={menuClassName}>
         <Menu className="w1 h1 ma3"/>
       </div>
-      <div className="w-100 c-NavbarContent mw8 center">{children}</div>
+      <div className="w-100 c-NavbarContent center">{children}</div>
     </nav>
   );
 };

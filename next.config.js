@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
 if (typeof require !== 'undefined') {
@@ -23,6 +24,19 @@ const nextConfig = {
         systemvars: true,
       }),
     ];
+
+    config.optimization.minimizer = [];
+    config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
+
+    config.module.rules.push({
+      test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+      use: {
+          loader: 'url-loader',
+          options: {
+              limit: 100000
+          }
+      }
+    });
 
     if (isServer) config.plugins.push(new ForkTsCheckerWebpackPlugin());
 

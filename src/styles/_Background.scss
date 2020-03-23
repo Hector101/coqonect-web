@@ -7,7 +7,7 @@
     visibility: visible;
   }
   
-  @media(min-width: 48em) {
+  @include md {
     &.c-IsDashboard, .c-Show {
       display: none;
     }
