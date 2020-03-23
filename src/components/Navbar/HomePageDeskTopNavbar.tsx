@@ -22,7 +22,7 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
             <a href="#meet-our-experts" className="link black">Meet Our Experts</a>
           </li>
           <li className="c-NavLinks pointer">
-            <a className="link black">Testimonials</a>
+            <a href="#testimonials" className="link black">Testimonials</a>
           </li>
         </ul>
         <Link href="/login">

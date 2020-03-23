@@ -6,7 +6,7 @@ import TestimonialCarousel from 'src/components/HomePage/TestimonialCarousel';
 
 const Testimonials: FunctionComponent<{}> = () => {
   return (
-    <section className="c-Testimonials" id="meet-our-experts">
+    <section className="c-Testimonials" id="testimonials">
       <div className="ph3 ph5-ns pv4">
         <h4 className="title tc mt0">Testimonials</h4>
         <div className="w-100 flex flex-column flex-row-ns items-center justify-between">

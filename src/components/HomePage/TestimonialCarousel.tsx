@@ -47,7 +47,7 @@ const TestimonialCarousel: FunctionComponent<{}> = () => {
   };
 
   return (
-    <div className={classnames(classes.root, 'ba b--black-10 br1')}>
+    <div className={classnames(classes.root, 'ba b--black-10 br1 bg-white')}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

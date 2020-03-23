@@ -4,7 +4,7 @@ import HeroSection from 'src/components/HomePage/HeroSection';
 import ExploreSkillCategory from 'src/components/HomePage/ExploreSkillCategory';
 import MeetOurExperts from 'src/components/HomePage/MeetOurExperts';
 import Testimonials from 'src/components/HomePage/Testimonials';
-import JoinUs from 'src/components/HomePage/JoinUs';
+import WhyJoinUs from 'src/components/HomePage/WhyJoinUs';
 import Footer from 'src/components/Footer';
 
 const HomePage: FunctionComponent<{}> = () => {
@@ -14,7 +14,7 @@ const HomePage: FunctionComponent<{}> = () => {
       <ExploreSkillCategory />
       <MeetOurExperts />
       <Testimonials />
-      <JoinUs />
+      <WhyJoinUs />
       <Footer />
     </div>
   );

@@ -9,7 +9,7 @@ const Footer: FunctionComponent<{}> = () => {
   return (
     <section>
       <div className="c-FooterSection">
-        <div className="c-FooterContainer flex-ns justify-between pv4 items-start-ns">
+        <div className="c-FooterContainer flex-ns justify-between pa4 items-start-ns">
           <div className="flex-ns items-center pointer">
             <Logo className="c-LogoIcon"/>
             <span className="b c-LogoText" >CoQonect</span>
@@ -31,17 +31,16 @@ const Footer: FunctionComponent<{}> = () => {
           </div>
           <div>
             <p>subscribe to our newsletter</p>
-            <div className="flex-ns">
+            <div className="flex justify-center">
               <Input
-                className="pv3 pr2 ph2 f6 input-reset bg-transparent w-100"
-                containerClassName="mt2"
+                className="pv2 ph4 f6 bg-transparent w-100"
                 defaultType="text"
                 placeholder="Enter E-mail Address"
                 name="text"
                 value=""
               />
               <Button
-                className="bn br1 bg-primary-blue  white pointer f6 pv2 ph4 ph3 w-100 w-auto-ns mt2"
+                className="bn br1 bg-primary-blue white pointer f6 pv2 ph4"
                 type="submit"
               >
                 Subscribe
