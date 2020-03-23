@@ -15,9 +15,15 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
       </a>
       <div className="flex justify-center items-center">
         <ul className="list flex-ns dn justify-center items-center">
-          <li className="c-NavLinks pointer"><a>Explore Skill Categories</a></li>
-          <li className="c-NavLinks pointer"><a>Meet Our Experts</a></li>
-          <li className="c-NavLinks pointer"><a>Testimonials</a></li>
+          <li className="c-NavLinks pointer">
+            <a className="link black">Explore Skill Categories</a>
+          </li>
+          <li className="c-NavLinks pointer">
+            <a href="#meet-our-experts" className="link black">Meet Our Experts</a>
+          </li>
+          <li className="c-NavLinks pointer">
+            <a className="link black">Testimonials</a>
+          </li>
         </ul>
         <Link href="/login">
           <a className="link c-Link mr4">

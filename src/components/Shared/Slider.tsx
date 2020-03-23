@@ -4,6 +4,7 @@ import Slick from 'react-slick';
 type Props = {
   children: ReactNode;
   className?: string;
+  numberOfSlide: number;
 };
 
 const Slider: FunctionComponent<Props> = (props) => {
@@ -11,6 +12,7 @@ const Slider: FunctionComponent<Props> = (props) => {
   const {
     className,
     children,
+    numberOfSlide,
   } = props;
 
   const settings = {
@@ -19,8 +21,8 @@ const Slider: FunctionComponent<Props> = (props) => {
     autoplaySpeed: 5000,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: numberOfSlide,
+    slidesToScroll: numberOfSlide,
     initialSlide: 0,
     cssEase: 'linear',
     responsive: [

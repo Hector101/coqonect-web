@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
+import classnames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -9,39 +9,14 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 
-const tutorialSteps = [
-  {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bird',
-    imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bali, Indonesia',
-    imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
-  },
-  {
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Goč, Serbia',
-    imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-];
+import { testimonials } from 'src/tempData/testimonials';
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
     flexGrow: 1,
   },
   header: {
@@ -49,22 +24,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     height: 50,
     paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-  },
-  img: {
-    height: 255,
-    display: 'block',
-    maxWidth: 400,
-    overflow: 'hidden',
-    width: '100%',
+    backgroundColor: '#eef0f0',
   },
 }));
 
-function SwipeableTextMobileStepper() {
+const TestimonialCarousel: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const maxSteps = testimonials.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -79,20 +47,32 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <div className={classes.root}>
-      <Paper square={true} elevation={0} className={classes.header}>
-        <Typography>{tutorialSteps[activeStep].label}</Typography>
-      </Paper>
+    <div className={classnames(classes.root, 'ba b--black-10 br1')}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents={true}
       >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
+        {testimonials.map((testimonial, index) => (
+          <div key={testimonial.name}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.imgPath} alt={step.label} />
+              <div className="w-100 flex flex-column-reverse flex-row-ns items-center">
+                <div className="w-100 w-50-ns tc tl-ns pa4">
+                  <div className="mb3">
+                    <FormatQuoteIcon fontSize="large" color="primary" />
+                    <Typography variant="subtitle1">
+                      {testimonial.testimony}
+                    </Typography>
+                  </div>
+                  <Typography color="textSecondary">
+                    - {testimonials[activeStep].name}
+                  </Typography>
+                </div>
+                <div className="w-100 w-50-ns tc tr-ns pa4">
+                  <img className="w3 h3 br-100" src={testimonial.img} alt={testimonial.name} />
+                </div>
+              </div>
             ) : null}
           </div>
         ))}
@@ -117,6 +97,6 @@ function SwipeableTextMobileStepper() {
       />
     </div>
   );
-}
+};
 
-export default SwipeableTextMobileStepper;
+export default TestimonialCarousel;

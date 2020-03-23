@@ -1,29 +1,24 @@
 import React, { FunctionComponent } from 'react';
 
-import SwipeableTextMobileStepper from 'src/components/Shared/Carousel';
-import Button from 'src/components/Shared/Button';
+// import Typography from '@material-ui/core/Typography';
 
+import TestimonialCarousel from 'src/components/HomePage/TestimonialCarousel';
 
 const Testimonials: FunctionComponent<{}> = () => {
   return (
-    <section className="c-TestimonialSection">
-      <div>
-        <h3 className="tc">Testimonials</h3>
-      </div>
-      <div className="flex flex-column flex-column-reverse flex-row-ns w-100 justify-between">
-        <div className="c-TestimonialThought">
-          <h5>What Our Mentees have to say, will interest you</h5>
-          <p>With more than 2000</p>
-          <p>mentorship session daily</p>
-          <Button
-            className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
-            type="button"
-          >
-            READ MORE STORIES
-          </Button>
-        </div>
-        <div className="c-SwipeableTextMobileStepper w-50">
-          <SwipeableTextMobileStepper />
+    <section className="c-Testimonials" id="meet-our-experts">
+      <div className="ph3 ph5-ns pv4">
+        <h4 className="title tc mt0">Testimonials</h4>
+        <div className="w-100 flex flex-column flex-row-ns items-center justify-between">
+          <div className="w-100 w-50-ns mv2 mv0-ns">
+            <div className="w-100 w-50-ns br1 pa3">
+              <h2 className="mv3">What Our Mentees have to say, will interest you.</h2>
+              <h5 className="mv2">With more than 2000 mentorship sessions daily.</h5>
+            </div>
+          </div>
+          <div className="w-100 w-50-ns">
+            <TestimonialCarousel />
+          </div>
         </div>
       </div>
     </section>
