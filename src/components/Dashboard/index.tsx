@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Select from 'react-select';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import Input from 'src/components/Shared/Input';
 import ReccommendedMentorshipCard from 'src/components/Shared/ReccommendedMentorshipCard';
@@ -19,10 +20,10 @@ const Dashboard: FunctionComponent<{}> = () => {
   return (
     <Paper elevation={0}>
       <div className="c-Dashboard mw8 center bg-white">
-        <section className="flex flex-column flex-row-ns justify-between">
+        <section className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
           <div className="mv2 mv0-ns">
-            <h3 className="mb0 f3">Recommended Mentorships</h3>
-            <span className="f6">Most subscribed sessions recently.</span>
+            <Typography variant="h5">Recommended Mentorships</Typography>
+            <Typography variant="subtitle2">Most subscribed sessions recently.</Typography>
           </div>
           <div className="flex items-center-l">
             <Select
@@ -49,7 +50,7 @@ const Dashboard: FunctionComponent<{}> = () => {
           </div>
         </section>
         <section className="mb4">
-          <div className="pt4 flex flex-column flex-row-ns justify-between">
+          <div className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
             <ReccommendedMentorshipCard />
             <ReccommendedMentorshipCard />
             <ReccommendedMentorshipCard />
@@ -62,11 +63,11 @@ const Dashboard: FunctionComponent<{}> = () => {
           </div>
         </section>
         <section>
-          <div>
-            <h3 className="mv0 f3">Featured Mentors</h3>
+          <div className="ph3 ph0-ns">
+            <Typography variant="h5">Featured Mentors</Typography>
           </div>
           <div>
-            <div className="pt3 flex flex-column flex-row-ns justify-start w-100">
+            <div className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-start w-100">
               <FeaturedMentorCard withMarginRight={true} />
               <FeaturedMentorCard withMarginRight={true} />
               <FeaturedMentorCard withMarginRight={true} />

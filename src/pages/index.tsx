@@ -24,7 +24,7 @@ const Index: INextFunctionalComponent<{}> = () => {
       <Navbar isExpanded={uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <HomePageDeskTopNavbar />
       </Navbar>
-      <MobileSidebar isExpanded={uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
+      <MobileSidebar isExpanded={!uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <HomePageMobileNavbar />
       </MobileSidebar>
       <div className="c-IndexContent">

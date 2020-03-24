@@ -5,7 +5,7 @@ import ExploreSkillCategory from 'src/components/HomePage/ExploreSkillCategory';
 import MeetOurExperts from 'src/components/HomePage/MeetOurExperts';
 import Testimonials from 'src/components/HomePage/Testimonials';
 import WhyJoinUs from 'src/components/HomePage/WhyJoinUs';
-import Footer from 'src/components/Footer';
+import Footer from 'src/components/Shared/Footer';
 
 const HomePage: FunctionComponent<{}> = () => {
   return (

@@ -44,7 +44,7 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(
   });
 
   const linkCategoryClassName = classnames('bb bt b--black-10 flex items-center ph3 h3', {
-    'justify-center': !uiStore.sideMenuOpened,
+    'justify-center': !uiStore.sideMenuOpened && !isMobile,
   });
 
   return (
@@ -91,7 +91,7 @@ const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, i
 
   const mainClassName = classnames('h3 ph3 f6 pointer black-80 c-sidemenu-link link flex items-center', {
     'c-selected': selected && link.selectable,
-    'justify-center': !uiStore.sideMenuOpened,
+    'justify-center': !uiStore.sideMenuOpened && !isMobile,
   });
   const linkTextClassName = classnames('ml3', {
     'dn c-fade-out': !uiStore.sideMenuOpened && !isMobile,
