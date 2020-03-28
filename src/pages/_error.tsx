@@ -29,7 +29,7 @@ function Error({ statusCode }: Props) {
     <Plain title={statusCode ? 'Page not Found' : 'Temporary Server Error'}>
       <div className="w-100 vh-100 flex flex-column justify-center items-center">
         {
-          statusCode
+          statusCode === 404
             ? (
               <>
                 <PageNotFountIcon className="w4 h4" />
