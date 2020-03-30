@@ -26,7 +26,7 @@ const ImageUploadModal: FunctionComponent<Props> = ({
       actionProgressStatus={actionProgressStatus}
     >
       <div>
-        <input type="file" name="myImage" onChange={onChange} />
+        <input type="file" name="myImage" onChange={onChange} className="bg-white" />
         <h5>Select image file not more than 3MB.</h5>
       </div>
     </CustomDialog>
