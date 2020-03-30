@@ -40,7 +40,7 @@ export const CHANGE_PASSWORD = gql`
 
 export const SKILL_CATEGORIES = gql`
   query {
-    client {
+    public {
       skillCategories {
         id
         name
@@ -54,9 +54,9 @@ export const SKILL_CATEGORIES = gql`
 `;
 
 export const ADD_USER_SKILL = gql`
-  mutation AddUserSkill($skillId: ID!, $description: String!) {
+  mutation AddUserSkill($skillId: ID!, $description: String!, $evidence: String!, $months: Int!, $years: Int!) {
     client {
-      addUserSkill(skillId: $skillId, description: $description) {
+      addUserSkill(skillId: $skillId, description: $description, evidence: $evidence, months: $months, years: $years) {
         message
       }
     }

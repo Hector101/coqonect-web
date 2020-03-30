@@ -16,10 +16,14 @@ export type TMessage = {
 // Query Types
 export type TQuery = {
   client: TClientQuery;
+  public: TPublicQuery;
 };
 
 export type TClientQuery = {
   authenticatedUser: TAuthenticatedUser;
+};
+
+export type TPublicQuery = {
   skillCategories: TSkillCategories[],
 };
 

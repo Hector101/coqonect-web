@@ -2,7 +2,7 @@ import { FunctionComponent, useState, ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { RenderSVG } from 'src/components/Shared/SVGS';
 
-type InputTypes = 'text' | 'email' | 'password' | 'search' | 'textarea';
+type InputTypes = 'text' | 'email' | 'password' | 'search' | 'textarea' | 'number';
 
 type Props = {
   value?: string;
@@ -24,6 +24,8 @@ type Props = {
   noBorders?: boolean;
   autoComplete?: 'on' | 'off';
   size?: 'small' | 'medium' | 'large';
+  min?: number;
+  max?: number;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -52,6 +54,7 @@ const Input: FunctionComponent<Props> = ({
     'bn': noBorders,
     'ba b--black-20': !noBorders,
     'c-with-left-icon': leftIconName,
+    'ba b--red': errorWithBorder && error,
   });
   const inputContainerClassName = classnames('relative c-Input', {
     [`${containerClassName}`]: !!containerClassName,
@@ -90,7 +93,6 @@ const Input: FunctionComponent<Props> = ({
   }
 
   return (
-
     <div className={inputContainerClassName}>
       {leftIconName && <RenderSVG name={leftIconName} className="w1 h1 absolute left-1 top-1" />}
       <input
@@ -112,7 +114,7 @@ const Input: FunctionComponent<Props> = ({
           </div>
         ) : null
       }
-      {error && <label className="light-red f6 mt1">{error}</label>}
+      {error && !errorWithBorder && <label className="light-red f6 mt1">{error}</label>}
     </div>
   );
 };
