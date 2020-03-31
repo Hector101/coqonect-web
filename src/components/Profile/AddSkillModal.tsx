@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import CustomDialog from 'src/components/Shared/CustomDialog';
 import Input from 'src/components/Shared/Input';
 
-import { SKILL_CATEGORIES, ADD_USER_SKILL } from 'src/queries';
+import { SKILL_CATEGORIES, ADD_USER_SKILL, AUTHENTICATED_USER } from 'src/queries';
 
 import { TQuery, TMutation } from 'src/apolloTypes';
 
@@ -46,11 +46,13 @@ const AddSkillModal: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
   const [selectedSkill, setSelectedSkill] = useState(null);
 
+  const{ refetch } = useQuery<TQuery>(AUTHENTICATED_USER);
   const { data: skillsData, loading: skillsLoading } = useQuery<TQuery>(SKILL_CATEGORIES);
   const [addUserSkill] = useMutation<TMutation>(ADD_USER_SKILL,
     {
       onCompleted(data) {
         uiStore.setSnackBarSuccessMessage(data.client.addUserSkill.message);
+        refetch();
         uiStore.closeDialog();
         _resetForm();
       },

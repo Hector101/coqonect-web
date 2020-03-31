@@ -13,6 +13,14 @@ export const AUTHENTICATED_USER = gql`
           country
           bio
         }
+        skills {
+          name
+          evidence
+          months
+          years
+          description
+          verified
+        }
       }
     }
   }

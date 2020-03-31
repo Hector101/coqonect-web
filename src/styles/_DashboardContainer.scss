@@ -6,6 +6,14 @@
   background-color: rgb(240, 240, 240);
 
   @include md {
+    margin: 3.75rem auto auto 20%;
+    
+    &.c-IsExpanded {
+      margin: 3.75rem auto auto 5%;
+    }
+  }
+
+  @include lg {
     margin: 3.75rem auto auto 15%;
     
     &.c-IsExpanded {

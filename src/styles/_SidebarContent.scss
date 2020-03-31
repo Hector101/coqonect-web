@@ -1,5 +1,20 @@
 .c-SidebarContent {
   .c-logo-section {
     height: 3.75rem;
+
+    .c-logo {
+      width: 2rem;
+      height: 2rem;
+
+      @include md {
+        width: 0.7rem;
+        height: 0.7rem;
+      }
+
+      @include md {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
   }
 }

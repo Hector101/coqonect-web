@@ -20,11 +20,16 @@ const SidebarContent: FunctionComponent<Props> = ({ isMobile }) => {
     dn: !uiStore.sideMenuOpened && !isMobile,
   });
 
+  const logoClassName = classnames('c-logo-section pa3 flex items-center', {
+    'justify-center': !uiStore.sideMenuOpened && !isMobile,
+    'justify-start': uiStore.sideMenuOpened || isMobile,
+  });
+
   return (
       <div className="c-SidebarContent">
-        <div className="c-logo-section pa3 flex items-center">
+        <div className={logoClassName}>
           <a className="inline-flex items-center">
-            <Logo className="w2 h2 fill-cyan" />
+            <Logo className="fill-cyan c-logo" />
             <span className={hideMenuTextClassName}>CoQonect</span>
           </a>
         </div>
