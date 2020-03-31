@@ -54,7 +54,9 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(
           return (
             <div key={menuLink.categoryName}>
               <div className={linkCategoryClassName}>
-                <img src={`/svgs/${menuLink.iconName}.svg`} className="w1 h1 fill-black-30" />
+              <span className="w1 h1">
+                <RenderSVG name={menuLink.iconName} className="w1 h1 fill-black-30" />
+              </span>
                 <h4 className={linkTitleClassName}>{menuLink.categoryName}</h4>
               </div>
               <MenuLinks menuLink={menuLink}  selectedRoute={router.pathname} isMobile={isMobile} />

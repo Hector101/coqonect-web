@@ -30,6 +30,7 @@ export type TPublicQuery = {
 export type TAuthenticatedUser = {
   profile: TProfile;
   email: string;
+  skills: TSkills[];
 };
 
 export type TProfile = {
@@ -49,4 +50,9 @@ export type TSkillCategories = {
 export type TSkills = {
   id: string;
   name: string;
+  evidence: string;
+  months: number;
+  years: number;
+  description: string;
+  verified: boolean;
 };

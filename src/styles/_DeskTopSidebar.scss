@@ -3,6 +3,13 @@
   transition: all 0.3s ease-in-out;
 
   &.c-IsExpanded {
-    width: 15%;
+
+    @include md {
+      width: 20%;
+    }
+
+    @include lg {
+      width: 15%;
+    }
   }
 }

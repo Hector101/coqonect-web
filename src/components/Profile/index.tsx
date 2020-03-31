@@ -26,6 +26,7 @@ import CustomTab from 'src/components/Shared/CustomTab';
 import TabContainer from 'src/components/Shared/TabContainer';
 import ImageUploadModal from 'src/components/Profile/ImageUploadModal';
 import AddSkillModal from 'src/components/Profile/AddSkillModal';
+import UserSkillsTable from 'src/components/Profile/UserSkillsTable';
 
 import { TQuery } from 'src/apolloTypes';
 
@@ -139,15 +140,20 @@ const Profile: FunctionComponent<{}> = () => {
               <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
             </div>
           </div>
-          <div className="pv4 flex justify-center">
-            <Button
-              id="add-skill"
-              className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
-              type="button"
-              onClick={_openDialog}
-            >
-              ADD SKILLS
-            </Button>
+          <div className="pv4 flex-column justify-center">
+            <div className="overflow-auto">
+              <UserSkillsTable skills={userData.client.authenticatedUser.skills} />
+            </div>
+            <div className="pv4 flex justify-center">
+              <Button
+                id="add-skill"
+                className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
+                type="button"
+                onClick={_openDialog}
+              >
+                ADD SKILLS
+              </Button>
+            </div>
           </div>
         </section>
         <section className="pv4">

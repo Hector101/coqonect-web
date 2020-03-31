@@ -26,10 +26,10 @@ function Error({ statusCode }: Props) {
   };
 
   return (
-    <Plain title={statusCode ? 'Temporary Server Error' : 'Page not Found'}>
+    <Plain title={statusCode && statusCode >= 500 ? 'Temporary Server Error' : 'Page not Found'}>
       <div className="w-100 vh-100 flex flex-column justify-center items-center">
         {
-          statusCode
+          statusCode && statusCode >= 500
             ? (
               <>
                 <Cloud className="w4 h4" />
