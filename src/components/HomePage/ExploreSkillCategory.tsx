@@ -1,16 +1,32 @@
 import React, { FunctionComponent } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 
 import SkillCategoryCard from 'src/components/HomePage/SkillCategoryCard';
+import LoadingPage from 'src/components/Shared/LoadingPage';
+
+import { TQuery } from 'src/apolloTypes';
+
+import { SKILL_CATEGORIES } from 'src/queries';
 
 const ExploreSkillCategory: FunctionComponent<{}> = () => {
+  const { data: userData, loading: skillsLoading } = useQuery<TQuery>(SKILL_CATEGORIES);
+
+  if ( skillsLoading || !userData ) {
+    return <LoadingPage />;
+  }
+
+  const { skillCategories } = userData.public;
+
   return (
     <section className="c-ExploreSkillCategory">
       <div className="ph3 ph5-ns pv5">
         <h4 className="title tc">Explore Skill Categories</h4>
         <div className="flex-ns w-100 justify-between">
-          <SkillCategoryCard />
-          <SkillCategoryCard />
-          <SkillCategoryCard />
+          {
+            skillCategories.map((skillCategory) => (
+              <SkillCategoryCard key={skillCategory.id} skillCategory={skillCategory} />
+            ))
+          }
         </div>
       </div>
     </section>

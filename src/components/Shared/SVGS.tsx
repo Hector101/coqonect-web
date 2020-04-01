@@ -30,6 +30,10 @@ import Activity from '../../../public/svgs/Activity.svg';
 import CityIcon from '../../../public/svgs/CityIcon.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 import SeeMore from '../../../public/svgs/SeeMore.svg';
+import Language from '../../../public/svgs/Language.svg';
+import Communication from '../../../public/svgs/Communication.svg';
+import Designs from '../../../public/svgs/Designs.svg';
+import Programming from '../../../public/svgs/Programming.svg';
 
 interface ISvgs {
   [key: string]: ReactType<{}>;
@@ -66,6 +70,10 @@ export const SVGS: ISvgs = {
   CityIcon,
   LocationIcon,
   SeeMore,
+  Language,
+  Communication,
+  Designs,
+  Programming,
 };
 
 type Props = {
