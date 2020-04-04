@@ -69,7 +69,7 @@ const CustomTab: FunctionComponent<Props> = ({ children }) => {
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          variant="fullWidth"
+          variant="scrollable"
           aria-label="tab panel"
         >
           {

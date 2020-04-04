@@ -2,6 +2,7 @@ import React, { FunctionComponent, SyntheticEvent, useState, ChangeEvent } from 
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
+import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
 import Button from 'src/components/Shared/Button';
@@ -44,7 +45,12 @@ const Profile: FunctionComponent<{}> = () => {
     return <LoadingPage />;
   }
 
-  const { profile: { fullName, imageUrl,  bio, city, country }, profile, email } = userData.client.authenticatedUser;
+  const {
+      profile: { fullName, imageUrl,  bio, city, country },
+      profile,
+      email,
+      skills,
+    } = userData.client.authenticatedUser;
 
   const _openDialog = (e: SyntheticEvent<HTMLSpanElement> | SyntheticEvent<HTMLButtonElement>) => {
     uiStore.openDialog(e.currentTarget.id);
@@ -118,52 +124,59 @@ const Profile: FunctionComponent<{}> = () => {
             </section>
           </div>
         </section>
-        <section className="w-100 pv2">
-          <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
-            <div>
-              <div className="relative">
-                <Gear className="w3 h3"/>
-                <Plus className="w1 h1 absolute bottom-0 right--1" />
-              </div>
-              <p className="f7">ADD SKILLS</p>
-            </div>
-            <RightArrow className="w1 h1 dn db-ns" />
-            <DownArrow className="w1 h1 dn-ns mb3" />
-            <div>
-              <Verify className="w3 h3"/>
-              <p className="f7">WE VERIFY THOSE SKILLS</p>
-            </div>
-            <RightArrow className="w1 h1 dn db-ns" />
-            <DownArrow className="w1 h1 dn-ns mb3" />
-            <div>
-              <Mentorship className="w3 h3"/>
-              <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
-            </div>
-          </div>
-          <div className="pv4 flex-column justify-center">
-            <div className="overflow-auto">
-              <UserSkillsTable skills={userData.client.authenticatedUser.skills} />
-            </div>
-            <div className="pv4 flex justify-center">
-              <Button
-                id="add-skill"
-                className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
-                type="button"
-                onClick={_openDialog}
-              >
-                ADD SKILLS
-              </Button>
-            </div>
-          </div>
-        </section>
         <section className="pv4">
-          <h3>Update Profile</h3>
           <CustomTab>
             <TabContainer title={'Edit Profile'}>
               <EditProfileForm profile={{email, ...profile}} />
             </TabContainer>
             <TabContainer title={'Change Password'}>
               <ChangePasswordForm />
+            </TabContainer>
+          </CustomTab>
+        </section>
+        <section className="w-100 pv2">
+          <h3 className="ttu">Mentors Only</h3>
+          <CustomTab>
+            <TabContainer title={'My Skills'}>
+              <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
+                <div>
+                  <div className="relative">
+                    <Gear className="w3 h3"/>
+                    <Plus className="w1 h1 absolute bottom-0 right--1" />
+                  </div>
+                  <p className="f7">ADD SKILLS</p>
+                </div>
+                <RightArrow className="w1 h1 dn db-ns" />
+                <DownArrow className="w1 h1 dn-ns mb3" />
+                <div>
+                  <Verify className="w3 h3"/>
+                  <p className="f7">WE VERIFY THOSE SKILLS</p>
+                </div>
+                <RightArrow className="w1 h1 dn db-ns" />
+                <DownArrow className="w1 h1 dn-ns mb3" />
+                <div>
+                  <Mentorship className="w3 h3"/>
+                  <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
+                </div>
+              </div>
+              <div className="pv4 flex-column justify-center">
+                <div className="pv2 flex justify-center">
+                  <Button
+                    id="add-skill"
+                    className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3"
+                    type="button"
+                    onClick={_openDialog}
+                  >
+                    ADD SKILLS
+                  </Button>
+                </div>
+                <div className={classnames('overflow-auto', { dn: !skills.length })}>
+                  <UserSkillsTable skills={skills} />
+                </div>
+              </div>
+            </TabContainer>
+            <TabContainer title={'Mentorship Curriculum'}>
+              <div className="w-100 h5">Create Mentorship Curriculum</div>
             </TabContainer>
           </CustomTab>
         </section>
