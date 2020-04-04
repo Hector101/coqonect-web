@@ -24,7 +24,7 @@ export type TClientQuery = {
 };
 
 export type TPublicQuery = {
-  skillCategories: TSkillCategories[],
+  skillCategories: TSkillCategory[],
 };
 
 export type TAuthenticatedUser = {
@@ -41,7 +41,7 @@ export type TProfile = {
   bio: string | null;
 };
 
-export type TSkillCategories = {
+export type TSkillCategory = {
   id: string;
   name: string;
   skills: TSkills[];
