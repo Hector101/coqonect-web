@@ -23,7 +23,7 @@ const SkillCategoryCard: FunctionComponent<Props> = ({ skillCategory }) => {
   };
 
   return (
-    <div className="c-SkillCategoryCard ba b--black-10 mv4 inline-flex-m mv4-m mh3-m flex-column-m inline-flex-l flex-column-l mh3-l">
+    <div className="c-SkillCategoryCard ba b--black-10 mv4 mv0-ns">
       <div className="tc flex justify-center items-center bg-cyan">
         <RenderSVG name={skillCategory.name} className="w1 h1 fill-white"/>
         <h3 className="b f5 ml2 white">{skillCategory.name}</h3>

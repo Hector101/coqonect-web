@@ -1,12 +1,12 @@
 .c-SkillCategoryCard {
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
 
-  @media screen and (min-width: 30em) and (max-width: 60em) {
-    width: 45%;
+  @media screen and (min-width: 768px) and (max-width: 1399px) {
+    width: calc(100% / 2);
+    margin: 10px;
   }
   
-  @media screen and (min-width: 60em) {
-    max-width: 30%;
-    width: 28%;
+  @include lg {
+    width: calc(100% / 4);
   }
 }
