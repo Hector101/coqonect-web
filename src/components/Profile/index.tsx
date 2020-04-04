@@ -29,6 +29,8 @@ import ImageUploadModal from 'src/components/Profile/ImageUploadModal';
 import AddSkillModal from 'src/components/Profile/AddSkillModal';
 import UserSkillsTable from 'src/components/Profile/UserSkillsTable';
 
+import { countryListAlpha2 } from 'src/tempData/countryList';
+
 import { TQuery } from 'src/apolloTypes';
 
 import { useStore } from 'src/store';
@@ -51,6 +53,8 @@ const Profile: FunctionComponent<{}> = () => {
       email,
       skills,
     } = userData.client.authenticatedUser;
+
+  const countryName = countryListAlpha2[country];
 
   const _openDialog = (e: SyntheticEvent<HTMLSpanElement> | SyntheticEvent<HTMLButtonElement>) => {
     uiStore.openDialog(e.currentTarget.id);
@@ -105,7 +109,7 @@ const Profile: FunctionComponent<{}> = () => {
               <h4 className="mv3 ttc">{fullName}</h4>
               <div className="flex items-center mv2">
                 <LocationIcon className="h1 w1 mr1" />
-                <span className="f7">{city} {', '} {country}</span>
+                <span className="f7">{city} {', '} {countryName}</span>
               </div>
               <div className="mv2">
                 <Rating

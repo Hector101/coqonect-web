@@ -33,11 +33,13 @@ export type TAuthenticatedUser = {
   skills: TSkills[];
 };
 
+type TCountryCode = 'AF' | 'AL' | 'DZ';
+
 export type TProfile = {
   fullName: string;
   imageUrl: string | null;
   city: string;
-  country: string;
+  country: TCountryCode;
   bio: string | null;
 };
 
