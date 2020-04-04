@@ -1,4 +1,4 @@
-import { TSkillCategories } from 'src/apolloTypes';
+import { TSkillCategory } from 'src/apolloTypes';
 
 export function isFunction(value: () => void) {
   return value && typeof value === 'function';
@@ -8,7 +8,7 @@ export function getGraphQLMessage(message: string) {
   return message.split('GraphQL error: ')[1];
 }
 
-export function groupedSelectionOptions(options: TSkillCategories[]) {
+export function groupedSelectionOptions(options: TSkillCategory[]) {
   if (!options) {
     return [];
   }
