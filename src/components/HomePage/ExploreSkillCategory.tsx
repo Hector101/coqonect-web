@@ -32,7 +32,7 @@ const ExploreSkillCategory: FunctionComponent<{}> = () => {
       <section className="c-ExploreSkillCategory">
         <div className="ph3 ph5-ns pv5">
           <h4 className="title tc">Explore Skill Categories</h4>
-          <div className="w-100 justify-between">
+          <div className="flex-ns w-100 justify-between">
             {
               skillCategories.map((skillCategory) => (
                 <SkillCategoryCard key={skillCategory.id} skillCategory={skillCategory} />
