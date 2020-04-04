@@ -4,21 +4,22 @@ import Divider from '@material-ui/core/Divider';
 
 import CustomDialog from 'src/components/Shared/CustomDialog';
 
-import { TSkillCategories } from 'src/apolloTypes';
+import { TSkillCategory } from 'src/apolloTypes';
 
 type Props = {
-  skillCategory: TSkillCategories;
+  skillCategory: TSkillCategory;
 };
 
-const SkillCard: FunctionComponent<Props> = ({skillCategory}) => {
+const SkillsModal: FunctionComponent<Props> = ({skillCategory}) => {
 
   return (
     <CustomDialog
-      dialogId="view-skill"
+      dialogId={`view-skill-${skillCategory.id}`}
       title="View Skill"
       darkenHeaderBackground={true}
     >
-      <ul className="list pa0 ma0">
+      {/* list pa0 ma0 w5 h5 */}
+      <ul className="list w5 h5 ma0 pa0">
       {
         skillCategory.skills.map((skill) => {
           return (
@@ -34,4 +35,4 @@ const SkillCard: FunctionComponent<Props> = ({skillCategory}) => {
   );
 };
 
-export default SkillCard;
+export default SkillsModal;
