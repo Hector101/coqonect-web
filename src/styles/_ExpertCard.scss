@@ -1,9 +1,20 @@
 .c-ExpertCard {
   padding: 1rem 2rem;
+  width: 100%;
+
+  @include md {
+    width: calc(100% - 1em);
+    margin-left: 0.5em;
+  }
 
   .c-skills {
     div {
       margin-top: 0.3rem;
     }
+  }
+
+  .c-view-profile-btn {
+    background-color: $primary-color;
+    color: #ffffff;
   }
 }

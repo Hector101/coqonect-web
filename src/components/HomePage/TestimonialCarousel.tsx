@@ -57,10 +57,10 @@ const TestimonialCarousel: FunctionComponent<{}> = () => {
         {testimonials.map((testimonial, index) => (
           <div key={testimonial.name}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <div className="w-100 flex flex-column-reverse flex-row-ns items-center">
-                <div className="w-100 w-50-ns tc tl-ns pa4">
+              <div className="w-100 flex flex-column-reverse flex-row-l items-center">
+                <div className="w-100 w-50-l tc tl-ns pa4">
                   <div className="mb3">
-                    <FormatQuoteIcon fontSize="large" color="primary" />
+                    <FormatQuoteIcon fontSize="large" className="c-formatQuoteIcon" />
                     <Typography variant="subtitle1">
                       {testimonial.testimony}
                     </Typography>
@@ -69,7 +69,7 @@ const TestimonialCarousel: FunctionComponent<{}> = () => {
                     - {testimonials[activeStep].name}
                   </Typography>
                 </div>
-                <div className="w-100 w-50-ns tc tr-ns pa4">
+                <div className="flex justify-center justify-end-l w-100 w-50-l tc tr-ns pa4">
                   <img className="w3 h3 br-100" src={testimonial.img} alt={testimonial.name} />
                 </div>
               </div>

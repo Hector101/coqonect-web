@@ -7,7 +7,7 @@ import Button from 'src/components/Shared/Button';
 const HeroSection: FunctionComponent<{}> = () => {
   return (
     <div className="c-HeroSection flex items-start white">
-      <section className="c-HeroTextSection mh3 mh5-ns mv6-ns">
+      <section className="c-HeroTextSection mh4 mv6-ns">
         <Typography
           variant="h3"
           gutterBottom={true}
@@ -23,7 +23,7 @@ const HeroSection: FunctionComponent<{}> = () => {
           <a>
             <Button
               type="button"
-              className="c-GetStartedButton bn bg-cyan f5 b white mb4 mb0-ns"
+              className="c-GetStartedButton bn bg-cyan f5 b white mb4 mb0-ns br1"
             >
               GET STARTED
             </Button>

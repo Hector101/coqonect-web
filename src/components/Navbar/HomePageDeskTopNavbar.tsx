@@ -26,7 +26,7 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
           </li>
         </ul>
         <Link href="/login">
-          <a className="link c-Link mr4">
+          <a className="link c-Link mr4 br1">
             <Button
               type="button"
               className="f6 bg-white pv2 ph3 ba b--black-30"
