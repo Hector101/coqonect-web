@@ -29,7 +29,7 @@ import ImageUploadModal from 'src/components/Profile/ImageUploadModal';
 import AddSkillModal from 'src/components/Profile/AddSkillModal';
 import UserSkillsTable from 'src/components/Profile/UserSkillsTable';
 
-import { countryListAlpha2 } from 'src/tempData/countryList';
+import { countryList } from 'src/tempData/countryList';
 
 import { TQuery } from 'src/apolloTypes';
 
@@ -54,7 +54,7 @@ const Profile: FunctionComponent<{}> = () => {
       skills,
     } = userData.client.authenticatedUser;
 
-  const countryName = countryListAlpha2[country];
+  const countryName = countryList[country];
 
   const _openDialog = (e: SyntheticEvent<HTMLSpanElement> | SyntheticEvent<HTMLButtonElement>) => {
     uiStore.openDialog(e.currentTarget.id);

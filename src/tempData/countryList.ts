@@ -1,4 +1,4 @@
-export const countryListAlpha2 = {
+export const countryList = {
   AF: 'Afghanistan', AL: 'Albania', DZ: 'Algeria', AS: 'American Samoa',
   AD: 'Andorra', AO: 'Angola', AI: 'Anguilla', AQ: 'Antarctica',
   AG: 'Antigua and Barbuda', AR: 'Argentina', AM: 'Armenia', AW: 'Aruba',
