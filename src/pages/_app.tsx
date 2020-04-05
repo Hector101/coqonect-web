@@ -4,16 +4,14 @@ import NProgress from 'nprogress';
 import Router, { withRouter } from 'next/router';
 import { NextComponentType, NextPageContext } from 'next';
 import dynamic from 'next/dynamic';
-import { observer } from 'mobx-react-lite';
+import NoSsr from '@material-ui/core/NoSsr';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import LoadingPage from 'src/components/Shared/LoadingPage';
 import CustomSnackbar from 'src/components/Shared/CustomSnackbar';
 
 // lib
 import { withApollo } from 'src/lib/withApollo';
-import callApi from 'src/lib/callApi';
-
-import { UserStore } from 'src/store/UserStore';
 
 import '../styles/slick/slick.css';
 import '../styles/slick/slick-theme.css';
@@ -35,37 +33,24 @@ const DashboardContainer = dynamic(() => import('src/components/Containers/Dashb
 });
 
 const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({ isDashboard, Component, pageProps }) => (
-  <>
+  <NoSsr>
     {isDashboard
       ? (<DashboardContainer><Component {...pageProps} /></DashboardContainer>)
       : <Component {...pageProps} />
     }
+    <CssBaseline />
     <CustomSnackbar />
-  </>
+  </NoSsr>
 );
 
+// @ts-ignore
+@withRouter
+// @ts-ignore
+@withApollo
 class MyApp extends App {
-  store: UserStore;
-
-  constructor(props: any) {
-    super(props);
-    this.store = new UserStore(callApi);
-  }
-
-  async componentDidMount() {
-    const { router } = this.props;
-
-    if (router.route.startsWith('/dashboard')) {
-      this.store.handleCheckAuthStatus(() => {
-        // auth success
-      }, () => {
-        router.push('/login');
-      });
-    }
-  }
-
   render() {
     const { Component, pageProps, router } = this.props;
+
     return (
       <WithCustomSnackbar
         isDashboard={router.route.startsWith('/dashboard')}
@@ -76,5 +61,4 @@ class MyApp extends App {
   }
 }
 
-// @ts-ignore
-export default observer(withRouter(withApollo(MyApp)));
+export default MyApp;

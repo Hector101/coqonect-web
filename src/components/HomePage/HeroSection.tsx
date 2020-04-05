@@ -1,10 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
+import { observer } from 'mobx-react-lite';
 
 import Button from 'src/components/Shared/Button';
 
+import { useStore } from 'src/store';
+
 const HeroSection: FunctionComponent<{}> = () => {
+  const { userStore } = useStore();
+
   return (
     <div className="c-HeroSection flex items-start white">
       <section className="c-HeroTextSection mh4 mv6-ns">
@@ -19,7 +24,7 @@ const HeroSection: FunctionComponent<{}> = () => {
           CoQonect connects you to verified
            experts to help you become an expert on various skills.
         </Typography>
-        <Link href="/signup">
+        <Link href={userStore.authenticated ? '/dashboard' : '/signup'}>
           <a>
             <Button
               type="button"
@@ -34,4 +39,4 @@ const HeroSection: FunctionComponent<{}> = () => {
   );
 };
 
-export default HeroSection;
+export default observer(HeroSection);
