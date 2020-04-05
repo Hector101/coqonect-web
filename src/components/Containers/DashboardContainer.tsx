@@ -1,12 +1,14 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode, useEffect } from 'react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router';
 
 import Navbar from 'src/components/Navbar';
 import MobileSidebar from 'src/components/Sidebar/MobileSidebar';
 import DeskTopSidebar from 'src/components/Sidebar/DeskTopSidebar';
 import DashboardNavbarContent from 'src/components/Navbar/DashboardNavbarContent';
 import SidebarContent from 'src/components/Sidebar/SidebarContent';
+import LoadingPage from 'src/components/Shared/LoadingPage';
 
 // store
 import { useStore } from 'src/store';
@@ -16,7 +18,14 @@ type Props = {
 };
 
 const DashboardContainer: FunctionComponent<Props> = ({ children }) => {
-  const { uiStore } = useStore();
+  const { uiStore, userStore } = useStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userStore.authCheckCompleted && !userStore.authenticated) {
+      router.push('/login');
+    }
+  }, [userStore.authCheckCompleted]);
 
   const dashboardContentClassName = classnames('c-DashboardContainer', {
     'c-IsExpanded': !uiStore.sideMenuOpened,
@@ -25,6 +34,10 @@ const DashboardContainer: FunctionComponent<Props> = ({ children }) => {
   const _toggleSideMenu = () => {
     uiStore.toggleSideMenu();
   };
+
+  if (!userStore.authCheckCompleted) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

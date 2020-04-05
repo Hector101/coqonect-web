@@ -10,11 +10,13 @@ export class UserStore {
   @observable signupResponse = { message: '' };
   @observable passwordResetResponse = { message: '' };
   @observable imageUploadResponse = { message: '' };
-  @observable loggedIn = false;
+  @observable authenticated = false;
+  @observable authCheckCompleted = false;
   @observable uploadingImage = false;
 
   constructor(public api: CallApiType) {
     this.api = api;
+    this.handleCheckAuthStatus();
   }
 
   @action
@@ -43,7 +45,7 @@ export class UserStore {
     if (response.status === 200) {
       this.loginResponse.message = response.message;
 
-      this.loggedIn = true;
+      this.authenticated = true;
       if (onSuccess) {
         onSuccess();
       }
@@ -51,7 +53,7 @@ export class UserStore {
 
     if (response.status === 401 || response.status === 500) {
       this.loginResponse.message = response.message;
-      this.loggedIn = false;
+      this.authenticated = false;
 
       if (onError) {
         onError();
@@ -95,6 +97,7 @@ export class UserStore {
     });
 
     if (response.success) {
+      this.authenticated = false;
       if (onSuccess) {
         onSuccess();
       }
@@ -138,7 +141,21 @@ export class UserStore {
     });
 
     if (response.status === 200) {
-      this.loggedIn = true;
+      this.authenticated = true;
+      if (onSuccess) {
+        onSuccess();
+      }
+    } else {
+      if (onError) {
+        onError();
+      }
+    }
+    this.authCheckCompleted = true;
+  }
+
+  @action
+  async checkAuth(onSuccess?: () => void, onError?: () => void) {
+    if (this.authenticated) {
       if (onSuccess) {
         onSuccess();
       }

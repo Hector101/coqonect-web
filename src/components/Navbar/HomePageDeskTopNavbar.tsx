@@ -1,11 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
+import { observer } from 'mobx-react-lite';
+import Tooltip from '@material-ui/core/Tooltip';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import Button from 'src/components/Shared/Button';
 
 import Logo from '../../../public/svgs/Logo.svg';
 
+import { useStore } from 'src/store';
+
 const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
+  const { userStore } = useStore();
 
   return (
     <div className="c-HomePageDeskTopNavbar flex justify-end justify-between-ns items-center ph4">
@@ -25,24 +31,39 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
             <a href="#testimonials" className="link black">Testimonials</a>
           </li>
         </ul>
-        <Link href="/login">
-          <a className="link c-Link mr4 br1">
-            <Button
-              type="button"
-              className="f6 bg-white pv2 ph3 ba b--black-30"
-            >
-              Login
-            </Button>
-          </a>
-        </Link>
-        <Link href="/signup">
-          <a className="link c-Link">
-            <Button type="button" className="f6 pv2 ph3 bn br1 bg-cyan white">Sign up</Button>
-          </a>
-        </Link>
+        {
+          !userStore.authenticated
+            ? (
+              <>
+                <Link href="/login">
+                  <a className="link c-Link mr4 br1">
+                    <Button
+                      type="button"
+                      className="f6 bg-white pv2 ph3 ba b--black-30"
+                    >
+                      Login
+                    </Button>
+                  </a>
+                </Link>
+                <Link href="/signup">
+                  <a className="link c-Link">
+                    <Button type="button" className="f6 pv2 ph3 bn br1 bg-cyan white">Sign up</Button>
+                  </a>
+                </Link>
+              </>
+            ) : (
+              <Link href="/dashboard">
+                <Tooltip title="Goto Dashboard" arrow={true}>
+                  <a className="link pointer">
+                    <AccountCircleIcon fontSize="large" color="primary" />
+                  </a>
+                </Tooltip>
+              </Link>
+            )
+        }
       </div>
     </div>
   );
 };
 
-export default HomePageDeskTopNavbar;
+export default observer(HomePageDeskTopNavbar);

@@ -13,7 +13,7 @@ const WhyJoinUs: FunctionComponent<{}> = () => {
     <section className="c-WhyJoinUs pa4">
       <div className="flex flex-column-reverse flex-row-ns items-center justify-between">
         <div className="w-100 w-50-ns">
-          <img src="images/blurred.png" className="c-image" />
+          <img src="images/blurred.jpg" className="c-image" />
         </div>
         <div className="w-100 w-50-ns">
           <div className="ph3">

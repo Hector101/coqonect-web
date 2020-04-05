@@ -107,9 +107,9 @@ const Profile: FunctionComponent<{}> = () => {
             </div>
             <div className="ml3 ml4-ns">
               <h4 className="mv3 ttc">{fullName}</h4>
-              <div className="flex items-center mv2">
+              <div className="flex items-center mv2 f7">
                 <LocationIcon className="h1 w1 mr1" />
-                <span className="f7">{city} {', '} {countryName}</span>
+                {!city || !countryName ? 'Unknown' : `${city}, ${countryName}`}
               </div>
               <div className="mv2">
                 <Rating

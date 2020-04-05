@@ -48,6 +48,7 @@ export class UIStore {
     this.snackBarOpen = true;
     this.snackBarVariant = variant;
     this.snackBarMessage = message;
+    setTimeout(() => { this.closeSnackBar(); }, 5000);
   }
 
   @action
