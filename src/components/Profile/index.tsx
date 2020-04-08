@@ -5,9 +5,10 @@ import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
+import LazyLoadPage from './LazyLoadPage';
+
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
-import LoadingPage from 'src/components/Shared/LoadingPage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
 import ChangePasswordForm from 'src/components/Profile/ChangePasswordForm';
 import AboutMeSection from 'src/components/Profile/AboutMeSection';
@@ -44,7 +45,7 @@ const Profile: FunctionComponent<{}> = () => {
   const [file, setFile] = useState(null);
 
   if (userLoading || !userData) {
-    return <LoadingPage />;
+    return <LazyLoadPage />;
   }
 
   const {
