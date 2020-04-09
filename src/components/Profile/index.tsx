@@ -5,13 +5,12 @@ import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
-import LazyLoadPage from './LazyLoadPage';
-
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
 import ChangePasswordForm from 'src/components/Profile/ChangePasswordForm';
 import AboutMeSection from 'src/components/Profile/AboutMeSection';
+import LazyLoadPage from 'src/components/Profile/LazyLoadPage';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
 import Gear from '../../../public/svgs/Gear.svg';

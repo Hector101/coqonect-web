@@ -3,10 +3,10 @@ import ContentLoader from 'react-content-loader';
 
 const LazyLoadPage = () => (
   <ContentLoader
-    speed={1.2}
-    style={{ width: '100%' }}
+    speed={2}
+    style={{ width: '100%', backgroundColor: '#fff', borderRadius: '4px' }}
     height={1000}
-    backgroundColor="#dddddd"
+    backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
   >
     <circle cx="120" cy="80" r="60" />
@@ -16,7 +16,7 @@ const LazyLoadPage = () => (
     <rect x="600" y="30" rx="2" ry="2" width="450" height="160" />
     <rect x="85" y="250" rx="3" ry="3" width="950" height="1" />
     <rect x="85" y="300" rx="3" ry="3" width="950" height="500" />
-    <rect x="85" y="850" rx="3" ry="3" width="950" height="300" />
+    <rect x="85" y="830" rx="3" ry="3" width="950" height="100" />
   </ContentLoader>
 );
 
