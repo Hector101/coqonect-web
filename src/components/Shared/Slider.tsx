@@ -5,6 +5,9 @@ type Props = {
   children: ReactNode;
   className?: string;
   numberOfSlide: number;
+  autoplay?: boolean;
+  dots?: boolean;
+  infinite?: boolean;
 };
 
 const Slider: FunctionComponent<Props> = (props) => {
@@ -13,13 +16,16 @@ const Slider: FunctionComponent<Props> = (props) => {
     className,
     children,
     numberOfSlide,
+    autoplay,
+    dots,
+    infinite,
   } = props;
 
   const settings = {
-    dots: true,
-    autoplay: true,
+    dots,
+    autoplay,
     autoplaySpeed: 5000,
-    infinite: true,
+    infinite,
     speed: 500,
     slidesToShow: numberOfSlide,
     slidesToScroll: numberOfSlide,
@@ -27,27 +33,30 @@ const Slider: FunctionComponent<Props> = (props) => {
     cssEase: 'linear',
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
+          autoplay: true,
           infinite: true,
-          dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
+          autoplay: true,
+          infinite: true,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          autoplay: true,
+          infinite: true,
         },
       },
     ],

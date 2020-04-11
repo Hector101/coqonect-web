@@ -44,7 +44,7 @@ const SkillCategoryCard: FunctionComponent<Props> = ({ skillCategory }) => {
         }
       </ul>
       <div
-        className="pv3 flex justify-center items-center blue pointer"
+        className="pt3 flex justify-center items-center blue pointer"
         id={`view-skill-${skillCategory.id}`}
         onClick={_openDialog}
       >

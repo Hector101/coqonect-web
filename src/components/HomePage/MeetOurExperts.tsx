@@ -8,7 +8,12 @@ const MeetOurExperts: FunctionComponent<{}> = () => {
     <section className="c-MeetOurExperts" id="meet-our-experts">
       <div className="pa4">
         <h4 className="title tc mt0">Meet Our Experts</h4>
-        <Slider numberOfSlide={4}>
+        <Slider
+          numberOfSlide={4}
+          autoplay={true}
+          dots={true}
+          infinite={true}
+        >
           <ExpertCard />
           <ExpertCard />
           <ExpertCard />

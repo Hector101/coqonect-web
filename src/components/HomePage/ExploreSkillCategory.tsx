@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import SkillCategoryCard from 'src/components/HomePage/SkillCategoryCard';
 import LoadingPage from 'src/components/Shared/LoadingPage';
+import Slider from 'src/components/Shared/Slider';
 
 import SkillsModal from 'src/components/HomePage/SkillsModal';
 
@@ -32,13 +33,13 @@ const ExploreSkillCategory: FunctionComponent<{}> = () => {
       <section className="c-ExploreSkillCategory">
         <div className="ph4 pv5">
           <h4 className="title tc">Explore Skill Categories</h4>
-          <div className="flex-ns flex-wrap-ns w-100 justify-between">
+          <Slider numberOfSlide={4}>
             {
               skillCategories.map((skillCategory) => (
                 <SkillCategoryCard key={skillCategory.id} skillCategory={skillCategory} />
               ))
             }
-          </div>
+          </Slider>
         </div>
       </section>
     </>

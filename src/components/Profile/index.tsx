@@ -10,7 +10,7 @@ import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
 import ChangePasswordForm from 'src/components/Profile/ChangePasswordForm';
 import AboutMeSection from 'src/components/Profile/AboutMeSection';
-import LazyLoadPage from 'src/components/Profile/LazyLoadPage';
+import LoadingPage from 'src/components/Shared/LoadingPage';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
 import Gear from '../../../public/svgs/Gear.svg';
@@ -44,7 +44,7 @@ const Profile: FunctionComponent<{}> = () => {
   const [file, setFile] = useState(null);
 
   if (userLoading || !userData) {
-    return <LazyLoadPage />;
+    return <LoadingPage />;
   }
 
   const {
