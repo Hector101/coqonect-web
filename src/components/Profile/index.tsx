@@ -7,10 +7,10 @@ import Paper from '@material-ui/core/Paper';
 
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
-import LoadingPage from 'src/components/Shared/LoadingPage';
 import EditProfileForm from 'src/components/Profile/EditProfileForm';
 import ChangePasswordForm from 'src/components/Profile/ChangePasswordForm';
 import AboutMeSection from 'src/components/Profile/AboutMeSection';
+import LoadingPage from 'src/components/Shared/LoadingPage';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
 import Gear from '../../../public/svgs/Gear.svg';

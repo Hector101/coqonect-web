@@ -7366,6 +7366,11 @@ react-apollo@^3.1.3:
     "@apollo/react-hooks" "^3.1.3"
     "@apollo/react-ssr" "^3.1.3"
 
+react-content-loader@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-5.0.3.tgz#2de797139a86be0418c83c4b71f68051c4bc409b"
+  integrity sha512-uEWQiTyGXgxJLuY+vZBngpVbFRSRciMMM30eXJ3QtgPN4wQx9uPHpxnmJoQjNXMyJIz7Bxyd/nrtkIdAMEeM+w==
+
 react-dom@^16.11.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
