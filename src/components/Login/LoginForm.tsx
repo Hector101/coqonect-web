@@ -11,7 +11,7 @@ import SweetAlertContent from 'src/components/Shared/SweetAlertContent';
 import Button from 'src/components/Shared/Button';
 import Input from 'src/components/Shared/Input';
 
-import CustomSwitch from 'src/components/CustomSwitch';
+import CustomSwitch from 'src/components/Shared/CustomSwitch';
 
 import { useStore } from 'src/store';
 
@@ -27,9 +27,9 @@ const validationSchema = yup.object().shape({
 });
 
 const LoginForm: FunctionComponent<{}> = () => {
-  const [ isAdmin, setIsAdmin ] = useState({status: false });
-  const _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsAdmin({ ...isAdmin, [event.target.name]: event.target.checked });
+  const [ isAdminLogin, setIsAdminLogin ] = useState(false);
+  const _toggleSwitch = () => {
+    setIsAdminLogin(!isAdminLogin);
   };
 
   const router = useRouter();
@@ -48,7 +48,7 @@ const LoginForm: FunctionComponent<{}> = () => {
 
   const _handleLogin = async ({ email, password }: TLoginFormValues, { setSubmitting, resetForm }: TFormMethod) => {
     userStore.resetLoginResponse();
-    if (!isAdmin.status) {
+    if (!isAdminLogin) {
       await userStore.handleLogin({ email, password },
         () => {
           uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
@@ -131,7 +131,13 @@ const LoginForm: FunctionComponent<{}> = () => {
         />
         <div className="flex items-center justify-between">
           <a onClick={_toggleModal} className="link lh-copy f6 pointer blue">Forgot Password?</a>
-          <CustomSwitch handleChange={_handleChange} isAdmin={isAdmin.status} name="status" />
+          <CustomSwitch
+            toggleSwitch={_toggleSwitch}
+            isAdminLogin={isAdminLogin}
+            // name="status"
+            label="Admin"
+            labelPlacement="start"
+          />
         </div>
       </div>
       <Button
