@@ -28,6 +28,9 @@ const useStyles = makeStyles(() => ({
   checked: {
     color: '#13b8c2',
   },
+  formLabel: {
+    margin: 0,
+  },
 }));
 
 const CustomSwitch: FunctionComponent<Props> = ({
@@ -58,6 +61,7 @@ const CustomSwitch: FunctionComponent<Props> = ({
         }
         label={label}
         labelPlacement={labelPlacement || 'start'}
+        className={classes.formLabel}
       />
     </FormGroup>
   );
