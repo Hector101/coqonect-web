@@ -134,7 +134,6 @@ const LoginForm: FunctionComponent<{}> = () => {
           <CustomSwitch
             toggleSwitch={_toggleSwitch}
             isAdminLogin={isAdminLogin}
-            // name="status"
             label="Admin"
             labelPlacement="start"
           />
