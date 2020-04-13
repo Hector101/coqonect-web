@@ -69,6 +69,40 @@ export class UserStore {
   }
 
   @action
+  async handleAdminLogin({ email, password }: TLoginFormValues, onSuccess?: () => void, onError?: () => void) {
+    const response = await this.api({
+      url: '/api/v1/admin-login',
+      data: { email, password },
+      method: 'post',
+    });
+
+    if (response.status === 200) {
+      this.loginResponse.message = response.message;
+
+      this.authenticated = true;
+      if (onSuccess) {
+        onSuccess();
+      }
+    }
+
+    if (response.status === 401 || response.status === 500) {
+      this.loginResponse.message = response.message;
+      this.authenticated = false;
+
+      if (onError) {
+        onError();
+      }
+    }
+
+    if (response.status === 403) {
+      this.emailUnverified = true;
+      if (onError) {
+        onError();
+      }
+    }
+  }
+
+  @action
   async handleSignup({fullName,  email, password }: TSignupFormValues, onSuccess?: () => void, onError?: () => void) {
     const response = await this.api({
       url: '/api/v1/signup',

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -10,6 +10,8 @@ import { observer } from 'mobx-react-lite';
 import SweetAlertContent from 'src/components/Shared/SweetAlertContent';
 import Button from 'src/components/Shared/Button';
 import Input from 'src/components/Shared/Input';
+
+import CustomSwitch from 'src/components/Shared/CustomSwitch';
 
 import { useStore } from 'src/store';
 
@@ -25,6 +27,11 @@ const validationSchema = yup.object().shape({
 });
 
 const LoginForm: FunctionComponent<{}> = () => {
+  const [ isAdminLogin, setIsAdminLogin ] = useState(false);
+  const _toggleSwitch = () => {
+    setIsAdminLogin(!isAdminLogin);
+  };
+
   const router = useRouter();
   const { uiStore, userStore } = useStore();
 
@@ -41,15 +48,27 @@ const LoginForm: FunctionComponent<{}> = () => {
 
   const _handleLogin = async ({ email, password }: TLoginFormValues, { setSubmitting, resetForm }: TFormMethod) => {
     userStore.resetLoginResponse();
-    await userStore.handleLogin({ email, password },
-      () => {
-        uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
-        router.push('/dashboard');
-      },
-      () => {
-        uiStore.setSnackBarErrorMessage(userStore.loginResponse.message);
-      },
-    );
+    if (!isAdminLogin) {
+      await userStore.handleLogin({ email, password },
+        () => {
+          uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
+          router.push('/dashboard');
+        },
+        () => {
+          uiStore.setSnackBarErrorMessage(userStore.loginResponse.message);
+        },
+      );
+    } else {
+      await userStore.handleAdminLogin({ email, password },
+        () => {
+          uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
+          router.push('/dashboard/admin');
+        },
+        () => {
+          uiStore.setSnackBarErrorMessage(userStore.loginResponse.message);
+        },
+      );
+    }
 
     resetForm();
     return setSubmitting(false);
@@ -110,7 +129,16 @@ const LoginForm: FunctionComponent<{}> = () => {
           error={errors.password}
           autoComplete="on"
         />
-        <a onClick={_toggleModal} className="link lh-copy f6 pointer blue">Forgot Password?</a>
+        <div className="flex items-center justify-between">
+          <a onClick={_toggleModal} className="link lh-copy f6 pointer blue">Forgot Password?</a>
+          <CustomSwitch
+            toggleSwitch={_toggleSwitch}
+            isAdminLogin={isAdminLogin}
+            label="Admin"
+            labelPlacement="start"
+            size="medium"
+          />
+        </div>
       </div>
       <Button
         className="bn white pointer f6 w-100 br2"
