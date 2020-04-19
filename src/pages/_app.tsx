@@ -20,6 +20,7 @@ import '../styles/pages.scss';
 
 type WithCustomSnackbarProps = {
   isDashboard: boolean;
+  isAdminDashboard: boolean;
   Component: NextComponentType<NextPageContext, any, {}>;
   pageProps: any;
 };
@@ -32,10 +33,21 @@ const DashboardContainer = dynamic(() => import('src/components/Containers/Dashb
   loading: () => <LoadingPage />,
 });
 
-const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({ isDashboard, Component, pageProps }) => (
+const AdminDashboardContainer = dynamic(() => import('src/components/Containers/AdminDashboardContainer'), {
+  loading: () => <LoadingPage />,
+});
+
+const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({
+  isDashboard,
+  isAdminDashboard,
+  Component,
+  pageProps,
+}) => (
   <NoSsr>
     {isDashboard
       ? (<DashboardContainer><Component {...pageProps} /></DashboardContainer>)
+      : isAdminDashboard
+      ? (<AdminDashboardContainer><Component {...pageProps} /></AdminDashboardContainer>)
       : <Component {...pageProps} />
     }
     <CssBaseline />
@@ -54,6 +66,7 @@ class MyApp extends App {
     return (
       <WithCustomSnackbar
         isDashboard={router.route.startsWith('/dashboard')}
+        isAdminDashboard={router.route.startsWith('/admin')}
         Component={Component}
         pageProps={pageProps}
       />

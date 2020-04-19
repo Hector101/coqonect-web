@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -17,6 +17,11 @@ import { useStore } from 'src/store';
 
 import { TLoginFormValues, TFormMethod } from 'src/interfaces/Forms';
 
+type Props = {
+  toggleSwitch: () => void;
+  isAdminLogin: boolean;
+};
+
 const validationSchema = yup.object().shape({
   email: yup.string()
     .email('Enter a valid E-mail')
@@ -26,11 +31,7 @@ const validationSchema = yup.object().shape({
     .min(6, 'Must be more than 6 length'),
 });
 
-const LoginForm: FunctionComponent<{}> = () => {
-  const [ isAdminLogin, setIsAdminLogin ] = useState(false);
-  const _toggleSwitch = () => {
-    setIsAdminLogin(!isAdminLogin);
-  };
+const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => {
 
   const router = useRouter();
   const { uiStore, userStore } = useStore();
@@ -62,7 +63,7 @@ const LoginForm: FunctionComponent<{}> = () => {
       await userStore.handleAdminLogin({ email, password },
         () => {
           uiStore.setSnackBarSuccessMessage(userStore.loginResponse.message);
-          router.push('/dashboard/admin');
+          router.push('/admin');
         },
         () => {
           uiStore.setSnackBarErrorMessage(userStore.loginResponse.message);
@@ -132,7 +133,7 @@ const LoginForm: FunctionComponent<{}> = () => {
         <div className="flex items-center justify-between">
           <a onClick={_toggleModal} className="link lh-copy f6 pointer blue">Forgot Password?</a>
           <CustomSwitch
-            toggleSwitch={_toggleSwitch}
+            toggleSwitch={toggleSwitch}
             isAdminLogin={isAdminLogin}
             label="Admin"
             labelPlacement="start"

@@ -11,9 +11,10 @@ import { useStore } from 'src/store';
 
 type Props = {
   isMobile?: boolean;
+  isAdminDashboard?: boolean;
 };
 
-const SidebarContent: FunctionComponent<Props> = ({ isMobile }) => {
+const SidebarContent: FunctionComponent<Props> = ({ isMobile, isAdminDashboard }) => {
   const { uiStore } = useStore();
 
   const hideMenuTextClassName = classnames('f5 b ml2 black-90', {
@@ -33,7 +34,7 @@ const SidebarContent: FunctionComponent<Props> = ({ isMobile }) => {
             <span className={hideMenuTextClassName}>CoQonect</span>
           </a>
         </div>
-        <SideMenuLinks isMobile={isMobile} />
+        <SideMenuLinks isMobile={isMobile} isAdminDashboard={isAdminDashboard} />
       </div>
   );
 };

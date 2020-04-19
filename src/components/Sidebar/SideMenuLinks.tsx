@@ -7,6 +7,7 @@ import { RenderSVG } from 'src/components/Shared/SVGS';
 
 // constants
 import sideMenuLinkOptions from 'src/constants/sideMenuLinkOptions';
+import adminSideMenuLinkOptions from 'src/constants/adminSideMenuLinkOptions';
 
 // types
 import { MenuList, LinkType } from 'src/interfaces/SideMenuLink';
@@ -16,6 +17,7 @@ import { useStore } from 'src/store';
 
 type Props = {
   isMobile?: boolean;
+  isAdminDashboard: boolean;
 };
 
 type MenuLinkCategoriesProps = {
@@ -126,10 +128,13 @@ const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, i
   );
 });
 
-const SideMenuLinks: FunctionComponent<Props> = ({ isMobile }) => {
+const SideMenuLinks: FunctionComponent<Props> = ({ isMobile, isAdminDashboard }) => {
   return (
       <div className="c-SideMenuLinks">
-        <MenuLinkCategories menuLinks={sideMenuLinkOptions} isMobile={isMobile} />
+        <MenuLinkCategories
+          menuLinks={isAdminDashboard ? adminSideMenuLinkOptions : sideMenuLinkOptions}
+          isMobile={isMobile}
+        />
       </div>
   );
 };
