@@ -97,8 +97,7 @@ const Profile: FunctionComponent<{}> = () => {
           <div className="flex items-center w-100 w-50-ns justify-center justify-start-ns">
             <div className="relative w4 h4">
               <LazyLoadImage
-                srcName={imageUrl}
-                fallbackIconName="ProfilePic"
+                src={imageUrl}
                 className="w4 h4 br-100 ba b--black-20"
               />
               <span id="uploadPic" onClick={_openDialog} className="w15 h15 br-100 bg-orange absolute bottom-1 right-0 pointer flex justify-center items-center">

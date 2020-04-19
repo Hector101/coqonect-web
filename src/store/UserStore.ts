@@ -12,6 +12,7 @@ export class UserStore {
   @observable imageUploadResponse = { message: '' };
   @observable authenticated = false;
   @observable authCheckCompleted = false;
+  @observable isAdmin = false;
   @observable uploadingImage = false;
 
   constructor(public api: CallApiType) {
@@ -79,7 +80,7 @@ export class UserStore {
     if (response.status === 200) {
       this.loginResponse.message = response.message;
 
-      this.authenticated = true;
+      this.isAdmin = true;
       if (onSuccess) {
         onSuccess();
       }
@@ -87,7 +88,7 @@ export class UserStore {
 
     if (response.status === 401 || response.status === 500) {
       this.loginResponse.message = response.message;
-      this.authenticated = false;
+      this.isAdmin = false;
 
       if (onError) {
         onError();
@@ -132,6 +133,7 @@ export class UserStore {
 
     if (response.success) {
       this.authenticated = false;
+      this.isAdmin = false;
       if (onSuccess) {
         onSuccess();
       }
@@ -179,17 +181,8 @@ export class UserStore {
       if (onSuccess) {
         onSuccess();
       }
-    } else {
-      if (onError) {
-        onError();
-      }
-    }
-    this.authCheckCompleted = true;
-  }
-
-  @action
-  async checkAuth(onSuccess?: () => void, onError?: () => void) {
-    if (this.authenticated) {
+    } else if (response.status === 207) {
+      this.isAdmin = true;
       if (onSuccess) {
         onSuccess();
       }
@@ -198,6 +191,7 @@ export class UserStore {
         onError();
       }
     }
+    this.authCheckCompleted = true;
   }
 
   @action

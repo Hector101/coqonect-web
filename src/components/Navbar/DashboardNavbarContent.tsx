@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import ContentLoader from 'react-content-loader';
 
 import Button from 'src/components/Shared/Button';
-import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
+import ImageAvatar from 'src/components/Shared/ImageAvatar';
 
 import { TQuery, TProfile } from 'src/apolloTypes';
 
@@ -40,10 +40,8 @@ const DashboardNavbarContent: FunctionComponent<{}> = () => {
               ? (
                 <Link href="/dashboard/profile">
                   <a className="inline-flex justify-center items-center pointer link">
-                    <LazyLoadImage
-                      srcName={optionalProps.imageUrl}
-                      fallbackIconName="ProfilePic"
-                      className="w15 h15 br-100 ba b--black-20"
+                    <ImageAvatar
+                      src={optionalProps.imageUrl}
                     />
                     <span className="f7 f6-ns ml2">{optionalProps.fullName}</span>
                   </a>

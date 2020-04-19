@@ -2,15 +2,15 @@ import React, { FunctionComponent } from 'react';
 
 type Props = {
   className: string;
-  srcName: string | null;
-  fallbackIconName: string;
+  src: string | null;
+  fallbackIconName?: string;
   alt?: string;
 };
 
-const LazyLoadImage: FunctionComponent<Props> = ({ srcName, fallbackIconName, ...restProps }) => {
-  const src = srcName ?? `/svgs/${fallbackIconName}.svg`;
+const LazyLoadImage: FunctionComponent<Props> = ({ src, fallbackIconName = 'ProfilePic', ...restProps }) => {
+  const srcName = src ?? `/svgs/${fallbackIconName}.svg`;
   return (
-    <img src={src} {...restProps}/>
+    <img src={srcName} {...restProps}/>
   );
 };
 

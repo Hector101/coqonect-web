@@ -62,6 +62,9 @@ const nextConfig = {
       '/dashboard/notifications': { page: '/dashboard/notifications' },
       '/reset-password': { page: '/reset-password' },
       '/unauthorized': { page: '/unauthorized' },
+      '/admin': { page: '/admin' },
+      '/admin/manage-admin': { page: '/admin/manage-admin' },
+      '/admin/notifications': { page: '/admin/notifications' },
     }
   },
 };

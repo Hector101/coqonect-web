@@ -17,9 +17,8 @@ const ExpertCard: FunctionComponent<{}> = () => {
     <div className="c-ExpertCard br1 bg-white">
       <div className="tc flex justify-center items-center">
         <LazyLoadImage
-          srcName={null}
+          src={null}
           className="w3 h3 br-100 ba b--black-10"
-          fallbackIconName="ProfilePic"
         />
       </div>
       <div className="tc">
