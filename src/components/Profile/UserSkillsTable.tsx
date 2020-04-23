@@ -10,6 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import PanToolIcon from '@material-ui/icons/PanTool';
+import BlockIcon from '@material-ui/icons/Block';
 
 import { TSkills } from 'src/apolloTypes';
 
@@ -86,7 +87,14 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
                     {skill.name}
                   </TableCell>
                   <TableCell key={skill.id} align="right">
-                    {skill.verified
+                    {skill.verified === 'pending'
+                      ? (
+                        <div className="inline-flex items-center">
+                          <span className="f7 mr1">Pending Review</span>
+                          <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
+                        </div>
+                      )
+                      : skill.verified === 'verified'
                       ? (
                         <div className="inline-flex items-center">
                           <span className="f7 mr1">Verified</span>
@@ -95,8 +103,8 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
                       )
                       : (
                         <div className="inline-flex items-center">
-                          <span className="f7 mr1">Pending Review</span>
-                          <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
+                          <span className="f7 mr1">Unverified</span>
+                          <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
                         </div>
                       )
                     }
