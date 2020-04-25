@@ -75,5 +75,5 @@ export type TSkills = {
   months: number;
   years: number;
   description: string;
-  verified: boolean;
+  status: 'verified' | 'unverified' | 'pending';
 };

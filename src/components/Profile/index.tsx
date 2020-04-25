@@ -3,7 +3,6 @@ import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
-import Paper from '@material-ui/core/Paper';
 
 import Button from 'src/components/Shared/Button';
 import LazyLoadImage from 'src/components/Shared/LazyLoadImage';
@@ -84,7 +83,7 @@ const Profile: FunctionComponent<{}> = () => {
   };
 
   return (
-    <Paper elevation={0}>
+    <>
       <ImageUploadModal
         handleAction={_handleImageUpload}
         onChange={_handleImageChange}
@@ -92,7 +91,7 @@ const Profile: FunctionComponent<{}> = () => {
         actionProgressStatus={userStore.uploadingImage}
       />
       <AddSkillModal />
-      <div className="ph4 mw8 center bg-white">
+      <div className="mw8 center bg-white">
         <section className="bb b--black-10 pv4 mb4 flex flex-column flex-row-ns items-start justify-between">
           <div className="flex items-center w-100 w-50-ns justify-center justify-start-ns">
             <div className="relative w4 h4">
@@ -184,7 +183,7 @@ const Profile: FunctionComponent<{}> = () => {
           </CustomTab>
         </section>
       </div>
-    </Paper>
+    </>
   );
 };
 

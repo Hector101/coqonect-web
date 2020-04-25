@@ -10,6 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import PanToolIcon from '@material-ui/icons/PanTool';
+import BlockIcon from '@material-ui/icons/Block';
 
 import { TSkills } from 'src/apolloTypes';
 
@@ -52,13 +53,45 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (_event: unknown, newPage: number) => {
+  const _handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const _handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const _renderVerificationStatus = (skill: TSkills) => {
+    switch (skill.status) {
+      case 'pending':
+        return (
+          <div className="inline-flex items-center">
+            <span className="f7 mr1">Pending Review</span>
+            <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
+          </div>
+        );
+      case 'verified':
+        return (
+          <div className="inline-flex items-center">
+            <span className="f7 mr1">Verified</span>
+            <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
+          </div>
+        );
+      case 'unverified':
+        return (
+          <div className="inline-flex items-center">
+            <span className="f7 mr1">Unverified</span>
+            <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
+          </div>
+        );
+      default:
+        return (
+          <div className="inline-flex items-center">
+            <span className="f7 mr1">unknown </span>
+          </div>
+        );
+    }
   };
 
   return (
@@ -86,20 +119,7 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
                     {skill.name}
                   </TableCell>
                   <TableCell key={skill.id} align="right">
-                    {skill.verified
-                      ? (
-                        <div className="inline-flex items-center">
-                          <span className="f7 mr1">Verified</span>
-                          <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
-                        </div>
-                      )
-                      : (
-                        <div className="inline-flex items-center">
-                          <span className="f7 mr1">Pending Review</span>
-                          <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
-                        </div>
-                      )
-                    }
+                    {_renderVerificationStatus(skill)}
                   </TableCell>
                 </TableRow>
               );
@@ -113,8 +133,8 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
         count={skills.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onChangePage={_handleChangePage}
+        onChangeRowsPerPage={_handleChangeRowsPerPage}
       />
     </Paper>
   );

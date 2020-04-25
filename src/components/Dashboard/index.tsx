@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import Select from 'react-select';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import Input from 'src/components/Shared/Input';
@@ -17,43 +16,61 @@ const filterOptions = [
 ];
 
 const Dashboard: FunctionComponent<{}> = () => {
+
   return (
-    <Paper elevation={0}>
-      <div className="c-Dashboard mw8 center bg-white">
-        <section className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
-          <div className="mv2 mv0-ns">
-            <Typography variant="h5">Recommended Mentorships</Typography>
-            <Typography variant="subtitle2">Most subscribed sessions recently.</Typography>
-          </div>
+    <div className="c-Dashboard mw8 center bg-white">
+      <section className="pa0 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
+        <div className="mv3 mv0-ns">
+          <Typography variant="h5">Recommended Mentorships</Typography>
+          <Typography variant="subtitle2">Most subscribed sessions recently.</Typography>
+        </div>
+        <div className="flex items-center-l mv3 mv0-ns">
+          <Select
+            options={filterOptions}
+            placeholder="Filter By"
+            defaultValue={filterOptions[0]}
+            className="w4 mr3-l f7"
+          />
           <div className="flex items-center-l">
-            <Select
-              options={filterOptions}
-              placeholder="Filter By"
-              defaultValue={filterOptions[0]}
-              className="w4 mr3-l f7"
+            <Input
+              className="c-find-by-skills-input w-100 f7 ph3 bg-white"
+              defaultType="search"
+              placeholder="Find by skills"
+              name="search"
             />
-            <div className="flex items-center-l">
-              <Input
-                className="c-find-by-skills-input w-100 f7 ph3 bg-white"
-                defaultType="search"
-                placeholder="Find by skills"
-                name="search"
-              />
-              <Button
-                className="pv1 ph3 br1 f7 ml1 bg-white c-find-by-skills-button"
-                type="button"
-                arial-label="search mentors by skills button"
-              >
-                <SVGS.Search className="w1"/>
-              </Button>
-            </div>
+            <Button
+              className="pv1 ph3 br1 f7 ml1 bg-white c-find-by-skills-button"
+              type="button"
+              arial-label="search mentors by skills button"
+            >
+              <SVGS.Search className="w1"/>
+            </Button>
           </div>
-        </section>
-        <section className="mb4">
-          <div className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
-            <ReccommendedMentorshipCard />
-            <ReccommendedMentorshipCard />
-            <ReccommendedMentorshipCard />
+        </div>
+      </section>
+      <section className="mb4">
+        <div className="pa0 pv3-ns ph0-ns flex flex-column flex-row-ns justify-between">
+          <ReccommendedMentorshipCard />
+          <ReccommendedMentorshipCard />
+          <ReccommendedMentorshipCard />
+        </div>
+        <div className="flex justify-center">
+          <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
+            <span className="c-see-more-text primary-blue">See More</span>
+            <SVGS.SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
+          </a>
+        </div>
+      </section>
+      <section>
+        <div className="ph3 ph0-ns">
+          <Typography variant="h5">Featured Mentors</Typography>
+        </div>
+        <div>
+          <div className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-start w-100">
+            <FeaturedMentorCard withMarginRight={true} />
+            <FeaturedMentorCard withMarginRight={true} />
+            <FeaturedMentorCard withMarginRight={true} />
+            <FeaturedMentorCard />
           </div>
           <div className="flex justify-center">
             <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
@@ -61,28 +78,9 @@ const Dashboard: FunctionComponent<{}> = () => {
               <SVGS.SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
             </a>
           </div>
-        </section>
-        <section>
-          <div className="ph3 ph0-ns">
-            <Typography variant="h5">Featured Mentors</Typography>
-          </div>
-          <div>
-            <div className="pa3 pv3-ns ph0-ns flex flex-column flex-row-ns justify-start w-100">
-              <FeaturedMentorCard withMarginRight={true} />
-              <FeaturedMentorCard withMarginRight={true} />
-              <FeaturedMentorCard withMarginRight={true} />
-              <FeaturedMentorCard />
-            </div>
-            <div className="flex justify-center">
-              <a className="c-see-more inline-flex flex-column items-center pointer pv2 pv4-ns">
-                <span className="c-see-more-text primary-blue">See More</span>
-                <SVGS.SeeMore className="c-see-more-icon w1 h1 fill-primary-blue"/>
-              </a>
-            </div>
-          </div>
-        </section>
-      </div>
-    </Paper>
+        </div>
+      </section>
+    </div>
   );
 };
 

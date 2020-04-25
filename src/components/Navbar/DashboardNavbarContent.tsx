@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
-import ContentLoader from 'react-content-loader';
 
 import Button from 'src/components/Shared/Button';
-import ImageAvatar from 'src/components/Shared/ImageAvatar';
+import UserProfileLink from 'src/components/Navbar/UserProfileLink';
 
-import { TQuery, TProfile } from 'src/apolloTypes';
+import { TQuery } from 'src/apolloTypes';
 
 import Notification from '../../../public/svgs/Notification.svg';
 
@@ -15,7 +14,7 @@ import { AUTHENTICATED_USER } from 'src/queries';
 const DashboardNavbarContent: FunctionComponent<{}> = () => {
   const{ data, loading } = useQuery<TQuery>(AUTHENTICATED_USER);
 
-  const renderStaticNavContents = (optionalProps?: TProfile) => (
+  return (
     <div className="c-DashboardNavbarContent flex justify-end items-center z-3">
       <ul className="flex justify-between items-center list">
         <li className="mr3 dib">
@@ -35,38 +34,11 @@ const DashboardNavbarContent: FunctionComponent<{}> = () => {
             </Link>
         </li>
         <li className="mr3 dib ttc">
-          {
-            optionalProps
-              ? (
-                <Link href="/dashboard/profile">
-                  <a className="inline-flex justify-center items-center pointer link">
-                    <ImageAvatar
-                      src={optionalProps.imageUrl}
-                    />
-                    <span className="f7 f6-ns ml2">{optionalProps.fullName}</span>
-                  </a>
-                </Link>
-              ) : (
-                <ContentLoader
-                  height={24}
-                  width={92.73}
-                  backgroundColor="#a5a2a2"
-                  speed={1}
-                >
-                  <circle cx="20" cy="12" r="12" />
-                  <rect height="10" rx="1" ry="1" width="60" x="35" y="7" />
-                </ContentLoader>)
-          }
+          <UserProfileLink loading={loading} userData={data}  />
         </li>
       </ul>
     </div>
   );
-
-  if (!data || loading) {
-    return  renderStaticNavContents();
-  }
-
-  return renderStaticNavContents(data.client.authenticatedUser.profile);
 };
 
 export default DashboardNavbarContent;
