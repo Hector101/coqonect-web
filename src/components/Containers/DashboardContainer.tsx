@@ -2,6 +2,7 @@ import { FunctionComponent, ReactNode, useEffect } from 'react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
+import Paper from '@material-ui/core/Paper';
 
 import Navbar from 'src/components/Navbar';
 import MobileSidebar from 'src/components/Sidebar/MobileSidebar';
@@ -9,6 +10,8 @@ import DeskTopSidebar from 'src/components/Sidebar/DeskTopSidebar';
 import DashboardNavbarContent from 'src/components/Navbar/DashboardNavbarContent';
 import SidebarContent from 'src/components/Sidebar/SidebarContent';
 import LoadingPage from 'src/components/Shared/LoadingPage';
+
+import { usePaperStyles } from 'src/styles/materiaStyles';
 
 // store
 import { useStore } from 'src/store';
@@ -20,6 +23,7 @@ type Props = {
 const DashboardContainer: FunctionComponent<Props> = ({ children }) => {
   const { uiStore, userStore } = useStore();
   const router = useRouter();
+  const classes = usePaperStyles();
 
   useEffect(() => {
     if (userStore.authCheckCompleted && !userStore.authenticated) {
@@ -51,7 +55,9 @@ const DashboardContainer: FunctionComponent<Props> = ({ children }) => {
         <SidebarContent isMobile={true} />
       </MobileSidebar>
       <div className={dashboardContentClassName}>
-        {children}
+        <Paper elevation={0} className={classes.paper}>
+          {children}
+        </Paper>
       </div>
     </>
   );

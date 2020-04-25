@@ -19,7 +19,7 @@ export const AUTHENTICATED_USER = gql`
           months
           years
           description
-          verified
+          status
         }
       }
     }
