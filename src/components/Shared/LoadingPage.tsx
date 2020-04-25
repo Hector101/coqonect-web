@@ -13,6 +13,7 @@ const LoadingPage = () => {
     <SVG src="/svgs/Loading.svg" className="w3 h3 c-LoadingPrimary" />
     </div>
   </Paper>
-)};
+  );
+};
 
 export default LoadingPage;
