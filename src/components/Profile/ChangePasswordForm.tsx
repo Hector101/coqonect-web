@@ -86,77 +86,79 @@ const ChangePasswordForm: FunctionComponent<{}> = () => {
 
   return (
     <form onSubmit={handleSubmit} className="c-EditProfileForm pa2 ba b--black-10">
-      <div className="w-100 mv2">
-        <label htmlFor="email" className="f5 b black-50">
-          Old Password
-        </label>
-        <Input
-          className="pv3 f6 input-reset bg-white w-100 mb1"
-          containerClassName="mv3"
-          defaultType="password"
-          customType="text"
-          placeholder="Enter Old Password"
-          name="oldPassword"
-          value={oldPassword}
-          error={errors.oldPassword}
-          leftIconName="Lock"
-          defaultRightIconName="Hide"
-          customRightIconName="Show"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          autoComplete="on"
-        />
+      <div className="w-100 w-50-l center">
+        <div className="w-100 mv2">
+          <label htmlFor="email" className="f5 b black-50">
+            Old Password
+          </label>
+          <Input
+            className="pv3 f6 input-reset bg-white w-100 mb1"
+            containerClassName="mv3"
+            defaultType="password"
+            customType="text"
+            placeholder="Enter Old Password"
+            name="oldPassword"
+            value={oldPassword}
+            error={errors.oldPassword}
+            leftIconName="Lock"
+            defaultRightIconName="Hide"
+            customRightIconName="Show"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            autoComplete="on"
+          />
+        </div>
+        <div className="w-100 mv2">
+          <label htmlFor="fullName" className="f5 b black-50">New Password</label>
+          <Input
+            className="pv3 f6 input-reset bg-white w-100 mb1"
+            containerClassName="mv3"
+            defaultType="password"
+            customType="text"
+            placeholder="Enter New Password"
+            name="newPassword"
+            value={newPassword}
+            error={errors.newPassword}
+            leftIconName="Lock"
+            defaultRightIconName="Hide"
+            customRightIconName="Show"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            autoComplete="on"
+          />
+        </div>
+        <div className="w-100 mv2">
+          <label htmlFor="fullName" className="f5 b black-50">Confirm New Password</label>
+          <Input
+            className="pv3 f6 input-reset bg-white w-100 mb1"
+            containerClassName="mv3"
+            defaultType="password"
+            customType="text"
+            placeholder="Confirm New Password"
+            name="confirmNewPassword"
+            value={confirmNewPassword}
+            error={errors.confirmNewPassword}
+            leftIconName="Lock"
+            defaultRightIconName="Hide"
+            customRightIconName="Show"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            autoComplete="on"
+          />
+        </div>
+        <Button
+          className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2 ttu"
+          type="submit"
+          disabled={
+            !!(errors.newPassword) ||
+            !!(errors.newPassword) ||
+            !!(errors.confirmNewPassword) ||
+            loading
+          }
+        >
+          {loading ? 'Processing...' : 'Update Password'}
+        </Button>
       </div>
-      <div className="w-100 mv2">
-        <label htmlFor="fullName" className="f5 b black-50">New Password</label>
-        <Input
-          className="pv3 f6 input-reset bg-white w-100 mb1"
-          containerClassName="mv3"
-          defaultType="password"
-          customType="text"
-          placeholder="Enter New Password"
-          name="newPassword"
-          value={newPassword}
-          error={errors.newPassword}
-          leftIconName="Lock"
-          defaultRightIconName="Hide"
-          customRightIconName="Show"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          autoComplete="on"
-        />
-      </div>
-      <div className="w-100 mv2">
-        <label htmlFor="fullName" className="f5 b black-50">Confirm New Password</label>
-        <Input
-          className="pv3 f6 input-reset bg-white w-100 mb1"
-          containerClassName="mv3"
-          defaultType="password"
-          customType="text"
-          placeholder="Confirm New Password"
-          name="confirmNewPassword"
-          value={confirmNewPassword}
-          error={errors.confirmNewPassword}
-          leftIconName="Lock"
-          defaultRightIconName="Hide"
-          customRightIconName="Show"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          autoComplete="on"
-        />
-      </div>
-      <Button
-        className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2 ttu"
-        type="submit"
-        disabled={
-          !!(errors.newPassword) ||
-          !!(errors.newPassword) ||
-          !!(errors.confirmNewPassword) ||
-          loading
-        }
-      >
-        {loading ? 'Processing...' : 'Update Password'}
-      </Button>
     </form>
   );
 };

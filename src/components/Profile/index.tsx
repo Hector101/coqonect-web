@@ -21,6 +21,12 @@ import DownArrow from '../../../public/svgs/DownArrow.svg';
 import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
 import LocationIcon from '../../../public/svgs/LocationIcon.svg';
+import Curricullum from '../../../public/svgs/Curricullum.svg';
+import Modules from '../../../public/svgs/Modules.svg';
+import StartMentorship from '../../../public/svgs/StartMentorship.svg';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import BlockIcon from '@material-ui/icons/Block';
 
 import CustomTab from 'src/components/Shared/CustomTab';
 import TabContainer from 'src/components/Shared/TabContainer';
@@ -36,9 +42,11 @@ import { useStore } from 'src/store';
 
 import { AUTHENTICATED_USER } from 'src/queries';
 
+import { useIconStyles } from 'src/styles/materiaStyles';
+
 const Profile: FunctionComponent<{}> = () => {
   const{ data: userData, loading: userLoading, refetch } = useQuery<TQuery>(AUTHENTICATED_USER);
-
+  const classes = useIconStyles();
   const { uiStore, userStore } = useStore();
   const [file, setFile] = useState(null);
 
@@ -137,27 +145,27 @@ const Profile: FunctionComponent<{}> = () => {
           </CustomTab>
         </section>
         <section className="w-100 pv2">
-          <h3 className="ttu">Mentors Only</h3>
+          <h3 className="ttu">For Mentors Only</h3>
           <CustomTab>
-            <TabContainer title={'My Skills'}>
+            <TabContainer title={'Manage Skills'}>
               <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
                 <div>
                   <div className="relative">
-                    <Gear className="w3 h3"/>
-                    <Plus className="w1 h1 absolute bottom-0 right--1" />
+                    <Gear className="w3 h3 fill-primary-blue"/>
+                    <Plus className="w1 h1 absolute bottom-0 right--1 fill-primary-blue" />
                   </div>
                   <p className="f7">ADD SKILLS</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div>
-                  <Verify className="w3 h3"/>
+                  <Verify className="w3 h3 fill-primary-blue"/>
                   <p className="f7">WE VERIFY THOSE SKILLS</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div>
-                  <Mentorship className="w3 h3"/>
+                  <Mentorship className="w3 h3 fill-primary-blue"/>
                   <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
                 </div>
               </div>
@@ -174,11 +182,53 @@ const Profile: FunctionComponent<{}> = () => {
                 </div>
                 <div className={classnames('overflow-auto', { dn: !skills.length })}>
                   <UserSkillsTable skills={skills} />
+                  <div className="flex justify-start mt3">
+                    <div className="flex items-center mr2 ba b--black-40 br3">
+                      <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
+                      <span className="f7 ml1">Verified</span>
+                    </div>
+                    <div className="flex items-center mr2 ba b--black-40 br3">
+                      <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
+                      <span className="f7 ml1">Pending Review</span>
+                    </div>
+                    <div className="flex items-center mr2 ba b--black-40 br3">
+                      <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
+                      <span className="f7 ml1">Unverified</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </TabContainer>
-            <TabContainer title={'Mentorship Curriculum'}>
-              <div className="w-100 h5">Create Mentorship Curriculum</div>
+            <TabContainer title={'Manage Curriculums'}>
+              <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
+                <div>
+                  <Curricullum className="w3 h3 fill-primary-blue"/>
+                  <p className="f7 ttu">create mentorship curricullum</p>
+                </div>
+                <RightArrow className="w1 h1 dn db-ns" />
+                <DownArrow className="w1 h1 dn-ns mb3" />
+                <div>
+                  <Modules className="w3 h3 fill-primary-blue"/>
+                  <p className="f7 ttu">add mentorship modules</p>
+                </div>
+                <RightArrow className="w1 h1 dn db-ns" />
+                <DownArrow className="w1 h1 dn-ns mb3" />
+                <div>
+                  <StartMentorship className="w3 h3 fill-primary-blue"/>
+                  <p className="f7 ttu">start mentorship sessions</p>
+                </div>
+              </div>
+              <div className="pv4 flex-column justify-center">
+                <div className="pv2 flex justify-center">
+                  <Button
+                    id="create-curruicullum"
+                    className="bn br1 bg-primary-blue  white pointer f7 pv2 ph3 ttu"
+                    type="button"
+                  >
+                    create mentorship curricullum
+                  </Button>
+                </div>
+              </div>
             </TabContainer>
           </CustomTab>
         </section>

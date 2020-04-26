@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,6 +12,8 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import BlockIcon from '@material-ui/icons/Block';
 
 import { TSkills } from 'src/apolloTypes';
+
+import { useIconStyles } from 'src/styles/materiaStyles';
 
 type Props = {
   skills: TSkills[];
@@ -30,26 +31,8 @@ const columns: Column[] = [
   { id: 'verified', label: 'STATUS', minWidth: 100, align: 'right' },
 ];
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: 440,
-  },
-  verifiedIconColor: {
-    color: '#16B8C2',
-  },
-  pendingReviewIcon: {
-    color: '#ec1111',
-  },
-  tableRow: {
-    cursor: 'pointer',
-  },
-});
-
 const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
-  const classes = useStyles();
+  const classes = useIconStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -67,21 +50,18 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
       case 'pending':
         return (
           <div className="inline-flex items-center">
-            <span className="f7 mr1">Pending Review</span>
             <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
           </div>
         );
       case 'verified':
         return (
           <div className="inline-flex items-center">
-            <span className="f7 mr1">Verified</span>
             <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
           </div>
         );
       case 'unverified':
         return (
           <div className="inline-flex items-center">
-            <span className="f7 mr1">Unverified</span>
             <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
           </div>
         );

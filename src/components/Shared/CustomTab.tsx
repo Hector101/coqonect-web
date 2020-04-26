@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -52,6 +53,7 @@ const CustomTab: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const matches = useMediaQuery(theme.breakpoints.down(768));
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -69,7 +71,8 @@ const CustomTab: FunctionComponent<Props> = ({ children }) => {
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          variant="scrollable"
+          variant={matches ? 'scrollable' : 'standard'}
+          centered={true}
           aria-label="tab panel"
         >
           {

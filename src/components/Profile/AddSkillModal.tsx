@@ -163,7 +163,7 @@ const AddSkillModal: FunctionComponent<{}> = () => {
 
         <div className="w-100 mt3">
           <Typography>Provide Links to Evidence</Typography>
-          <Typography variant="subtitle2" color="textSecondary">(For Admin Only)</Typography>
+          <Typography variant="subtitle2" color="textSecondary">(Visible to Admins Only)</Typography>
           <Input
             className="mt2"
             mainClassName="pa3 f6 w-100 h3 ba b--black-20 outline-0"
