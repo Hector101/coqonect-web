@@ -47,13 +47,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
+  tab: {
+    color: '#000000',
+    fontWeight: 'bold',
+  },
 }));
 
 const CustomTab: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const matches = useMediaQuery(theme.breakpoints.down(768));
+  const matches = useMediaQuery(theme.breakpoints.down(480));
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -72,13 +76,18 @@ const CustomTab: FunctionComponent<Props> = ({ children }) => {
           indicatorColor="primary"
           textColor="primary"
           variant={matches ? 'scrollable' : 'standard'}
-          centered={true}
+          centered={!matches}
           aria-label="tab panel"
         >
           {
             React.Children.map(children, (child, index) => {
               return (
-                <Tab key={index} style={{ fontWeight: 'bold' }} label={child.props.title} {...a11yProps(0)} />
+                <Tab
+                  key={index}
+                  className={classes.tab}
+                  label={child.props.title}
+                  {...a11yProps(0)}
+                />
               );
             })
           }

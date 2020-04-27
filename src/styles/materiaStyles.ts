@@ -6,9 +6,10 @@ export const usePaperStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const useIconStyles = makeStyles({
+export const useTableStyles = makeStyles({
   root: {
     width: '100%',
+    border: 'ipx solid red',
   },
   container: {
     maxHeight: '100%',

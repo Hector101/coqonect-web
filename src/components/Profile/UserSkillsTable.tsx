@@ -13,7 +13,7 @@ import BlockIcon from '@material-ui/icons/Block';
 
 import { TSkills } from 'src/apolloTypes';
 
-import { useIconStyles } from 'src/styles/materiaStyles';
+import { useTableStyles } from 'src/styles/materiaStyles';
 
 type Props = {
   skills: TSkills[];
@@ -32,7 +32,7 @@ const columns: Column[] = [
 ];
 
 const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
-  const classes = useIconStyles();
+  const classes = useTableStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -75,48 +75,64 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table aria-label="table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {skills.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((skill) => {
-              return (
-                <TableRow hover={true} role="checkbox" tabIndex={-1} key={skill.name} className={classes.tableRow}>
-                  <TableCell key={skill.id} align="left">
-                    {skill.name}
+    <>
+      <Paper className={classes.root}>
+        <TableContainer className={classes.container}>
+          <Table aria-label="table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
+                  >
+                    {column.label}
                   </TableCell>
-                  <TableCell key={skill.id} align="right">
-                    {_renderVerificationStatus(skill)}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={skills.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={_handleChangePage}
-        onChangeRowsPerPage={_handleChangeRowsPerPage}
-      />
-    </Paper>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {skills.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((skill) => {
+                return (
+                  <TableRow hover={true} role="checkbox" tabIndex={-1} key={skill.name} className={classes.tableRow}>
+                    <TableCell key={skill.id} align="left">
+                      {skill.name}
+                    </TableCell>
+                    <TableCell key={skill.id} align="right">
+                      {_renderVerificationStatus(skill)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 50]}
+          component="div"
+          count={skills.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={_handleChangePage}
+          onChangeRowsPerPage={_handleChangeRowsPerPage}
+        />
+      </Paper>
+      <div className="flex justify-end mt3">
+        <div className="flex items-center mr2 ba b--black-20 br4">
+          <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
+          <span className="f7 ml1">Verified</span>
+        </div>
+        <div className="flex items-center mr2 ba b--black-20 br4">
+          <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
+          <span className="f7 ml1">Pending Review</span>
+        </div>
+        <div className="flex items-center mr2 ba b--black-20 br4">
+          <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
+          <span className="f7 ml1">Unverified</span>
+        </div>
+      </div>
+    </>
   );
 };
 

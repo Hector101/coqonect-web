@@ -88,6 +88,19 @@ const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
     lineHeight: 1.5,
+    minWidth: 600,
+
+    [theme.breakpoints.down(960)]: {
+      minWidth: 500,
+    },
+
+    [theme.breakpoints.down(768)]: {
+      minWidth: 400,
+    },
+
+    [theme.breakpoints.down(480)]: {
+      minWidth: 300,
+    },
   },
 }))(MuiDialogContent);
 

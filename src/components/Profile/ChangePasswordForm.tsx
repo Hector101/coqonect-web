@@ -147,7 +147,7 @@ const ChangePasswordForm: FunctionComponent<{}> = () => {
           />
         </div>
         <Button
-          className="c-save-button bn br1 bg-primary-blue  white f6 pv2 ph4 ph3 w-100 w-auto-ns mt2 ttu"
+          className="c-save-button bn br1 bg-primary-blue  white f6 pv3 ph4 w-100 mt2 ttu"
           type="submit"
           disabled={
             !!(errors.newPassword) ||

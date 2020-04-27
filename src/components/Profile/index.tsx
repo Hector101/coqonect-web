@@ -12,11 +12,10 @@ import AboutMeSection from 'src/components/Profile/AboutMeSection';
 import LoadingPage from 'src/components/Shared/LoadingPage';
 
 import EdirPencil from '../../../public/svgs/EditPencil.svg';
-import Gear from '../../../public/svgs/Gear.svg';
 import Mentorship from '../../../public/svgs/Mentorship.svg';
 import Verify from '../../../public/svgs/Verify.svg';
 import RightArrow from '../../../public/svgs/RightArrow.svg';
-import Plus from '../../../public/svgs/Plus.svg';
+import AddSkill from '../../../public/svgs/AddSkill.svg';
 import DownArrow from '../../../public/svgs/DownArrow.svg';
 import EmptyStar from '../../../public/svgs/EmptyStar.svg';
 import FullStar from '../../../public/svgs/FullStar.svg';
@@ -24,9 +23,6 @@ import LocationIcon from '../../../public/svgs/LocationIcon.svg';
 import Curricullum from '../../../public/svgs/Curricullum.svg';
 import Modules from '../../../public/svgs/Modules.svg';
 import StartMentorship from '../../../public/svgs/StartMentorship.svg';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import PanToolIcon from '@material-ui/icons/PanTool';
-import BlockIcon from '@material-ui/icons/Block';
 
 import CustomTab from 'src/components/Shared/CustomTab';
 import TabContainer from 'src/components/Shared/TabContainer';
@@ -42,11 +38,8 @@ import { useStore } from 'src/store';
 
 import { AUTHENTICATED_USER } from 'src/queries';
 
-import { useIconStyles } from 'src/styles/materiaStyles';
-
 const Profile: FunctionComponent<{}> = () => {
   const{ data: userData, loading: userLoading, refetch } = useQuery<TQuery>(AUTHENTICATED_USER);
-  const classes = useIconStyles();
   const { uiStore, userStore } = useStore();
   const [file, setFile] = useState(null);
 
@@ -149,24 +142,21 @@ const Profile: FunctionComponent<{}> = () => {
           <CustomTab>
             <TabContainer title={'Manage Skills'}>
               <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
-                <div>
-                  <div className="relative">
-                    <Gear className="w3 h3 fill-primary-blue"/>
-                    <Plus className="w1 h1 absolute bottom-0 right--1 fill-primary-blue" />
-                  </div>
-                  <p className="f7">ADD SKILLS</p>
+                <div className="w-third">
+                    <AddSkill className="w3 h3 fill-primary-blue"/>
+                  <p className="f7 ttu">add skills</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
-                <div>
+                <div className="w-third">
                   <Verify className="w3 h3 fill-primary-blue"/>
-                  <p className="f7">WE VERIFY THOSE SKILLS</p>
+                  <p className="f7 ttu">skill verification</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
-                <div>
+                <div className="w-third">
                   <Mentorship className="w3 h3 fill-primary-blue"/>
-                  <p className="f7">OFFER MENTORSHIP ON VERIFIED SKILLS</p>
+                  <p className="f7 ttu">offer mentorship on skills</p>
                 </div>
               </div>
               <div className="pv4 flex-column justify-center">
@@ -182,20 +172,6 @@ const Profile: FunctionComponent<{}> = () => {
                 </div>
                 <div className={classnames('overflow-auto', { dn: !skills.length })}>
                   <UserSkillsTable skills={skills} />
-                  <div className="flex justify-start mt3">
-                    <div className="flex items-center mr2 ba b--black-40 br3">
-                      <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
-                      <span className="f7 ml1">Verified</span>
-                    </div>
-                    <div className="flex items-center mr2 ba b--black-40 br3">
-                      <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
-                      <span className="f7 ml1">Pending Review</span>
-                    </div>
-                    <div className="flex items-center mr2 ba b--black-40 br3">
-                      <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
-                      <span className="f7 ml1">Unverified</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </TabContainer>
