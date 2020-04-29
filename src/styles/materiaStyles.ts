@@ -18,7 +18,10 @@ export const useTableStyles = makeStyles({
     color: '#16B8C2',
   },
   pendingReviewIcon: {
-    color: '#ec1111',
+    color: '#fa8a49',
+  },
+  unverifiedIcon: {
+    color: '#f50057',
   },
   tableRow: {
     cursor: 'pointer',

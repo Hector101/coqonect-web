@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import BlockIcon from '@material-ui/icons/Block';
+import Chip from '@material-ui/core/Chip';
 
 import { TSkills } from 'src/apolloTypes';
 
@@ -62,7 +63,7 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
       case 'unverified':
         return (
           <div className="inline-flex items-center">
-            <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
+            <BlockIcon className={classes.unverifiedIcon} fontSize="small" />
           </div>
         );
       default:
@@ -119,18 +120,22 @@ const UserSkillsTable: FunctionComponent<Props> = ({ skills }) => {
         />
       </Paper>
       <div className="flex justify-end mt3">
-        <div className="flex items-center mr2 ba b--black-20 br4">
-          <CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />
-          <span className="f7 ml1">Verified</span>
-        </div>
-        <div className="flex items-center mr2 ba b--black-20 br4">
-          <PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />
-          <span className="f7 ml1">Pending Review</span>
-        </div>
-        <div className="flex items-center mr2 ba b--black-20 br4">
-          <BlockIcon className={classes.pendingReviewIcon} fontSize="small" />
-          <span className="f7 ml1">Unverified</span>
-        </div>
+        <Chip
+          icon={<CheckCircleOutlineIcon className={classes.verifiedIconColor} fontSize="small" />}
+          label="Verified"
+          variant="outlined"
+        />
+        <Chip
+          icon={<PanToolIcon className={classes.pendingReviewIcon} fontSize="small" />}
+          label="Pending Review"
+          variant="outlined"
+
+        />
+        <Chip
+          icon={<BlockIcon className={classes.unverifiedIcon} fontSize="small" />}
+          label="Unverified"
+          variant="outlined"
+        />
       </div>
     </>
   );
