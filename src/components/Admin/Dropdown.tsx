@@ -1,19 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { observer } from 'mobx-react-lite';
-
+import React, { FunctionComponent } from 'react';
 import { createStyles, makeStyles, withStyles, Theme } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
-
-import ViewSkillsTable from 'src/components/Admin/ViewSkillsTable';
-
-import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
-
-import { TQuery } from 'src/apolloTypes';
-
-import { AUTHENTICATED_USER } from 'src/queries';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +20,7 @@ const BootstrapInput = withStyles((theme: Theme) =>
       'fontSize': 16,
       'padding': '10px 26px 10px 12px',
       'transition': theme.transitions.create(['border-color', 'box-shadow']),
+      // Use the system font instead of the default Roboto font.
       'fontFamily': [
         '-apple-system',
         'BlinkMacSystemFont',
@@ -59,42 +50,29 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-const ReviewSkillsView: FunctionComponent<{}> = () => {
+const Dropdown: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const [filterStatus, setFilterStatus] = useState('pending');
-
-  const{ data: userData, loading: userLoading } = useQuery<TQuery>(AUTHENTICATED_USER,
-    { variables: { status: filterStatus, take: 20, skip: 0 },
-  });
-
-
-  const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
-    setFilterStatus(event.target.value);
+  const [age, setAge] = React.useState('');
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setAge(event.target.value as string);
   };
-
-  if (userLoading || !userData) {
-    return <LoadingPage />;
-  }
-
-  const { userSkills } = userData.admin;
   return (
     <div>
       <FormControl className={classes.margin}>
+        <InputLabel htmlFor="demo-customized-select-native">Status</InputLabel>
         <NativeSelect
-          id="filter"
-          value={filterStatus}
+          id="demo-customized-select-native"
+          value={age}
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <option value="pending">Pending</option>
-          <option value="verified">Verified</option>
-          <option value="unverified">Unverified</option>
+          <option value={10}>Pending</option>
+          <option value={20}>Verified</option>
+          <option value={30}>Unverified</option>
         </NativeSelect>
       </FormControl>
-      <ViewSkillsTable  userSkills={userSkills} />
     </div>
   );
 };
 
-export default observer(ReviewSkillsView);
+export default Dropdown;
