@@ -6,31 +6,31 @@ const sideMenuLinkOptions: MenuList[] = [
     iconName: 'MainMenu',
     links: [
       {
-        route: '/dashboard',
+        route: '/app/dashboard',
         value: 'Dashboard',
         iconName: 'Home',
         selectable: true,
       },
       {
-        route: '/dashboard/profile',
+        route: '/app/profile',
         value: 'Profile',
         iconName: 'Avatar',
         selectable: true,
       },
       {
-        route: '/dashboard/active-session',
+        route: '/app/active-session',
         value: 'Active Sessions',
         iconName: 'ActiveSession',
         selectable: true,
       },
       {
-        route: '/dashboard/mentors',
-        value: 'Featured Mentors',
+        route: '/app/mentors',
+        value: 'Mentors',
         iconName: 'Mentor',
         selectable: true,
       },
       {
-        route: '/dashboard/notifications',
+        route: '/app/notifications',
         value: 'Notifications',
         iconName: 'Notification',
         selectable: true,
@@ -42,13 +42,13 @@ const sideMenuLinkOptions: MenuList[] = [
     iconName: 'Setting',
     links: [
       {
-        route: '/dashboard/help',
+        route: '/app/help',
         value: 'Help',
         iconName: 'Help',
         selectable: true,
       },
       {
-        route: '/login',
+        route: '/auth/login',
         value: 'Logout',
         iconName: 'Logout',
         selectable: false,

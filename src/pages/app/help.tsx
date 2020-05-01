@@ -7,17 +7,16 @@ import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
 // interface
 import INextFunctionalComponent from 'src/interfaces/NextFunctionalComponent';
 
-const ManageAdminView = dynamic(() => import('src/components/AdminLayout/ManageAdminView'), {
+const HelpView = dynamic(() => import('src/components/AppLayout/HelpView'), {
   loading: () =>  <LoadingPage />,
 });
 
-const ManageAdminPage: INextFunctionalComponent<{}> = () => {
+const HelpPage: INextFunctionalComponent<{}> = () => {
   return (
-    <Plain title="Manage Admin Dashboard | CoQonect">
-      <ManageAdminView />
+    <Plain title="Help | CoQonect">
+      <HelpView />
     </Plain>
   );
 };
 
-
-export default ManageAdminPage;
+export default HelpPage;
