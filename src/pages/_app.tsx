@@ -7,8 +7,8 @@ import dynamic from 'next/dynamic';
 import NoSsr from '@material-ui/core/NoSsr';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import LoadingPage from 'src/components/Shared/LoadingPage';
-import CustomSnackbar from 'src/components/Shared/CustomSnackbar';
+import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
+import CustomSnackbar from 'src/components/SharedLayout/Shared/CustomSnackbar';
 
 // lib
 import { withApollo } from 'src/lib/withApollo';
@@ -29,13 +29,17 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const DashboardContainer = dynamic(() => import('src/components/Containers/DashboardContainer'), {
+const DashboardContainer = dynamic(() => import('src/components/SharedLayout/Containers/DashboardContainer'), {
   loading: () => <LoadingPage />,
 });
 
-const AdminDashboardContainer = dynamic(() => import('src/components/Containers/AdminDashboardContainer'), {
-  loading: () => <LoadingPage />,
-});
+const AdminDashboardContainer = dynamic(() => {
+    return import('src/components/SharedLayout/Containers/AdminDashboardContainer');
+  },
+  {
+    loading: () => <LoadingPage />,
+  },
+);
 
 const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({
   isDashboard,
@@ -65,7 +69,7 @@ class MyApp extends App {
 
     return (
       <WithCustomSnackbar
-        isDashboard={router.route.startsWith('/dashboard')}
+        isDashboard={router.route.startsWith('/app')}
         isAdminDashboard={router.route.startsWith('/admin')}
         Component={Component}
         pageProps={pageProps}

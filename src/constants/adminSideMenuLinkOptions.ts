@@ -6,8 +6,8 @@ const adminSideMenuLinkOptions: MenuList[] = [
     iconName: 'MainMenu',
     links: [
       {
-        route: '/admin',
-        value: 'Dashboard',
+        route: '/admin/review-skills',
+        value: 'Review Skills',
         iconName: 'Home',
         selectable: true,
       },
@@ -17,12 +17,6 @@ const adminSideMenuLinkOptions: MenuList[] = [
         iconName: 'Avatar',
         selectable: true,
       },
-      {
-        route: '/admin/notifications',
-        value: 'Notifications',
-        iconName: 'Notification',
-        selectable: true,
-      },
     ],
   },
   {
@@ -30,7 +24,7 @@ const adminSideMenuLinkOptions: MenuList[] = [
     iconName: 'Setting',
     links: [
       {
-        route: '/login',
+        route: '/auth/login',
         value: 'Logout',
         iconName: 'Logout',
         selectable: false,

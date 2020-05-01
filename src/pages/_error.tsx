@@ -2,13 +2,17 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { NextPageContext } from 'next';
 
-import PageNotFountIcon from '../../public/svgs/404.svg';
-import Cloud from '../../public/svgs/Cloud.svg';
-import LeftArrow from '../../public/svgs/LeftArrow.svg';
-import Home from '../../public/svgs/Home.svg';
+import SVGS from 'src/components/SharedLayout/Shared/SVGS';
 
-import Plain from 'src/components/Containers/Plain';
-import Button from 'src/components/Shared/Button';
+const {
+  PageNotFountIcon,
+  Cloud,
+  LeftArrow,
+  Home,
+} = SVGS;
+
+import Plain from 'src/components/SharedLayout/Containers/Plain';
+import Button from 'src/components/SharedLayout/Shared/Button';
 
 type Props = {
   statusCode: number;
