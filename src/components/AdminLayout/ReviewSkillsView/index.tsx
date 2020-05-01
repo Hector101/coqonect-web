@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
-import Select, { ValueType } from 'react-select';
+import Select from 'react-select';
 
 import ViewSkillsTable from 'src/components/AdminLayout/ReviewSkillsView/ViewSkillsTable';
 
@@ -24,11 +24,11 @@ const options: OptionType[] = [
 ];
 
 
-const Admin: FunctionComponent<{}> = () => {
-  const [selectedOption, setSelectedOption] = useState<ValueType<OptionType>>();
+const ReviewSkillsView: FunctionComponent<{}> = () => {
+  const [selectedOption, setSelectedOption] = useState({ value: 'pending', label: 'Pending' });
 
   const{ data: userData, loading: userLoading } = useQuery<TQuery>(AUTHENTICATED_ADMIN,
-    { variables: { status: selectedOption, take: 20, skip: 0 },
+    { variables: { status: selectedOption.value, take: 20, skip: 0 },
   });
 
 
@@ -36,21 +36,24 @@ const Admin: FunctionComponent<{}> = () => {
     return <LoadingPage />;
   }
 
-  const handleChange = (option: ValueType<OptionType>) => {
+  const handleChange = (option: any) => {
     setSelectedOption(option);
   };
 
   const { userSkills } = userData.admin;
   return (
     <div>
-      <Select
-        value={selectedOption as ValueType<OptionType>}
-        onChange={handleChange}
-        options={options}
-      />
+      <div className="w-100">
+        <Select
+          value={selectedOption}
+          onChange={handleChange}
+          options={options}
+          className="w5"
+        />
+      </div>
       <ViewSkillsTable  userSkills={userSkills} />
     </div>
   );
 };
 
-export default observer(Admin);
+export default observer(ReviewSkillsView);
