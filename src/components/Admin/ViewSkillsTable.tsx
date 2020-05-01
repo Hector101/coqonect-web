@@ -62,11 +62,12 @@ const ViewSkillsTable: FunctionComponent<Props> = ({ userSkills }) => {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table aria-label="table">
-          <TableHead>
-          <TableRow>
+    <>
+      <Paper className={classes.root}>
+        <TableContainer className={classes.container}>
+          <Table aria-label="table">
+            <TableHead>
+              <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -75,40 +76,47 @@ const ViewSkillsTable: FunctionComponent<Props> = ({ userSkills }) => {
                   </TableCell>
                 ))}
               </TableRow>
-          </TableHead>
-          <TableBody>
-            {userSkills.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userSkill) => {
-              return (
-                <TableRow hover={true} role="checkbox" tabIndex={-1} key={userSkill.name} className={classes.tableRow}>
-                  <TableCell key={userSkill.id}>
-                    {userSkill.name}
-                  </TableCell>
-                  <TableCell key={userSkill.status}>
-                    {userSkill.status}
-                  </TableCell>
-                  <TableCell
-                    key={userSkill.evidence}
-                    id={`user-skill-${userSkill.id}`}
-                    onClick={_openDialog}
+            </TableHead>
+            <TableBody>
+              {userSkills.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userSkill) => {
+                return (
+                  <TableRow
+                    hover={true}
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={userSkill.name}
+                    className={classes.tableRow}
                   >
-                    View
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={userSkills.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={_handleChangePage}
-        onChangeRowsPerPage={_handleChangeRowsPerPage}
-      />
-    </Paper>
+                    <TableCell key={userSkill.id}>
+                      {userSkill.name}
+                    </TableCell>
+                    <TableCell key={userSkill.status}>
+                      {userSkill.status}
+                    </TableCell>
+                    <TableCell
+                      key={userSkill.evidence}
+                      id={`user-skill-${userSkill.id}`}
+                      onClick={_openDialog}
+                    >
+                      View
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 50]}
+          component="div"
+          count={userSkills.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={_handleChangePage}
+          onChangeRowsPerPage={_handleChangeRowsPerPage}
+        />
+      </Paper>
+    </>
   );
 };
 
