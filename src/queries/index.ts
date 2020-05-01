@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 
 export const AUTHENTICATED_USER = gql`
-  query($status: String, $take: Int!, $skip: Int!) {
+  query {
     client {
       authenticatedUser {
         email
@@ -23,6 +23,11 @@ export const AUTHENTICATED_USER = gql`
         }
       }
     }
+  }
+`;
+
+export const AUTHENTICATED_ADMIN = gql`
+  query($status: String, $take: Int!, $skip: Int!) {
     admin {
       userSkills(status: $status, take: $take, skip: $skip) {
         id

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import CustomDialog from 'src/components/Shared/CustomDialog';
+import CustomDialog from 'src/components/SharedLayout/Shared/CustomDialog';
 
 type Props = {
   id?: string;

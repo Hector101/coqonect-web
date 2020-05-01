@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
 import Select, { ValueType } from 'react-select';
 
-import ViewSkillsTable from 'src/components/Admin/ViewSkillsTable';
+import ViewSkillsTable from 'src/components/AdminLayout/ReviewSkillsView/ViewSkillsTable';
 
 import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
 
 import { TQuery } from 'src/apolloTypes';
-import { AUTHENTICATED_USER } from 'src/queries';
+import { AUTHENTICATED_ADMIN } from 'src/queries';
 
 
 type OptionType = {
@@ -27,7 +27,7 @@ const options: OptionType[] = [
 const Admin: FunctionComponent<{}> = () => {
   const [selectedOption, setSelectedOption] = useState<ValueType<OptionType>>();
 
-  const{ data: userData, loading: userLoading } = useQuery<TQuery>(AUTHENTICATED_USER,
+  const{ data: userData, loading: userLoading } = useQuery<TQuery>(AUTHENTICATED_ADMIN,
     { variables: { status: selectedOption, take: 20, skip: 0 },
   });
 
@@ -45,7 +45,7 @@ const Admin: FunctionComponent<{}> = () => {
     <div>
       <Select
         value={selectedOption as ValueType<OptionType>}
-        onChange={(option) => handleChange(option)}
+        onChange={handleChange}
         options={options}
       />
       <ViewSkillsTable  userSkills={userSkills} />
