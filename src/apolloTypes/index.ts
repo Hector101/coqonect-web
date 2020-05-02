@@ -17,6 +17,7 @@ export type TMessage = {
 export type TQuery = {
   client: TClientQuery;
   public: TPublicQuery;
+  admin: TAdminQuery;
 };
 
 export type TClientQuery = {
@@ -25,6 +26,10 @@ export type TClientQuery = {
 
 export type TPublicQuery = {
   skillCategories: TSkillCategory[],
+};
+
+export type TAdminQuery = {
+  userSkills: TUserSkills[],
 };
 
 export type TAuthenticatedUser = {
@@ -76,4 +81,12 @@ export type TSkills = {
   years: number;
   description: string;
   status: 'verified' | 'unverified' | 'pending';
+};
+
+export type TUserSkills = {
+  id: string;
+  name: string;
+  status: 'pending' | 'verified' | 'unverified';
+  description: string;
+  evidence: string;
 };

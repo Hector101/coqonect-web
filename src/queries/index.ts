@@ -26,6 +26,20 @@ export const AUTHENTICATED_USER = gql`
   }
 `;
 
+export const AUTHENTICATED_ADMIN = gql`
+  query($status: String, $take: Int!, $skip: Int!, $email: String, $name: String) {
+    admin {
+      userSkills(status: $status, take: $take, skip: $skip, email: $email, name: $name) {
+        id
+        name
+        status
+        description
+        evidence
+      }
+    }
+  }
+`;
+
 export const EDIT_PROFILE = gql`
   mutation EditProfile($city: String!, $country: String!, $bio: String!, $fullName: String!) {
     client {

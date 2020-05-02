@@ -26,6 +26,7 @@ type Props = {
   size?: 'small' | 'medium' | 'large';
   min?: number;
   max?: number;
+  toggleType?: boolean;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -35,6 +36,7 @@ const Input: FunctionComponent<Props> = ({
   disabled,
   defaultType,
   customType,
+  toggleType,
   name,
   leftIconName,
   defaultRightIconName,
@@ -72,7 +74,7 @@ const Input: FunctionComponent<Props> = ({
   };
 
   const rightIcon = toggleStatus ? customRightIconName : defaultRightIconName;
-  const currentType = toggleStatus ? customType : defaultType;
+  const currentType = toggleStatus || toggleType ? customType : defaultType;
   const readOnly = onChange ? false : true;
 
   if (defaultType === 'textarea') {

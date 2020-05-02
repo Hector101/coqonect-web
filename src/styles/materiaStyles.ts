@@ -2,7 +2,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 export const usePaperStyles = makeStyles((theme: Theme) => ({
   paper: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(2),
+    minHeight: 'calc(100vh - 92px)',
   },
 }));
 
@@ -25,5 +26,28 @@ export const useTableStyles = makeStyles({
   },
   tableRow: {
     cursor: 'pointer',
+  },
+});
+
+export const useInputFieldStyles = makeStyles({
+  root: {
+    'width': '100%',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#cccccc',
+      },
+      '&:hover fieldset': {
+        borderColor: '#cccccc',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#2684FF',
+      },
+    },
+  },
+  button: {
+    'backgroundColor': '#2684FF',
+    '&:hover': {
+      backgroundColor: '#2684FF',
+    },
   },
 });

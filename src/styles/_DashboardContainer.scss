@@ -1,5 +1,5 @@
 .c-DashboardContainer {
-  height: 100%;
+  height: calc(100vh - 60px);
   margin: 3.75rem auto auto auto;
   padding: 1rem;
   transition: all 0.3s ease-in-out;
