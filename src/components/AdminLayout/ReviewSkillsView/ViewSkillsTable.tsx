@@ -31,8 +31,8 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
   },
-  container: {
-    maxHeight: 440,
+  tableHeaderCell: {
+    fontWeight: 'bold',
   },
   tableRow: {
     cursor: 'pointer',
@@ -61,14 +61,15 @@ const ViewSkillsTable: FunctionComponent<Props> = ({ userSkills }) => {
   };
 
   return (
-    <div>
-      <TableContainer className={classes.container}>
+    <>
+      <TableContainer>
         <Table aria-label="table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
+                  className={classes.tableHeaderCell}
                 >
                   {column.label}
                 </TableCell>
@@ -113,7 +114,7 @@ const ViewSkillsTable: FunctionComponent<Props> = ({ userSkills }) => {
         onChangePage={_handleChangePage}
         onChangeRowsPerPage={_handleChangeRowsPerPage}
       />
-    </div>
+    </>
   );
 };
 

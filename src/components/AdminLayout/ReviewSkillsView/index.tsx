@@ -1,58 +1,128 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { observer } from 'mobx-react-lite';
 import Select from 'react-select';
+import classnames from 'classnames';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
 import ViewSkillsTable from 'src/components/AdminLayout/ReviewSkillsView/ViewSkillsTable';
 
 import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
+import GridCard from 'src/components/SharedLayout/Shared/GridCard';
 
 import { TQuery } from 'src/apolloTypes';
 import { AUTHENTICATED_ADMIN } from 'src/queries';
 
+import { statusFilterOptions, userFilterOptions } from 'src/constants/selectOptions';
 
-type OptionType = {
-  value: string;
-  label: string;
-};
-
-
-const options: OptionType[] = [
-  {value: 'pending', label: 'Pending'},
-  {value: 'unverified', label: 'Unverified'},
-  {value: 'verified', label: 'Verified'},
-];
-
+import { useInputFieldStyles } from 'src/styles/materiaStyles';
 
 const ReviewSkillsView: FunctionComponent<{}> = () => {
-  const [selectedOption, setSelectedOption] = useState({ value: 'pending', label: 'Pending' });
+  const [statusFilterOption, setStatusFilterOption] = useState({ value: '', label: '' });
+  const [userFilterOption, setUserFilterOption] = useState({ value: '', label: '' });
+  const [searchValue, setSearchValue] = useState('');
 
-  const{ data: userData, loading: userLoading } = useQuery<TQuery>(AUTHENTICATED_ADMIN,
-    { variables: { status: selectedOption.value, take: 20, skip: 0 },
-  });
+  const classes = useInputFieldStyles();
 
+  const [
+    getUserSkills,
+    { data, loading },
+  ] = useLazyQuery<TQuery>(AUTHENTICATED_ADMIN);
 
-  if (userLoading || !userData) {
+  if (loading) {
     return <LoadingPage />;
   }
 
-  const handleChange = (option: any) => {
-    setSelectedOption(option);
+  const _changeByStatus = (option: any) => {
+    setStatusFilterOption(option);
   };
 
-  const { userSkills } = userData.admin;
+  const _changeByUser = (option: any) => {
+    setUserFilterOption(option);
+  };
+
+  const _handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const _handleFilter = () => {
+    getUserSkills({
+      variables: {
+        status: statusFilterOption.value,
+        email: userFilterOption.value === 'email' ? searchValue : '',
+        name: userFilterOption.value === 'name' ? searchValue : '',
+        take: 20,
+        skip: 0,
+      },
+    },
+  );
+  };
+
   return (
-    <div>
-      <div className="w-100">
-        <Select
-          value={selectedOption}
-          onChange={handleChange}
-          options={options}
-          className="w5"
-        />
-      </div>
-      <ViewSkillsTable  userSkills={userSkills} />
-    </div>
+    <Grid container spacing={2}>
+      <GridCard
+        headerTitle="Filters"
+        subHeaderTitle="Search user skills by status or user details"
+        xs={12}
+        md={5}
+        lg={3}
+      >
+        <div className="w-100 mb3">
+          <Typography variant="subtitle2">By status</Typography>
+          <Select
+            value={statusFilterOption}
+            onChange={_changeByStatus}
+            options={statusFilterOptions}
+            className="w-100"
+          />
+        </div>
+        <div className="w-100 mb3">
+          <Typography variant="subtitle2">By Email or Name</Typography>
+          <Select
+            value={userFilterOption}
+            onChange={_changeByUser}
+            options={userFilterOptions}
+            className="w-100"
+          />
+        </div>
+        <Divider light />
+        <div className="w-100 mt3">
+          <TextField
+            className={classes.root}
+            variant="outlined"
+            label="Email or Name"
+            defaultValue={searchValue}
+            type={userFilterOption.value === 'email' ? 'email' : 'text'}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={_handleInputChange}
+          />
+        </div>
+        <div className="w-100 mt3">
+          <Button
+            className={classnames('w-100 bg-blue', classes.button)}
+            color="primary"
+            variant="contained"
+            onClick={_handleFilter}
+            disabled={!statusFilterOption.value}
+          >
+            Query User Skills
+          </Button>
+        </div>
+      </GridCard>
+      <GridCard xs={12} md={7} lg={9}>
+        {
+          data
+            ? <ViewSkillsTable  userSkills={data.admin.userSkills} />
+            : <Typography component="div">No user skill available</Typography>
+        }
+      </GridCard>
+    </Grid>
   );
 };
 
