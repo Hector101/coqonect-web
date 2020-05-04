@@ -1,0 +1,34 @@
+@mixin statusBadge($background, $color: #ffffff) {
+  background-color: $background;
+  color: $color;
+  padding: 0 0.5rem;
+  height: auto;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .2rem;
+  transition: color .15s;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+.pending {
+  @include statusBadge(#f4772e);
+}
+
+.verified {
+  @include statusBadge(#1bc943);
+}
+
+.unverified {
+  @include statusBadge(#f83245);
+}
+
+.hover {
+  &:hover {
+    background-color: #fffbf2;
+  }
+}

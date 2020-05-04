@@ -13,12 +13,13 @@ type Props = {
   sm?: boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   md?: boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   lg?: boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  className?: string;
 };
 
-const GridCard: FunctionComponent<Props> = ({ children, headerTitle, subHeaderTitle, ...rest }) => {
+const GridCard: FunctionComponent<Props> = ({ children, headerTitle, subHeaderTitle, className, ...rest }) => {
   return (
-    <Grid item {...rest} style={{ height: '100%' }}>
-      <Card variant="outlined">
+    <Grid  item {...rest}>
+      <Card variant="outlined" className={className}>
         {
           headerTitle || subHeaderTitle
             ? (

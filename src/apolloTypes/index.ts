@@ -89,4 +89,6 @@ export type TUserSkills = {
   status: 'pending' | 'verified' | 'unverified';
   description: string;
   evidence: string;
+  accountId: string;
+  profile: TProfile;
 };

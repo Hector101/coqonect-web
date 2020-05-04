@@ -1,6 +1,6 @@
 export type TStatusOptionType = {
-  value: 'pending' | 'verified' | 'unverified';
-  label: 'Pending' | 'Verified' | 'Unverified';
+  value: '' | 'pending' | 'verified' | 'unverified';
+  label: 'All' | 'Pending' | 'Verified' | 'Unverified';
 };
 
 export type TUserOptionType = {
@@ -9,6 +9,7 @@ export type TUserOptionType = {
 };
 
 export const statusFilterOptions: TStatusOptionType[] = [
+  { value: '', label: 'All' },
   { value: 'pending', label: 'Pending' },
   { value: 'verified', label: 'Verified' },
   { value: 'unverified', label: 'Unverified' },

@@ -44,10 +44,4 @@ export const useInputFieldStyles = makeStyles({
       },
     },
   },
-  button: {
-    'backgroundColor': '#2684FF',
-    '&:hover': {
-      backgroundColor: '#2684FF',
-    },
-  },
 });

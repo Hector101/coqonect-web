@@ -11,9 +11,71 @@ export class UIStore {
   @observable snackBarMessage = '';
   @observable validEditorState = false;
   @observable dialog = { open: false, id: '' };
+  @observable userSkillFilter = {
+    statusSelectOption: { value: '', label: 'All' },
+    userSelectOption: { value: '', label: '' },
+    email: '',
+    name: '',
+    skillName: '',
+    take: 10,
+    skip: 0,
+    totatCount: 10,
+  };
+
 
   constructor(public api: CallApiType) {
     this.api = api;
+  }
+
+  @action
+  setStatusSelectOption(option: { value: string, label: string }) {
+    this.userSkillFilter.statusSelectOption = option;
+  }
+
+  @action
+  setUserSelectOption(option: { value: string, label: string }) {
+    this.userSkillFilter.userSelectOption = option;
+  }
+
+  @action
+  setEmail(value: string) {
+    this.userSkillFilter.email = value;
+  }
+
+  @action
+  setName(value: string) {
+    this.userSkillFilter.name = value;
+  }
+
+  @action
+  setSkillName(value: string) {
+    this.userSkillFilter.skillName = value;
+  }
+
+  @action
+  gotoNext(onSuccess?: () => void) {
+    const nextCount = this.userSkillFilter.skip + 10;
+    this.userSkillFilter.skip = nextCount;
+    if (onSuccess) {
+      onSuccess();
+    }
+  }
+
+  @action
+  gotoPrev(onSuccess?: () => void) {
+    const prevCount = this.userSkillFilter.skip - 10;
+    this.userSkillFilter.skip = prevCount;
+    if (onSuccess) {
+      onSuccess();
+    }
+  }
+
+  @action
+  resetSkip(onSuccess?: () => void) {
+    this.userSkillFilter.skip = 0;
+    if (onSuccess) {
+      onSuccess();
+    }
   }
 
   @action

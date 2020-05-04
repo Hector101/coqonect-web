@@ -1,9 +1,6 @@
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
 const Dotenv = require('dotenv-webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const withPlugins = require('next-compose-plugins');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
@@ -11,7 +8,7 @@ if (typeof require !== 'undefined') {
   require.extensions['.css'] = (file) => {};
 }
 
-const nextConfig = {
+module.exports = {
   webpack: (config, { isServer }) => {
     config.plugins = config.plugins || [];
 
@@ -67,11 +64,3 @@ const nextConfig = {
     }
   },
 };
-
-module.exports = withPlugins(
-  [
-    [withCSS],
-    [withSass],
-  ],
-  nextConfig,
-);

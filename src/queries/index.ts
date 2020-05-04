@@ -27,14 +27,19 @@ export const AUTHENTICATED_USER = gql`
 `;
 
 export const AUTHENTICATED_ADMIN = gql`
-  query($status: String, $take: Int!, $skip: Int!, $email: String, $name: String) {
+  query($status: String, $take: Int!, $skip: Int!, $email: String, $name: String, $skillName: String) {
     admin {
-      userSkills(status: $status, take: $take, skip: $skip, email: $email, name: $name) {
+      userSkills(status: $status, take: $take, skip: $skip, email: $email, name: $name, skillName: $skillName) {
         id
         name
         status
         description
         evidence
+        accountId
+        profile {
+          fullName
+          imageUrl
+        }
       }
     }
   }

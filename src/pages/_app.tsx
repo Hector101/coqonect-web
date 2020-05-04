@@ -13,6 +13,7 @@ import CustomSnackbar from 'src/components/SharedLayout/Shared/CustomSnackbar';
 // lib
 import { withApollo } from 'src/lib/withApollo';
 
+import 'rc-dialog/assets/index.css';
 import '../styles/slick/slick.css';
 import '../styles/slick/slick-theme.css';
 import '../styles/tachyons.scss';
