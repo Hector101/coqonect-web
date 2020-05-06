@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx';
+import store from 'store';
 
 import { TLoginFormValues, TSignupFormValues, TPasswordResetFormValues } from 'src/interfaces/Forms';
 import { CallApiType } from 'src/interfaces/CallApi';
@@ -47,6 +48,8 @@ export class UserStore {
       this.loginResponse.message = response.message;
 
       this.authenticated = true;
+      store.set('__cnt', response.payload.token);
+
       if (onSuccess) {
         onSuccess();
       }
@@ -134,6 +137,7 @@ export class UserStore {
     if (response.success) {
       this.authenticated = false;
       this.isAdmin = false;
+      store.remove('__cnt');
       if (onSuccess) {
         onSuccess();
       }

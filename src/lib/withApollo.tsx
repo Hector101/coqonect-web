@@ -38,8 +38,7 @@ export function withApollo<PageProps>(PageComponent: NextPage<PageProps>, { ssr 
     WithApollo.getInitialProps = async (ctx: IMyContext) => {
       const { AppTree } = ctx;
 
-      const cookie = ctx && ctx.req && ctx.req.headers && ctx.req.headers.cookie && String(ctx.req.headers.cookie);
-      const apolloClient = (ctx.apolloClient = initApolloClient({}, cookie));
+      const apolloClient = (ctx.apolloClient = initApolloClient());
 
       let pageProps = {} as PageProps;
       if (PageComponent.getInitialProps) {
