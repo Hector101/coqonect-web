@@ -17,8 +17,6 @@ const callApi: CallApiType = async ({
 
     const response = await fetch(`${process.env.API_URL}${url}`, {
       method,
-      mode: 'cors',
-      credentials: 'include',
       body,
       headers: {
         ...customeHeader,

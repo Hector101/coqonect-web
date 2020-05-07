@@ -18,7 +18,11 @@ export class UserStore {
 
   constructor(public api: CallApiType) {
     this.api = api;
-    this.handleCheckAuthStatus();
+
+    // check auth status once after initial initialization
+    if (!this.authenticated) {
+      this.handleCheckAuthStatus();
+    }
   }
 
   @action
@@ -84,6 +88,8 @@ export class UserStore {
       this.loginResponse.message = response.message;
 
       this.isAdmin = true;
+      store.set('__cnt', response.payload.token);
+
       if (onSuccess) {
         onSuccess();
       }

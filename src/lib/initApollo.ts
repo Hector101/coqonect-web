@@ -40,7 +40,7 @@ function createApolloClient(initialState: NormalizedCacheObject = {}):
     };
   });
 
-  const link = createPersistedQueryLink().concat(authLink.concat(httpLink));
+  const link = createPersistedQueryLink({ useGETForHashedQueries: true }).concat(authLink.concat(httpLink));
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
