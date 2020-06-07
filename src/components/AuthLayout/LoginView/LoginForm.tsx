@@ -1,26 +1,19 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import sweetalert from '@sweetalert/with-react';
 import SVG from 'react-inlinesvg';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 // Components
 import SweetAlertContent from 'src/components/SharedLayout/Shared/SweetAlertContent';
 import Button from 'src/components/SharedLayout/Shared/Button';
 import Input from 'src/components/SharedLayout/Shared/Input';
 
-import CustomSwitch from 'src/components/SharedLayout/Shared/CustomSwitch';
-
 import { useStore } from 'src/store';
 
 import { TLoginFormValues, TFormMethod } from 'src/interfaces/Forms';
-
-type Props = {
-  toggleSwitch: () => void;
-  isAdminLogin: boolean;
-};
 
 const validationSchema = yup.object().shape({
   email: yup.string()
@@ -31,7 +24,9 @@ const validationSchema = yup.object().shape({
     .min(6, 'Must be more than 6 length'),
 });
 
-const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => {
+const LoginForm: FunctionComponent<{}> = () => {
+  const [ isAdminLogin, setIsAdminLogin ] = useState(false);
+
 
   const router = useRouter();
   const { uiStore, userStore } = useStore();
@@ -45,7 +40,7 @@ const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => 
 
       userStore.resetEmailUnverified();
     }
-  });
+  }, []);
 
   const _handleLogin = async ({ email, password }: TLoginFormValues, { setSubmitting, resetForm }: TFormMethod) => {
     userStore.resetLoginResponse();
@@ -97,7 +92,16 @@ const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => 
     handleBlur,
   } = formik;
 
-  return (
+  const _onEmailChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (event.target.value.includes('@coqonect.com')) {
+        setIsAdminLogin(true);
+      } else {
+        setIsAdminLogin(false);
+      }
+      handleChange(event);
+  };
+
+  return useObserver(() => (
     <form onSubmit={handleSubmit}>
       <div
         id="login"
@@ -110,7 +114,7 @@ const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => 
           name="email"
           value={values.email}
           leftIconName="Email"
-          onChange={handleChange}
+          onChange={_onEmailChange}
           onBlur={handleBlur}
           error={errors.email}
         />
@@ -132,13 +136,6 @@ const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => 
         />
         <div className="flex items-center justify-between">
           <a onClick={_toggleModal} className="link lh-copy f6 pointer blue">Forgot Password?</a>
-          <CustomSwitch
-            toggleSwitch={toggleSwitch}
-            isAdminLogin={isAdminLogin}
-            label="Admin"
-            labelPlacement="start"
-            size="medium"
-          />
         </div>
       </div>
       <Button
@@ -157,7 +154,7 @@ const LoginForm: FunctionComponent<Props> = ({ toggleSwitch, isAdminLogin }) => 
         {isSubmitting ? <SVG src="/svgs/Loading.svg" className="w2 h2 c-LoadingWhite" /> : 'Login'}
       </Button>
     </form>
-  );
+  ));
 };
 
-export default observer(LoginForm);
+export default LoginForm;

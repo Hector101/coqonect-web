@@ -1,23 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import Button from 'src/components/SharedLayout/Shared/Button';
-
 import SVGS from 'src/components/SharedLayout/Shared/SVGS';
 
-const {
-  Logo,
-} = SVGS;
-
 import { useStore } from 'src/store';
+
+const { Logo } = SVGS;
 
 const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
-  return (
+  return useObserver(() => (
     <div className="c-HomePageDeskTopNavbar flex justify-end justify-between-ns items-center ph4">
       <a className="flex-ns dn items-center pointer">
         <Logo className="c-LogoIcon" />
@@ -67,7 +65,7 @@ const HomePageDeskTopNavbar: FunctionComponent<{}> = () => {
         }
       </div>
     </div>
-  );
+  ));
 };
 
-export default observer(HomePageDeskTopNavbar);
+export default HomePageDeskTopNavbar;

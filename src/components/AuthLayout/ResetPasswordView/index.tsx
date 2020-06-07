@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import * as yup from 'yup';
 import Link from 'next/link';
 
@@ -92,7 +92,7 @@ const ResetPasswordView: FunctionComponent<{}> = () => {
   const { handleSubmit, handleChange, values, errors, isSubmitting } = formik;
   const disabled = !!(errors.password) || !!(errors.confirmPassword) || isSubmitting;
 
-  return (
+  return useObserver(() => (
     <div className="c-ResetPassword w-100 vh-100 flex flex-column justify-center-ns justify-start items-center">
       <div className="shadow-1-m shadow-1-l w-100 w-50-m w-40-l mt1">
         <div className="tc pv2">
@@ -147,7 +147,7 @@ const ResetPasswordView: FunctionComponent<{}> = () => {
         </div>
       </div>
     </div>
-  );
+  ));
 };
 
-export default observer(ResetPasswordView);
+export default ResetPasswordView;

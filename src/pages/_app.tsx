@@ -60,10 +60,7 @@ const WithCustomSnackbar: FunctionComponent<WithCustomSnackbarProps> = ({
   </NoSsr>
 );
 
-// @ts-ignore
-@withRouter
-// @ts-ignore
-@withApollo
+
 class MyApp extends App {
   render() {
     const { Component, pageProps, router } = this.props;
@@ -79,4 +76,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default withApollo(withRouter(MyApp));

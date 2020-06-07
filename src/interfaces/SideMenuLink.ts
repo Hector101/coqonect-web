@@ -1,6 +1,7 @@
 export type LinkType = {
   route: '/app/dashboard'
   | '/app/profile'
+  | '/app/curricullum'
   | '/app/active-session'
   | '/app/mentors'
   | '/app/notifications'

@@ -18,6 +18,12 @@ const sideMenuLinkOptions: MenuList[] = [
         selectable: true,
       },
       {
+        route: '/app/curricullum',
+        value: 'Curricullums',
+        iconName: 'Curricullum',
+        selectable: true,
+      },
+      {
         route: '/app/active-session',
         value: 'Active Sessions',
         iconName: 'ActiveSession',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import Plain from 'src/components/SharedLayout/Containers/Plain';
 import Navbar from 'src/components/SharedLayout/Navbar';
@@ -19,7 +19,7 @@ const Index: INextFunctionalComponent<{}> = () => {
     uiStore.toggleSideMenu();
   };
 
-  return (
+  return useObserver(() => (
     <Plain title="Home | CoQonect">
       <Navbar isExpanded={uiStore.sideMenuOpened} toggleMenu={_toggleSideMenu}>
         <HomePageDeskTopNavbar />
@@ -31,7 +31,7 @@ const Index: INextFunctionalComponent<{}> = () => {
         <HomePageView />
       </div>
     </Plain>
-  );
+  ));
 };
 
-export default observer(Index);
+export default Index;

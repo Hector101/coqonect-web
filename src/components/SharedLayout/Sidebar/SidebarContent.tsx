@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import SideMenuLinks from 'src/components/SharedLayout/Sidebar/SideMenuLinks';
 
@@ -28,7 +28,7 @@ const SidebarContent: FunctionComponent<Props> = ({ isMobile, isAdminDashboard }
     'justify-start': uiStore.sideMenuOpened || isMobile,
   });
 
-  return (
+  return useObserver(() => (
       <div className="c-SidebarContent">
         <div className={logoClassName}>
           <a className="inline-flex items-center">
@@ -38,7 +38,7 @@ const SidebarContent: FunctionComponent<Props> = ({ isMobile, isAdminDashboard }
         </div>
         <SideMenuLinks isMobile={isMobile} isAdminDashboard={isAdminDashboard} />
       </div>
-  );
+  ));
 };
 
-export default observer(SidebarContent);
+export default SidebarContent;

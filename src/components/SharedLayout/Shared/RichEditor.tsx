@@ -7,7 +7,7 @@ import React,
   SetStateAction,
 } from 'react';
 import { Editor, RichUtils, EditorState, ContentBlock } from 'draft-js';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from 'src/store';
 
@@ -32,7 +32,7 @@ type StyleButtonProps = TInlineStyleControls & TStyleButton;
 
 type BlockStyleControlsProps = Pick<Props, 'editorState'> & TInlineStyleControls;
 
-export const RichEditor: FunctionComponent<Props> = observer((props) => {
+export const RichEditor: FunctionComponent<Props> = (props) => {
   const { uiStore } = useStore();
 
   const { editorState } = props;
@@ -66,7 +66,7 @@ export const RichEditor: FunctionComponent<Props> = observer((props) => {
     }
   }
 
-  return (
+  return useObserver(() => (
     <div className={`RichEditor-root ${props.containerClassName}`}>
       <BlockStyleControls
         editorState={editorState}
@@ -89,8 +89,8 @@ export const RichEditor: FunctionComponent<Props> = observer((props) => {
         />
       </div>
     </div>
-  );
-});
+  ));
+};
 
 const styleMap = {
   CODE: {

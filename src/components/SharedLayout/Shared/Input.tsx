@@ -6,7 +6,7 @@ type InputTypes = 'text' | 'email' | 'password' | 'search' | 'textarea' | 'numbe
 
 type Props = {
   value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   className: string;
   mainClassName?: string;

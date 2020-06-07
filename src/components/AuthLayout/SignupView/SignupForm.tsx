@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import SVG from 'react-inlinesvg';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 // Components
 import Button from 'src/components/SharedLayout/Shared/Button';
@@ -60,7 +60,7 @@ const SignupForm: FunctionComponent<{}> = () => {
     handleBlur,
   } = formik;
 
-  return (
+  return useObserver(() => (
     <form onSubmit={handleSubmit}>
       <div
         id="signup"
@@ -123,7 +123,7 @@ const SignupForm: FunctionComponent<{}> = () => {
         {isSubmitting ? <SVG src="/svgs/Loading.svg" className="w2 h2 c-LoadingWhite" /> : 'Signup'}
       </Button>
     </form>
-  );
+  ));
 };
 
-export default observer(SignupForm);
+export default SignupForm;

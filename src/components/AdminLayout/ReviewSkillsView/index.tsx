@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import Select from 'react-select';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -104,7 +104,7 @@ const ReviewSkillsView: FunctionComponent<{}> = () => {
       });
     });
   };
-  return (
+  return useObserver(() => (
     <Grid container spacing={2}>
       <GridCard
         headerTitle="Filters"
@@ -211,7 +211,7 @@ const ReviewSkillsView: FunctionComponent<{}> = () => {
         }
       </GridCard>
     </Grid>
-  );
+  ));
 };
 
-export default observer(ReviewSkillsView);
+export default ReviewSkillsView;

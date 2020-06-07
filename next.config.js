@@ -1,6 +1,5 @@
 const Dotenv = require('dotenv-webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
@@ -36,8 +35,6 @@ module.exports = {
     });
 
     if (isServer) config.plugins.push(new ForkTsCheckerWebpackPlugin());
-
-    if (config.resolve.plugins) config.resolve.plugins.push(new TsconfigPathsPlugin());
 
     config.resolve.modules.unshift(__dirname);
 
