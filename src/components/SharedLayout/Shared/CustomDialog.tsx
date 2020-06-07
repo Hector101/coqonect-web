@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import classnames from 'classnames';
 
 import Button from '@material-ui/core/Button';
@@ -132,7 +132,7 @@ const CustomModal: FunctionComponent<Props> = ({
     handleAction();
   };
 
-  return (
+  return useObserver(() => (
     <div>
       <Dialog
         onClose={handleClose}
@@ -167,7 +167,7 @@ const CustomModal: FunctionComponent<Props> = ({
         }
       </Dialog>
     </div>
-  );
+  ));
 };
 
-export default observer(CustomModal);
+export default CustomModal;

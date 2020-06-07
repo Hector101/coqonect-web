@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, useEffect } from 'react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import Paper from '@material-ui/core/Paper';
 
@@ -43,7 +43,7 @@ const AdminDashboardContainer: FunctionComponent<Props> = ({ children }) => {
     return <LoadingPage />;
   }
 
-  return (
+  return useObserver(() => (
     <>
       <Navbar toggleMenu={_toggleSideMenu} isDashboard={true} isExpanded={uiStore.sideMenuOpened}>
         <AdminDashboardNavbarContent />
@@ -60,7 +60,7 @@ const AdminDashboardContainer: FunctionComponent<Props> = ({ children }) => {
         </Paper>
       </div>
     </>
-  );
+  ));
 };
 
-export default observer(AdminDashboardContainer);
+export default AdminDashboardContainer;

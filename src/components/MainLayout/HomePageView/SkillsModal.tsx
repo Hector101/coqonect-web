@@ -18,8 +18,7 @@ const SkillsModal: FunctionComponent<Props> = ({skillCategory}) => {
       title="View Skill"
       darkenHeaderBackground={true}
     >
-      {/* list pa0 ma0 w5 h5 */}
-      <ul className="list w5 h5 ma0 pa0">
+      <ul className="list w-100 h5 ma0 pa0">
       {
         skillCategory.skills.map((skill) => {
           return (

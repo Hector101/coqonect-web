@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import Button from 'src/components/SharedLayout/Shared/Button';
 
@@ -10,7 +10,7 @@ import { useStore } from 'src/store';
 const HeroSection: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
-  return (
+  return useObserver(() => (
     <div className="c-HeroSection flex items-start white">
       <section className="c-HeroTextSection mh4 mv6-ns">
         <Typography
@@ -36,7 +36,7 @@ const HeroSection: FunctionComponent<{}> = () => {
         </Link>
       </section>
     </div>
-  );
+  ));
 };
 
-export default observer(HeroSection);
+export default HeroSection;

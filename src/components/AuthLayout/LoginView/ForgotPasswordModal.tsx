@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import Modal from 'src/components/SharedLayout/Shared/Modal';
 import ResetPasswordForm from 'src/components/AuthLayout/LoginView/ForgotPasswordForm';
@@ -17,7 +17,7 @@ const {
 const EmailNotSentMessage: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
-  return (
+  return useObserver(() => (
     <div className="pa4 w-100 flex flex-column justify-center items-start">
       <Error className="w3 h3"/>
       <div className="w-100">
@@ -28,13 +28,13 @@ const EmailNotSentMessage: FunctionComponent<{}> = () => {
         </p>
       </div>
     </div>
-  );
+  ));
 };
 
 const EmailSentMessage: FunctionComponent<{}> = () => {
   const { userStore } = useStore();
 
-  return (
+  return useObserver(() => (
     <div className="pa4 w-100 flex flex-column justify-center items-start">
       <CheckMark className="w3 h3 fill-green"/>
       <div className="w-100">
@@ -48,7 +48,7 @@ const EmailSentMessage: FunctionComponent<{}> = () => {
         </p>
       </div>
     </div>
-  );
+  ));
 };
 
 const ForgotPasswordModal: FunctionComponent<{}> = () => {
@@ -58,13 +58,13 @@ const ForgotPasswordModal: FunctionComponent<{}> = () => {
     uiStore.toggleModal();
   };
 
-  return (
+  return useObserver(() => (
     <Modal visible={uiStore.modalOpened} onClose={_closeModal}>
       {userStore.emailSentStatus === 'sent' && <EmailSentMessage />}
       {userStore.emailSentStatus === 'failed' && <EmailNotSentMessage />}
       {!userStore.emailSentStatus && <ResetPasswordForm />}
     </Modal>
-  );
+  ));
 };
 
-export default observer(ForgotPasswordModal);
+export default ForgotPasswordModal;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, useState, ChangeEvent } from 'react';
 import Rating from 'react-rating';
 import { useQuery } from '@apollo/react-hooks';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import classnames from 'classnames';
 
 import Button from 'src/components/SharedLayout/Shared/Button';
@@ -87,7 +87,7 @@ const ProfileView: FunctionComponent<{}> = () => {
     );
   };
 
-  return (
+  return useObserver(() => (
     <>
       <ImageUploadModal
         handleAction={_handleImageUpload}
@@ -147,19 +147,19 @@ const ProfileView: FunctionComponent<{}> = () => {
             <TabContainer title={'Manage Skills'}>
               <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
                 <div className="w-third">
-                    <AddSkill className="w3 h3 fill-primary-blue"/>
+                    <AddSkill className="w3 h3"/>
                   <p className="f7 ttu">add skills</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div className="w-third">
-                  <Verify className="w3 h3 fill-primary-blue"/>
+                  <Verify className="w3 h3"/>
                   <p className="f7 ttu">skill verification</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div className="w-third">
-                  <Mentorship className="w3 h3 fill-primary-blue"/>
+                  <Mentorship className="w3 h3"/>
                   <p className="f7 ttu">offer mentorship on skills</p>
                 </div>
               </div>
@@ -182,19 +182,19 @@ const ProfileView: FunctionComponent<{}> = () => {
             <TabContainer title={'Manage Curriculums'}>
               <div className="flex flex-column flex-row-ns items-center justify-between justify-around-ns pv4 tc ba b--black-10">
                 <div>
-                  <Curricullum className="w3 h3 fill-primary-blue"/>
+                  <Curricullum className="w3 h3"/>
                   <p className="f7 ttu">create mentorship curricullum</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div>
-                  <Modules className="w3 h3 fill-primary-blue"/>
+                  <Modules className="w3 h3"/>
                   <p className="f7 ttu">add mentorship modules</p>
                 </div>
                 <RightArrow className="w1 h1 dn db-ns" />
                 <DownArrow className="w1 h1 dn-ns mb3" />
                 <div>
-                  <StartMentorship className="w3 h3 fill-primary-blue"/>
+                  <StartMentorship className="w3 h3"/>
                   <p className="f7 ttu">start mentorship sessions</p>
                 </div>
               </div>
@@ -214,7 +214,7 @@ const ProfileView: FunctionComponent<{}> = () => {
         </section>
       </div>
     </>
-  );
+  ));
 };
 
-export default observer(ProfileView);
+export default ProfileView;

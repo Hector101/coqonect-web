@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import classnames from 'classnames';
 
 import Snackbar from '@material-ui/core/Snackbar';
@@ -81,7 +81,7 @@ const CustomSnackbar: FunctionComponent<{}> = () => {
 
   const snackBarContentClassName = classnames(classes.margin, classes[variant]);
 
-  return (
+  return useObserver(() => (
     <Snackbar
       anchorOrigin={{
         vertical: 'bottom',
@@ -107,7 +107,7 @@ const CustomSnackbar: FunctionComponent<{}> = () => {
         ]}
       />
     </Snackbar>
-  );
+  ));
 };
 
-export default observer(CustomSnackbar);
+export default CustomSnackbar;

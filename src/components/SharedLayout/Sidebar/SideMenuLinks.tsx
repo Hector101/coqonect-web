@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
 import { RenderSVG } from 'src/components/SharedLayout/Shared/SVGS';
 
@@ -37,7 +37,7 @@ type MenuLinkProps = {
   isMobile?: boolean;
 };
 
-const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(({ menuLinks, isMobile }) => {
+const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = ({ menuLinks, isMobile }) => {
   const { uiStore } = useStore();
   const router = useRouter();
 
@@ -49,7 +49,7 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(
     'justify-center': !uiStore.sideMenuOpened && !isMobile,
   });
 
-  return (
+  return useObserver(() => (
     <>
       {
         menuLinks.map((menuLink) => {
@@ -67,8 +67,8 @@ const MenuLinkCategories: FunctionComponent<MenuLinkCategoriesProps> = observer(
         })
       }
     </>
-  );
-});
+  ));
+};
 
 const MenuLinks: FunctionComponent<MenuLinksProps> = ({ menuLink, selectedRoute, isMobile }) => {
   return (
@@ -89,7 +89,7 @@ const MenuLinks: FunctionComponent<MenuLinksProps> = ({ menuLink, selectedRoute,
   );
 };
 
-const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, isMobile }) => {
+const MenuLink: FunctionComponent<MenuLinkProps> = ({ link, selected, isMobile }) => {
   const { uiStore, userStore } = useStore();
   const router = useRouter();
 
@@ -118,15 +118,15 @@ const MenuLink: FunctionComponent<MenuLinkProps> = observer(({ link, selected, i
     }
   };
 
-  return (
+  return useObserver(() => (
     <a className={mainClassName} id={link.route} onClick={_handleClick}>
       <span className="w1 h1">
         <RenderSVG name={link.iconName} className="w1 h1" />
       </span>
       <span id={link.route} className={linkTextClassName}>{link.value}</span>
     </a>
-  );
-});
+  ));
+};
 
 const SideMenuLinks: FunctionComponent<Props> = ({ isMobile, isAdminDashboard }) => {
   return (

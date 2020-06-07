@@ -1,11 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 
 // Components
 import Button from 'src/components/SharedLayout/Shared/Button';
 import ForgotPasswordModal from 'src/components/AuthLayout/LoginView/ForgotPasswordModal';
 import LoginForm from 'src/components/AuthLayout/LoginView/LoginForm';
-import { observer } from 'mobx-react-lite';
 
 // SVG
 import SVGS from 'src/components/SharedLayout/Shared/SVGS';
@@ -16,11 +15,6 @@ const {
 } = SVGS;
 
 const LoginView: FunctionComponent<{}> = () => {
-  const [ isAdminLogin, setIsAdminLogin ] = useState(false);
-
-  const _toggleSwitch = () => {
-    setIsAdminLogin(!isAdminLogin);
-  };
   const _socialLogin = () => {
     window.location.href = `${process.env.API_URL}/api/v1/google`;
   };
@@ -42,13 +36,12 @@ const LoginView: FunctionComponent<{}> = () => {
               className="pa3 input-reset ba b--black-20 bg-transparent pointer f6 w-100 flex items-center"
               onClick={_socialLogin}
               type="button"
-              disabled={isAdminLogin}
             >
               <Google className="w1 h1 mr4" />
               <span className="f6">Sign In with Google</span>
             </Button>
             <h4 className="lh-title tc">OR</h4>
-            <LoginForm toggleSwitch={_toggleSwitch} isAdminLogin={isAdminLogin} />
+            <LoginForm />
           </div>
           <div className="flex justify-between items-center mv3 link f6">
             <span aria-labelledby="Don't have an account?">Don't have an account?</span>
@@ -62,4 +55,4 @@ const LoginView: FunctionComponent<{}> = () => {
   );
 };
 
-export default observer(LoginView);
+export default LoginView;

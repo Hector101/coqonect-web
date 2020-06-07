@@ -84,73 +84,69 @@ const EditProfileForm: FunctionComponent<Props> = ({ profile }) => {
 
   return (
     <form onSubmit={handleSubmit} className="c-EditProfileForm pa2 ba b--black-10">
-      <div className="w-100 w-80-l center">
-        <div className="flex flex-column flex-row-ns justfy-between items-center">
-          <div className="w-100 pv2 pr0 pr5-ns">
-            <label htmlFor="email" className="f5 b black-50">
-              Email Address
-              <span className="orange f7 f6-ns"> (Not Editable)</span>
-            </label>
-            <Input
-              className="pv3 pr2 f6 input-reset bg-transparent w-100"
-              containerClassName="mt2"
-              defaultType="text"
-              placeholder="Enter E-mail"
-              name="text"
-              value={email}
-              leftIconName="Email"
-            />
-          </div>
-          <div className="w-100 mv2">
-            <label htmlFor="fullName" className="f5 b black-50">Full Name</label>
-            <Input
-              className="pv3 ph3 f6 input-reset bg-transparent w-100"
-              containerClassName="mt2"
-              defaultType="text"
-              placeholder="Enter Fullname"
-              name="fullName"
-              value={fullName}
-              error={errors.fullName}
-              onChange={handleChange}
-              leftIconName="FullNameAvatar"
-            />
-          </div>
+      <div className="w-100 w-50-l center">
+        <div className="w-100 mv2">
+          <label htmlFor="email" className="f5 b black-50">
+            Email Address
+            <span className="orange f7 f6-ns"> (Not Editable)</span>
+          </label>
+          <Input
+            className="pv3 pr2 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
+            defaultType="text"
+            placeholder="Enter E-mail"
+            name="text"
+            value={email}
+            leftIconName="Email"
+          />
         </div>
-        <div className="flex flex-column flex-row-ns justfy-center items-center">
-          <div className="w-100 pv2 pr0 pr5-ns">
-            <label htmlFor="email" className="f5 b black-50">
-              City
-              {city && <span className="orange f7 f6-ns"> (Not Editable)</span>}
-            </label>
-            <Input
-              className="pv3 ph3 f6 input-reset bg-transparent w-100"
-              containerClassName="mt2"
-              defaultType="text"
-              placeholder="Enter Your City"
-              name="city"
-              value={city}
-              error={errors.city}
-              onChange={city ? null : handleChange}
-              leftIconName="CityIcon"
-            />
-          </div>
-          <div className="w-100 mv2">
-            <label htmlFor="email" className="f5 b black-50">
-              Country
-              {country && <span className="f7 f6-ns orange"> (Not Editable)</span>}
-            </label>
-            <Input
-              className="pv3 ph3 f6 input-reset bg-transparent w-100"
-              containerClassName="mt2"
-              defaultType="text"
-              placeholder="Enter Your Country"
-              name="country"
-              value={country}
-              error={errors.country}
-              onChange={country ? null : handleChange}
-              leftIconName="LocationIcon"
-            />
-          </div>
+        <div className="w-100 mv2">
+          <label htmlFor="fullName" className="f5 b black-50">Full Name</label>
+          <Input
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
+            defaultType="text"
+            placeholder="Enter Fullname"
+            name="fullName"
+            value={fullName}
+            error={errors.fullName}
+            onChange={handleChange}
+            leftIconName="FullNameAvatar"
+          />
+        </div>
+        <div className="w-100 mv2">
+          <label htmlFor="email" className="f5 b black-50">
+            City
+            {city && <span className="orange f7 f6-ns"> (Not Editable)</span>}
+          </label>
+          <Input
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
+            defaultType="text"
+            placeholder="Enter Your City"
+            name="city"
+            value={city}
+            error={errors.city}
+            onChange={city ? null : handleChange}
+            leftIconName="CityIcon"
+          />
+        </div>
+        <div className="w-100 mv2">
+          <label htmlFor="email" className="f5 b black-50">
+            Country
+            {country && <span className="f7 f6-ns orange"> (Not Editable)</span>}
+          </label>
+          <Input
+            className="pv3 ph3 f6 input-reset bg-transparent w-100"
+            containerClassName="mt2"
+            defaultType="text"
+            placeholder="Enter Your Country"
+            name="country"
+            value={country}
+            error={errors.country}
+            onChange={country ? null : handleChange}
+            leftIconName="LocationIcon"
+          />
         </div>
         <div className="mt3">
           <label htmlFor="bio" className="f5 b black-60">

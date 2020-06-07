@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
-import { observer } from 'mobx-react-lite';
 
 // components
 import Button from 'src/components/SharedLayout/Shared/Button';
@@ -56,4 +55,4 @@ const SignupView: FunctionComponent<{}> = () => {
   );
 };
 
-export default observer(SignupView);
+export default SignupView;

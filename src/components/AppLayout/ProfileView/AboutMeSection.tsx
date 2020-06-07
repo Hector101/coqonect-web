@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 import classnames from 'classnames';
 
 import HtmlFromString from 'src/components/SharedLayout/Shared/HtmlFromString';
@@ -29,7 +29,7 @@ const AboutMeSection: FunctionComponent<Props> = ({ bio }) => {
     uiStore.openDialog(e.currentTarget.id);
   };
 
-  return (
+  return useObserver(() => (
     <>
       <CustomDialog
         title="More About Me"
@@ -56,7 +56,7 @@ const AboutMeSection: FunctionComponent<Props> = ({ bio }) => {
         }
       </div>
     </>
-  );
+  ));
 };
 
-export default observer(AboutMeSection);
+export default AboutMeSection;
