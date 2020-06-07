@@ -12,7 +12,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 import ViewSkillsList from 'src/components/AdminLayout/ReviewSkillsView/ViewSkillsList';
 
-import LoadingPage from 'src/components/SharedLayout/Shared/LoadingPage';
+import Loading from 'src/components/SharedLayout/Shared/Loading';
 import GridCard from 'src/components/SharedLayout/Shared/GridCard';
 
 import { TQuery } from 'src/apolloTypes';
@@ -32,10 +32,6 @@ const ReviewSkillsView: FunctionComponent<{}> = () => {
     getUserSkills,
     { data, loading },
   ] = useLazyQuery<TQuery>(AUTHENTICATED_ADMIN);
-
-  if (loading) {
-    return <LoadingPage />;
-  }
 
   const _changeByStatus = (option: any) => {
     uiStore.setStatusSelectOption(option);
@@ -104,114 +100,121 @@ const ReviewSkillsView: FunctionComponent<{}> = () => {
       });
     });
   };
-  return useObserver(() => (
-    <Grid container spacing={2}>
-      <GridCard
-        headerTitle="Filters"
-        subHeaderTitle="Query by skill name, status or user details"
-        xs={12}
-        md={5}
-        lg={3}
-      >
-        <div className="w-100 mb3">
-          <Typography variant="subtitle2">By status</Typography>
-          <Select
-            value={uiStore.userSkillFilter.statusSelectOption}
-            onChange={_changeByStatus}
-            options={statusFilterOptions}
-            className="w-100"
-          />
-        </div>
-        <div className="w-100 mb3">
-          <Typography variant="subtitle2">By Email or Name</Typography>
-          <Select
-            value={uiStore.userSkillFilter.userSelectOption}
-            onChange={_changeByUser}
-            options={userFilterOptions}
-            className="w-100"
-          />
-        </div>
-        <Divider light />
-        <div className="w-100 mv3">
-          <TextField
-            className={classes.root}
-            variant="outlined"
-            label="Optional: Email or Name"
-            defaultValue={uiStore.userSkillFilter.email || uiStore.userSkillFilter.name}
-            type={uiStore.userSkillFilter.email === 'email' ? 'email' : 'text'}
-            disabled={!uiStore.userSkillFilter.userSelectOption.value}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={_handleUserInfoChange}
-          />
-        </div>
-        <Divider light />
-        <div className="w-100 mt3">
-          <TextField
-            className={classes.root}
-            variant="outlined"
-            label="Optional: Skill Name"
-            defaultValue={uiStore.userSkillFilter.skillName}
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={_handleSkillNameChange}
-          />
-        </div>
-        <div className="w-100 mt3">
-          <Button
-            disableElevation
-            className="w-100 bg-cyan"
-            color="primary"
-            variant="contained"
-            onClick={_handleFilter}
-          >
-            Query User Skills
-          </Button>
-        </div>
-      </GridCard>
-      <GridCard xs={12} md={7} lg={9}>
-        {
-          uiStore.userSkillFilter.skip && !data.admin.userSkills.length
-            ? (
-              <div className="flex justify-center items-center h4">
-                <Typography variant="subtitle1">No more Records to show. Go back to previous list</Typography>
-              </div>
-            )
-            : <ViewSkillsList  userSkills={data ? data.admin.userSkills : []} />
-        }
-        {
-          data
-            ? (
-              <ul className="list pl0 mv0">
-                <li className="flex justify-between items-center lh-copy pa3 ph0-l bt b--black-10">
-                  <Button
-                    color="primary"
-                    startIcon={<KeyboardArrowLeftIcon />}
-                    onClick={_gotoPrev}
-                    disabled={uiStore.userSkillFilter.skip === 0}
+  return useObserver(() => {
 
-                  >
-                    Prev
-                  </Button>
-                  <Button
-                    color="primary"
-                    endIcon={<KeyboardArrowRightIcon />}
-                    onClick={_gotoNext}
-                    disabled={data.admin.userSkills.length < 10}
-                  >
-                    Next
-                  </Button>
-                </li>
-              </ul>
+    if (loading) {
+      return <Loading />;
+    }
+
+    return (
+      <Grid container spacing={2}>
+        <GridCard
+          headerTitle="Filters"
+          subHeaderTitle="Query by skill name, status or user details"
+          xs={12}
+          md={5}
+          lg={3}
+        >
+          <div className="w-100 mb3">
+            <Typography variant="subtitle2">By status</Typography>
+            <Select
+              value={uiStore.userSkillFilter.statusSelectOption}
+              onChange={_changeByStatus}
+              options={statusFilterOptions}
+              className="w-100"
+            />
+          </div>
+          <div className="w-100 mb3">
+            <Typography variant="subtitle2">By Email or Name</Typography>
+            <Select
+              value={uiStore.userSkillFilter.userSelectOption}
+              onChange={_changeByUser}
+              options={userFilterOptions}
+              className="w-100"
+            />
+          </div>
+          <Divider light />
+          <div className="w-100 mv3">
+            <TextField
+              className={classes.root}
+              variant="outlined"
+              label="Optional: Email or Name"
+              defaultValue={uiStore.userSkillFilter.email || uiStore.userSkillFilter.name}
+              type={uiStore.userSkillFilter.email === 'email' ? 'email' : 'text'}
+              disabled={!uiStore.userSkillFilter.userSelectOption.value}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={_handleUserInfoChange}
+            />
+          </div>
+          <Divider light />
+          <div className="w-100 mt3">
+            <TextField
+              className={classes.root}
+              variant="outlined"
+              label="Optional: Skill Name"
+              defaultValue={uiStore.userSkillFilter.skillName}
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={_handleSkillNameChange}
+            />
+          </div>
+          <div className="w-100 mt3">
+            <Button
+              disableElevation
+              className="w-100 bg-cyan"
+              color="primary"
+              variant="contained"
+              onClick={_handleFilter}
+            >
+              Query User Skills
+            </Button>
+          </div>
+        </GridCard>
+        <GridCard xs={12} md={7} lg={9}>
+          {
+            uiStore.userSkillFilter.skip && !data.admin.userSkills.length
+              ? (
+                <div className="flex justify-center items-center h4">
+                  <Typography variant="subtitle1">No more Records to show. Go back to previous list</Typography>
+                </div>
               )
-            : null
-        }
-      </GridCard>
-    </Grid>
-  ));
+              : <ViewSkillsList  userSkills={data ? data.admin.userSkills : []} />
+          }
+          {
+            data
+              ? (
+                <ul className="list pl0 mv0">
+                  <li className="flex justify-between items-center lh-copy pa3 ph0-l bt b--black-10">
+                    <Button
+                      color="primary"
+                      startIcon={<KeyboardArrowLeftIcon />}
+                      onClick={_gotoPrev}
+                      disabled={uiStore.userSkillFilter.skip === 0}
+
+                    >
+                      Prev
+                    </Button>
+                    <Button
+                      color="primary"
+                      endIcon={<KeyboardArrowRightIcon />}
+                      onClick={_gotoNext}
+                      disabled={data.admin.userSkills.length < 10}
+                    >
+                      Next
+                    </Button>
+                  </li>
+                </ul>
+                )
+              : null
+          }
+        </GridCard>
+      </Grid>
+    );
+  });
 };
 
 export default ReviewSkillsView;
